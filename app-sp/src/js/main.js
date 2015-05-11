@@ -11,6 +11,9 @@ require('./utils/window-event');
 //require('../js-app/app-collection');
 
 require('domready')(() => {
-  //show canvas demo
-    //React.render(<HelloMessage name="Sebastian" />, document.body);
+    keyboard.start();
+
+
+    histroy.start({pushState : true});
+    React.render(<App/>, document.getElementById('app'));
 });

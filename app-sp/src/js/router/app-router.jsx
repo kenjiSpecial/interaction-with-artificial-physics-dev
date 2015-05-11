@@ -20,14 +20,13 @@ var load = Promise.promisify(require('img'));
 //    view
 var loadView = require('../components/js/load-view');
 
-var canvasApp = require('../components/js/canvas-app');
 
 var AppRouter = Router.extend({
     initialize: function () {
         _.bindAll(this, 'onLoadStartHandler', 'onLoadDoneHandler', 'onWorkBallAnimationDoneHandler', 'onCloseWork');
 
         appStore.on(AppConstants.LOAD_START, this.onLoadStartHandler);
-        appStore.on(AppConstants.APP_LOAD_DONE, this.onLoadDoneHandler);
+        appStore.on(AppConstants.LOAD_DONE, this.onLoadDoneHandler);
 
         appStore.on(AppConstants.ON_WORK_BALL_ANIMATION_DONE, this.onWorkBallAnimationDoneHandler);
         appStore.on(AppConstants.CLOSE_WORK, this.onCloseWork);
@@ -42,7 +41,6 @@ var AppRouter = Router.extend({
     },
 
     index: function () {
-
 
         if (appStore.get("isTransition")) {
             this.navigate(this.prevRoute);
@@ -82,8 +80,7 @@ var AppRouter = Router.extend({
     },
 
     renderInitIndex: function () {
-        canvasApp.renderIndex();
-        appAction.onMouseMoveSet();
+        //appAction.onMouseMoveSet();
     },
 
     renderWork: function (workID) {
@@ -91,7 +88,6 @@ var AppRouter = Router.extend({
     },
 
     renderWorkInit: function (workID) {
-        canvasApp.forceInitialize();
 
         appAction.forceSetWork(workID);
         setTimeout(function () {
@@ -123,6 +119,8 @@ var AppRouter = Router.extend({
         if (images.length > 0) {
             Promise.all(images.map(x => load(x))).then(this.renderAction);
         } else {
+            //console.log('onLoadStartHandler');
+
             setTimeout(function () {
                 var imageObj = {};
                 appAction.loadDone(imageObj);
@@ -142,7 +140,6 @@ var AppRouter = Router.extend({
     },
 
     onRenderApp: function () {
-        canvasApp.initialize();
         var str = history.getFragment();
         var url, param;
 

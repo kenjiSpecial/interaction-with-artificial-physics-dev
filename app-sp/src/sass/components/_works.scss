@@ -1,0 +1,62 @@
+
+#app-main-dom-wrapper {
+  position: relative;
+  width: 100%;
+
+  margin-top: 60px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  z-index: 1;
+
+  .work-text {
+    @extend .baseWorkProperties;
+    //width: 100%;
+
+    color: #000000;
+    height: 50px;
+    vertical-align: middle;
+    line-height: 50px;
+    font-size: 20px;
+    letter-spacing: 1px;
+
+
+
+    transform-origin: left top 0;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    z-index: 1;
+
+    .work-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .work-base {
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .work-active {
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      width: 0;
+
+      color: #BBB;
+      display: inline-block;
+      white-space: nowrap;
+    }
+  }
+
+}

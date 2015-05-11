@@ -51,6 +51,9 @@ var AppAction = {
             actionType: AppConstants.LOAD_DONE
         });
     },
+
+    /** ---------------------------- */
+
     onMouseMoveSet: function () {
         AppDispatcher.dispatch({
             actionType: AppConstants.ON_MOUSE_MOVE_EVENT

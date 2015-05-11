@@ -106,7 +106,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
             var workObj = { id: workID, workNum: ii, type: WORK_UPDATE, name : workName, originXPos: xPos, curXPos: xPos, ballPos: xPos, workData: null }
 
             _apps.works.push(workObj);
-            APP_CONSTANTS.WORKS_UPDATE.push(WORK_UPDATE);
+            //APP_CONSTANTS.WORKS_UPDATE.push(WORK_UPDATE);
 
             _apps.workTotalSize += constants.workGap;
         }

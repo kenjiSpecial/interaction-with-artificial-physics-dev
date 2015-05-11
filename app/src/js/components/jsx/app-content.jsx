@@ -23,7 +23,7 @@ class AppContent extends React.Component {
     }
 
     componentWillMount() {
-        AppStore.on(AppConstants.BACK_GROUND_ANIMATION_DONE, this.onBackgroundAnimationDoneHandler.bind(this));
+
     }
 
     onBackgroundAnimationDoneHandler(){

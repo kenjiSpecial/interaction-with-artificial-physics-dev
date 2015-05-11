@@ -10,8 +10,14 @@
     "url": "https://github.com/kenjiSpecial"
   },
   "dependencies": {
+    "bluebird": "^2.9.25",
     "domready": "^1.0.7",
+    "events": "^1.0.2",
     "flux": "^2.0.3",
+    "gsap": "^1.16.1",
+    "img": "^1.0.0",
+    "keymirror": "^0.1.1",
+    "lodash": "^3.8.0",
     "object-assign": "^2.0.0",
     "raf": "^2.0.4",
     "react-prefixr": "^0.1.0"

@@ -133,7 +133,7 @@ var AppRouter = Router.extend({
     },
 
     onLoadDoneHandler: function () {
-        console.log('onLoadDoneHandler');
+
         var pr = loadView.fadeOut()
         var self = this;
 
