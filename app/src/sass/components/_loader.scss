@@ -6,6 +6,7 @@ $ANIM_SEC: 5s;
   position: absolute;
   top: 0; left: 0;
   background-color: #000000;
+  z-index: 9999;
 
   .load-wrapper{
     position: absolute;

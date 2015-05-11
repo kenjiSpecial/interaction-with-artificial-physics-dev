@@ -7,8 +7,6 @@ var LoadView = function(){
     this.loader = document.getElementById("loader");
     this.ballArr = this.loader.querySelectorAll(".ball");
     this.loadText = this.loader.querySelectorAll(".letter");
-
-    //console.log(this.ballArr);
 };
 
 LoadView.prototype.fadeOut = function() {
@@ -22,9 +20,9 @@ LoadView.prototype.fadeOut = function() {
         TweenLite.to(el, .4, {opacity: 0, delay: (loadTextLength - i) * .03, x: +15, ease: Power3.easeOut});
     });
 
-    setTimeout(this.removeLoadView, 800 );
+    TweenLite.to(this.loader, .8, {width: 0, delay: .6, ease: Expo.easeInOut, onComplete: this.removeLoadView.bind(this)});
 
-    return Promise.delay(750);
+    return Promise.delay(600);
 };
 
 LoadView.prototype.removeLoadView = function() {

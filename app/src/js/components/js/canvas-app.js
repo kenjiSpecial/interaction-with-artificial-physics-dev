@@ -6,7 +6,6 @@ var CONSTANTS = require('../../utils/constants');
 var CONSTANTS_DATA = require('../../utils/constants_app');
 
 // components
-var Background = require('./canvas-component/background-black');
 var ScrollBar =  require('./canvas-component/scroll-bar');
 var WorkRope = require('./canvas-component/work-rope');
 
@@ -15,7 +14,6 @@ var WorkStore = require('../../stores/work-store');
 
 var CanvasApp = function() {
     _.bindAll(this, "onUpdate", "onStopUpdateHandler");
-    this.background = new Background();
     this.scrollBar = new ScrollBar();
 
     WorkStore.on(CONSTANTS.CHANGE_DIRECTORY_TO_WORK, this.onStopUpdateHandler);
@@ -65,9 +63,6 @@ CanvasApp.prototype = {
     },
 
     renderIndex : function(){
-        this.background.start();
-
-        // --------------------
 
         this.setWorkRope();
 
@@ -75,8 +70,6 @@ CanvasApp.prototype = {
 
     forceInitialize : function(){
         this.setWorkRope();
-
-        this.background.start();
 
         ticker.on(CONSTANTS.TICK, this.onUpdate);
     },
@@ -94,10 +87,11 @@ CanvasApp.prototype = {
     onUpdate : function(){
         this.ctx.clearRect(0, 0, this.windowWid, this.windowHig);
         this.scrollBar.update(this.ctx);
+
         for(var ii in this.workRopeArr){
             this.workRopeArr[ii].update(this.ctx);
         }
-        this.background.update(this.ctx);
+
     },
 
     onWindowResizeHandler : function() {

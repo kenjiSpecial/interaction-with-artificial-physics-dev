@@ -123,6 +123,7 @@ var AppRouter = Router.extend({
         if (images.length > 0) {
             Promise.all(images.map(x => load(x))).then(this.renderAction);
         } else {
+
             setTimeout(function () {
                 var imageObj = {};
                 appAction.loadDone(imageObj);
@@ -132,6 +133,7 @@ var AppRouter = Router.extend({
     },
 
     onLoadDoneHandler: function () {
+        console.log('onLoadDoneHandler');
         var pr = loadView.fadeOut()
         var self = this;
 

@@ -11,6 +11,7 @@
 #app-main-dom-wrapper {
   @extend .baseWorkProperties;
   width: 100%;
+  z-index: 1;
 
   .work-main-wrapper {
     @extend .baseWorkProperties;

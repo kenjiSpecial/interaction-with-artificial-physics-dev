@@ -14,8 +14,7 @@ class AppContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            works: AppData.works,
-            zIndex : -1
+            works: AppData.works
         };
     }
 
@@ -28,22 +27,18 @@ class AppContent extends React.Component {
     }
 
     onBackgroundAnimationDoneHandler(){
-        this.setState({
-            zIndex: 1
-        })
+
     }
 
     render() {
         var count = -1;
         var count2 = -1;
 
-        var domStyle = {
-            zIndex : this.state.zIndex
-        }
+
 
         return (
             <div id="app-dom-wrapper">
-                <div id="app-main-dom-wrapper"  style={domStyle}>
+                <div id="app-main-dom-wrapper">
                     <div className="work-text-wrapper">
                         {
                             this.state.works.map(function (result) {
