@@ -1,0 +1,176 @@
+#footer-wrapper {
+  z-index: 100;
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+}
+
+#footer-content {
+  padding-left: 30px;
+  padding-right: 30px;
+
+  .title {
+    float: left;
+    position: relative;
+    padding-left: 20px;
+    font-size: $fontSizeBig;
+    letter-spacing: 1px;
+    font-weight: bold;
+    cursor: pointer;
+
+
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      background-color: black;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -9px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      opacity: 0;
+      background: black;
+      transition: 0.3s all ease-out-expo();
+    }
+
+    &:hover {
+      &:after {
+        opacity: 1;
+        bottom: -6px;
+      }
+    }
+
+    &.active{
+      &:after {
+        opacity: 1;
+        bottom: -6px;
+      }
+      cursor: default;
+    }
+
+  }
+
+  .sub-content {
+    float: right;
+    margin-top: 7px;
+
+    .fullscreen{
+      margin-right: 30px;
+      cursor: pointer;
+    }
+
+    .sub {
+      position: relative;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      padding-left: 12px;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        background-color: black;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        opacity: 0;
+        background: black;
+        transition: 0.3s all ease-out-expo();
+      }
+
+      &.hover {
+        &:after {
+          opacity: 1;
+          bottom: -6px;
+        }
+      }
+    }
+
+    .share {
+      margin-right: 30px;
+      position: relative;
+      cursor: default;
+
+      .text {
+        cursor: pointer;
+      }
+
+      .share-buttons {
+        padding: 5px 0 12px;
+        position: absolute;
+        bottom: 0;
+        left: -30px;
+        overflow: hidden;
+        transition: 0.3s all ease-out-expo();
+        width: 0;
+
+        &.open {
+          width: 95px;
+        }
+
+        background: #000000;
+
+        li {
+          //margin: 12px;
+
+          a {
+            padding: 6px 12px;
+            font-weight: 400;
+            text-decoration: none;
+            color: #a7a7a7;
+            display: inline-block;
+            position: relative;
+
+            .bot {
+              position: relative;
+            }
+
+            .top {
+              position: absolute;
+              top: 6px;
+              color: #fff;
+              overflow: hidden;
+              //width: 100%;
+              width: 0;
+              transition: 0.2s all ease-in-out-quart();
+            }
+
+            &.hover {
+              .top {
+                width: 100%;
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+  }
+
+}

@@ -1,0 +1,118 @@
+$RAD: 200px;
+$ANIM_SEC: 5s;
+
+#loader{
+  @extend %full-size;
+  position: absolute;
+  top: 0; left: 0;
+  background-color: #000000;
+
+  .load-wrapper{
+    position: absolute;
+    height: $RAD;
+    width: $RAD;
+    top: 0; left: 0; bottom: 0; right: 0;
+    margin: auto;
+  }
+
+  .loading{
+    color: #fff;
+    width: 100%;
+    letter-spacing: 2px;
+    font-size: 14px;
+    font-weight: 300;
+    margin-top: 20px;
+    text-align: center;
+    span{
+      display: inline-block;
+    }
+  }
+
+  .go{
+    .ball{
+      animation: loading-orbit $ANIM_SEC infinite linear;
+      &::before{
+        animation: loading-orbit-before $ANIM_SEC/3 infinite ease-in-out;
+      }
+
+      @for $i from 0 through 4{
+        &:nth-child(#{$i}){
+          animation-delay: -$ANIM_SEC/8 * $i;
+          &::before{
+            animation-delay: -$ANIM_SEC/12 * $i;
+          }
+        }
+      }
+    }
+
+
+  }
+
+  .orbit{
+    //position: absolute;
+    position: relative;
+    overflow: hidden;
+    //height: $RAD;
+    //width: $RAD;
+    @extend %full-size;
+
+    overflow: visible;
+
+    .ball{
+      top: $RAD/8; left: $RAD/8;
+      height: $RAD * 3 / 4;
+      width: $RAD * 3 / 4;
+      transform-origin: center center;
+      position: absolute;
+
+
+      &::before{
+
+        position: absolute;
+        left: calc(50% - .5em);
+        display: block;
+        content: '';
+        height: 1em;
+        width: 1em;
+        border-radius: 50%;
+        transform: scale(1);
+        background-color: #ffffff;
+      }
+    }
+  }
+
+}
+
+@keyframes loading-orbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-orbit-before {
+  0% {
+    height: 1em; width: 1em;
+    transform: translate3d(0,0,0);
+    z-index: 5;
+  }
+  5%{
+    height: 1.25em; width: 1.25em;
+  }
+  25% {
+    height: 2em; width: 2em;
+    z-index: 10;
+  }
+  50% {
+    transform: translate3d($RAD/20, $RAD*3/4,0);
+    z-index: 0;
+    height: 1em; width: 1em;
+  }
+  100% {
+    transform: translate3d(0,0,0);
+    z-index: 0;
+    height: 1em; width: 1em;
+  }
+}

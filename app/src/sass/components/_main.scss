@@ -1,0 +1,47 @@
+.drag {
+  cursor: grab;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: url("/images/cursors/openhand.cur");
+
+  &.dragging {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: url("/images/cursors/closehand.cur");
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+#main-wrapper {
+  position: relative;
+  @extend %full-size;
+}
+
+#app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  @extend %full-size;
+
+}
+
+#app-wrapper {
+  position: relative;
+  @extend %full-size;
+}
+
+#app-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  @extend %full-size;
+}

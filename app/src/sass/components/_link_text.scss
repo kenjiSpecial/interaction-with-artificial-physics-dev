@@ -1,0 +1,29 @@
+.link-text{
+  display: inline-block;
+  position: relative;
+
+  .base{
+    display: inline-block;
+    position: relative;
+  }
+
+  .front{
+    display: inline-block;
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    color: black;
+    word-break: keep-all;
+    transition: 0.3s all ease-out-expo();
+    white-space: nowrap;
+  }
+
+  &:hover{
+    .front{
+      width: 100%;
+    }
+  }
+
+}

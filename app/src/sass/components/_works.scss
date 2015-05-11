@@ -1,0 +1,89 @@
+.baseWorkProperties {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  //-webkit-backface-visibility: hidden;
+  //-webkit-perspective: 1000;
+  //-webkit-transform: translate3d(0, 0, 0);
+}
+
+#app-main-dom-wrapper {
+  @extend .baseWorkProperties;
+  width: 100%;
+
+  .work-main-wrapper {
+    @extend .baseWorkProperties;
+    width: 100%;
+  }
+
+  .work-text-wrapper {
+    @extend .baseWorkProperties;
+    width: 100%;
+  }
+
+  .work-ball-wrapper {
+    @extend .baseWorkProperties;
+    width: 100%;
+  }
+
+  .work-text {
+    @extend .baseWorkProperties;
+    //width: 100%;
+    height: 40px;
+    vertical-align: middle;
+    line-height: 40px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #BBB;
+
+    transform: rotate(90deg);
+    transform-origin: left top 0;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    z-index: 1;
+
+    .work-wrapper{
+      position: relative;
+      width: 100%;
+    }
+
+    .work-base{
+      top: 0; left: 0;
+      width: 100%;
+      display: inline-block;
+      white-space:    nowrap;
+    }
+
+    .work-active{
+      position: absolute;
+      top: 0; left: 0;
+      overflow: hidden;
+      width: 0;
+      color: #000000;
+      display: inline-block;
+      white-space:    nowrap;
+    }
+  }
+
+  .work-ball {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    //@extend .baseWorkProperties;
+    position: absolute;
+    cursor: pointer;
+
+
+    z-index: 999;
+  }
+}

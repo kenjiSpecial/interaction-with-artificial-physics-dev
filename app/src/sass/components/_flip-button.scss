@@ -1,0 +1,108 @@
+$size: 60px;
+
+.flip-container {
+  perspective: 1000;
+  width: $size;
+  height: $size;
+  top: -$size/2;
+  left: -$size/2;
+
+  .flipper {
+    &.rotated{
+      transform: rotateY(180deg);
+    }
+
+    width: $size;
+    height: $size;
+    transition: 0.6s all ease-in-out-quart();
+    transform-style: preserve-3d;
+
+    position: relative;
+
+    .front, .back {
+      backface-visibility: hidden;
+
+      position: absolute;
+
+      width: $size;
+      height: $size;
+      border-radius: 50%;
+      text-align: center;
+      vertical-align: middle;
+      line-height: $size;
+      font-size: $size/2;
+      font-weight: bold;
+
+    }
+
+    .front {
+      z-index: 2;
+      background: black;
+      color: white;
+
+      transform: rotateY(0deg);
+
+    }
+    .back {
+      transform: rotateY(180deg);
+
+
+      &:hover{
+
+
+        .cross{
+          background: black;
+
+          &:before, &:after{
+            background-color: #ffffff;
+          }
+        }
+
+      }
+    }
+  }
+}
+
+.cross {
+
+  position: relative;
+  border: 3px solid black;
+
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: white;
+
+  &:before, &:after {
+    position: absolute;
+
+    top: 9px;
+    left: 15px;
+
+    content: ' ';
+    height: 15px;
+    width: 3px;
+
+    background-color: #000;
+  }
+
+  &:before{
+    transform: rotate(45deg);
+  }
+
+  &:after{
+    transform: rotate(-45deg);
+  }
+
+}
+
+.close-button:hover{
+  .cross{
+    background: black;
+    &:before, &:after{
+      background-color: #fff;
+    }
+  }
+}
