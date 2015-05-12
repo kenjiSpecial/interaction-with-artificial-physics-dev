@@ -29,7 +29,6 @@ class FacebookText extends React.Component {
                 target="_blank"
                 onclick={this.props.onClick}>
                 <div className="bot">{this.props.name}</div>
-                <div className="top">{this.props.name}</div>
             </a>
         );
     }
