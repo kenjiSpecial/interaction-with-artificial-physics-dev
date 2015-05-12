@@ -9,7 +9,8 @@ var Tappable = require('react-tappable');
 
 var TweenLite = require('gsap');
 
-class AppContent extends React.Component {
+
+class AboutContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -35,9 +36,8 @@ class AppContent extends React.Component {
     }
 
     componentDidMount(){
-        this.containerDom = document.getElementById("app-main-wrapper");
+        this.containerDom = document.getElementById("app-about-wrapper");
         this.cover = this.containerDom.querySelector(".content-title");
-
     }
 
     onBackgroundAnimationDoneHandler() {
@@ -55,6 +55,10 @@ class AppContent extends React.Component {
         TweenLite.to(this.cover, .5, {opacity: 0, onComplete: this.coverTweenComplete.bind(this)  });
     }
 
+    onCloseMenuAnimationDone(){
+
+    }
+
     coverTweenComplete(){
         this.cover.style.display = "none";
     }
@@ -64,52 +68,37 @@ class AppContent extends React.Component {
     }
 
     selectedTweenComplete(){
+
     }
 
     openMenuHandler() {
         this.containerDom.style.display = "block";
-        //this.containerDom.style.borderTop = "1px solid #ccc";
-        TweenLite.to(this.containerDom, .5, {scale: .7, y: "200px", ease: Expo.easeOut });
+        TweenLite.to(this.containerDom, .5, {scale: .7, y: "140px", ease: Expo.easeOut });
 
         this.cover.style.display = "block";
         TweenLite.to(this.cover, .5, {opacity: 1 });
     }
 
-    onCloseMenuAnimationDone(){
-
-    }
-
     onTapHandler(){
+
         if(!AppStore.get("isMenuOpen")) return;
 
-        AppAction.onTapMenu(this.props.name);
+        AppAction.onTapMenu(this.props.name)
     }
 
     render() {
-        var count = -1;
 
         return (
-            <Tappable id="app-main-wrapper"
-                 className={this.state.className}
-                 onTap={this.onTapHandler.bind(this)}>
+            <Tappable id="app-about-wrapper"
+                      className={this.state.className}
+                      onTap={this.onTapHandler.bind(this)}>
                 <div className="content-container" >
-                    <canvas id="app-canvas"></canvas>
-
                     <div id="app-main-dom-wrapper">
-                        <div className="work-text-wrapper">
-                            {
-                                this.state.works.map(function (result) {
-                                    count++;
-                                    var keyID = "work-text" + count;
-                                    return (
-                                        <WorkText key={keyID} name={result} number={count}></WorkText>
-                                    );
-                                })
-                            }
-                        </div>
+                        About
                     </div>
+
                     <div className="content-title">
-                        <div className="content-title-text">HOME</div>
+                        <div className="content-title-text">ABOUT</div>
                     </div>
                 </div>
             </Tappable>
@@ -117,6 +106,7 @@ class AppContent extends React.Component {
     }
 }
 
-AppContent.defaultProps = { name: "app" };
 
-module.exports = AppContent;
+AboutContent.defaultProps = { name: "about" };
+
+module.exports = AboutContent;

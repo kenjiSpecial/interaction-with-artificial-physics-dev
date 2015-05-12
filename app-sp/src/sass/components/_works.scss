@@ -3,11 +3,17 @@
   position: relative;
   width: 100%;
 
-  margin-top: 60px;
+
+
+
   padding-left: 15px;
   padding-right: 15px;
 
   z-index: 1;
+
+  .work-text-wrapper{
+    margin-top: 40px;
+  }
 
   .work-text {
     @extend .baseWorkProperties;

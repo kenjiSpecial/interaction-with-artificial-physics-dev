@@ -6,8 +6,13 @@ var appData = require('../data/app-data');
 var _apps = {
     isLoad: false,
     isTransition: false,
+    isMenuOpen : false,
+    isMenuAnimation : false,
+
+    selectedClassName : "app",
     works : [],
     images : {}
+
 }
 
 var AppStore = assign({}, EventEmitter.prototype, {
@@ -17,6 +22,14 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
     getAll: function () {
         return _apps;
+    },
+
+    isMenuOpen : function() {
+        return _apps.isMenuOpen;
+    },
+
+    selectedClassName : function(){
+        return _apps.selectedClassName;
     },
 
     // ================================
@@ -52,7 +65,44 @@ var AppStore = assign({}, EventEmitter.prototype, {
         _apps.isLoad = true;
 
         this.emit(CONSTANTS.LOAD_DONE);
+    },
+
+    openMenu : function() {
+        _apps.isMenuAnimation = true;
+        _apps.isMenuOpen = true;
+
+        this.emit(CONSTANTS.OPEN_MENU);
+    },
+
+    closeMenu : function() {
+        _apps.isMenuAnimation = true;
+        _apps.isMenuOpen = false;
+
+        this.emit(CONSTANTS.CLOSE_MENU);
+    },
+
+    menuAnimationDone : function(){
+        _apps.isMenuAnimation = false;
+
+        this.emit(CONSTANTS.MENU_ANIMATION_DONE);
+    },
+
+    onCLoseMenuAnimationDone : function(){
+        _apps.isMenuAnimation = false;
+
+        this.emit(CONSTANTS.CLOSE_MENU_ANIMATION_DONE);
+    },
+
+    onTapMenu : function(menuName) {
+        console.log(menuName);
+        _apps.selectedClassName = menuName;
+        _apps.isMenuAnimation = true;
+        _apps.isMenuOpen = false;
+
+        this.emit(CONSTANTS.TAP_MENU);
     }
+
+
 });
 
 AppStore.dispatchToken = AppDispatcher.register(function (action) {
@@ -62,6 +112,21 @@ AppStore.dispatchToken = AppDispatcher.register(function (action) {
             break;
         case CONSTANTS.LOAD_DONE:
             AppStore.loadDone(action.images);
+            break;
+        case CONSTANTS.OPEN_MENU:
+            AppStore.openMenu();
+            break;
+        case CONSTANTS.CLOSE_MENU:
+            AppStore.closeMenu();
+            break;
+        case CONSTANTS.MENU_ANIMATION_DONE:
+            AppStore.menuAnimationDone();
+            break;
+        case CONSTANTS.CLOSE_MENU_ANIMATION_DONE:
+            AppStore.onCLoseMenuAnimationDone()
+            break;
+        case CONSTANTS.TAP_MENU:
+            AppStore.onTapMenu(action.menuName);
             break;
     }
 

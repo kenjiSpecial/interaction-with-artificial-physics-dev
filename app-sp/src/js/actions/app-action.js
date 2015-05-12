@@ -232,6 +232,39 @@ var AppAction = {
         AppDispatcher.dispatch({
             actionType : AppConstants.WINDOW_RESIZE_IN_WORK
         })
+    },
+
+    /** ----------------------- */
+
+    openMenu : function(){
+        AppDispatcher.dispatch({
+            actionType : AppConstants.OPEN_MENU
+        });
+    },
+
+    closeMenu: function(){
+        AppDispatcher.dispatch({
+            actionType : AppConstants.CLOSE_MENU
+        });
+    },
+
+    menuAnimationDone : function() {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.MENU_ANIMATION_DONE
+        });
+    },
+
+    closeAnimationDone : function() {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.CLOSE_MENU_ANIMATION_DONE
+        });
+    },
+
+    onTapMenu: function(menuName) {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.TAP_MENU,
+            menuName   : menuName
+        });
     }
 
 };

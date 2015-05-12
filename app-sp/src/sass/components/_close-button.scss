@@ -1,0 +1,63 @@
+.close-button-wrapper{
+  //background: yellow;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  top:0;
+  right: 0;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.close-button{
+  position: relative;
+  margin-top: 20px;
+  margin-left: 10px;
+
+  display: block;
+
+  width: 24px;
+  height: 15px;
+  z-index: 1000;
+  transform: rotate(0deg);
+  transition: all .3s ;
+
+  .bar{
+    display: block;
+    width: 24px;
+    height: 2px;
+    margin: 4px auto;
+
+    background: black;
+    transition: all .3s;
+  }
+
+  .open &{
+    transform: rotate(225deg);
+    transition: all .3s;
+    transform-origin: center center;
+    margin-top: 15px;
+    margin-left: 15px;
+
+    .bar{
+      background: #000000; // TODO CHANGE COLOR LATER
+      transition: all .3s;
+
+      &:nth-child(2){
+        opacity: 0;
+        transition: opacity 0s;
+      }
+
+      &:nth-child(1){
+
+      }
+
+      &:nth-child(3){
+        margin-top: -13px;
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+
+}

@@ -10,25 +10,94 @@
 #main-wrapper {
   position: relative;
   @extend %full-size;
-}
-
-#app {
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  @extend %full-size;
 
 }
 
-#app-wrapper {
-  position: relative;
-  @extend %full-size;
-}
+  #app {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    @extend %full-size;
+  }
 
-#app-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  @extend %full-size;
-}
+    #app-wrapper {
+
+      position: relative;
+      @extend %full-size;
+
+      &.menu{
+        background: #ccc;
+        overflow: hidden;
+      }
+    }
+
+
+          #app-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            @extend %full-size;
+          }
+
+      .content-wrapper{
+        @extend %full-size;
+        position: absolute;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+        transform: translate3d(0,0,0);
+        display: none;
+
+        .menu &{
+          box-shadow: 0 0 40px rgba(0,0,0,0.4);
+        }
+
+        &.selected{
+          display: block;
+        }
+
+        .content-title{
+          @extend %full-size;
+          background: rgba(0, 0, 0, .6);
+          font-size: 40px;
+          letter-spacing: 6px;
+          position: absolute;
+          top: 0; left: 0;
+          font-weight: bold;
+          color: white;
+          width: 100%;
+          text-align: center;
+          display: none;
+          backface-visibility: hidden;
+          opacity: 0;
+
+          .content-title-text{
+            margin-top: 20px;
+          }
+        }
+
+        .content-container{
+          @extend %full-size;
+          position: absolute;
+          background: #ffffff;
+          backface-visibility: hidden;
+          transform: translate3d(0,0,0);
+          transform-style: preserve-3d;
+
+          @extend %full-size;
+
+          &:before{
+            content:"";
+            position: absolute;
+            @extend %full-size;
+            background-color: rgba(0, 0, 0, .6);
+            transition: all 800ms;
+            opacity: 0;
+          }
+        }
+
+
+      }
+
+
+

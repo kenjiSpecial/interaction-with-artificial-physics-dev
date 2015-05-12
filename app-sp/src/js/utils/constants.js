@@ -49,6 +49,11 @@ module.exports = keyMirror({
 
     "RENDER_WORK" : null,
 
+    "OPEN_MENU" : null,
+    "MENU_ANIMATION_DONE" : null,
+    "CLOSE_MENU": null,
+    "CLOSE_MENU_ANIMATION_DONE" : null,
+    "TAP_MENU" : null,
 
     // keyboar
     "KEYBOARD_DOWN" : null,
