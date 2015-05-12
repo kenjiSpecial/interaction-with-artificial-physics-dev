@@ -265,6 +265,12 @@ var AppAction = {
             actionType : AppConstants.TAP_MENU,
             menuName   : menuName
         });
+    },
+
+    onTapBottomContent : function() {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.TAP_BOTTOM_CONTENT
+        });
     }
 
 };

@@ -94,14 +94,19 @@ var AppStore = assign({}, EventEmitter.prototype, {
     },
 
     onTapMenu : function(menuName) {
-        console.log(menuName);
         _apps.selectedClassName = menuName;
         _apps.isMenuAnimation = true;
         _apps.isMenuOpen = false;
 
         this.emit(CONSTANTS.TAP_MENU);
-    }
+    },
 
+    onTapBottomContent : function() {
+        _apps.isMenuAnimation = true;
+        _apps.isMenuOpen = false;
+
+        this.emit(CONSTANTS.TAP_BOTTOM_CONTENT)
+    }
 
 });
 
@@ -127,6 +132,9 @@ AppStore.dispatchToken = AppDispatcher.register(function (action) {
             break;
         case CONSTANTS.TAP_MENU:
             AppStore.onTapMenu(action.menuName);
+            break;
+        case CONSTANTS.TAP_BOTTOM_CONTENT:
+            AppStore.onTapBottomContent()
             break;
     }
 

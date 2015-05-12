@@ -14,6 +14,7 @@ class CloseButton extends React.Component{
         }
 
         AppStore.on(AppConstants.TAP_MENU, this.onTapMenu.bind(this));
+        AppStore.on(AppConstants.TAP_BOTTOM_CONTENT, this.onTapMenu.bind(this));
     }
 
     onClickHandler(){

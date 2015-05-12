@@ -1,5 +1,66 @@
 #app-share-wrapper{
-  .app-main-dom-wrapper{
+
+
+
+}
+
+#app-share-dom-wrapper{
+  @extend %full-size;
+}
+
+
+.share-buttons {
+  width: 100%;
+
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  transition: 0.3s all ease-out-expo();
+
+
+  li {
+    width: 100%;
+    text-align: center;
+
+    a {
+      width: 100%;
+      text-align: center;
+      color: #000000;
+      height: 50px;
+      vertical-align: middle;
+      line-height: 50px;
+      font-size: 20px;
+      letter-spacing: 1px;
+
+      font-weight: 400;
+      text-decoration: none;
+      color: #000;
+      display: inline-block;
+      position: relative;
+
+      .bot {
+        position: relative;
+      }
+
+      .top {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        color: #bbb;
+        overflow: hidden;
+        width: 0%;
+        transition: 0.2s all ease-in-out-quart();
+      }
+
+      &.hover {
+        .top {
+          width: 100%;
+        }
+      }
+    }
 
   }
 }

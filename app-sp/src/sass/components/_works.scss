@@ -5,15 +5,21 @@
 
 
 
-
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5%;
+  padding-right: 5%;
 
   z-index: 1;
 
   .work-text-wrapper{
-    margin-top: 40px;
+    margin-top: 60px;
   }
+
+  h1{
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
 
   .work-text {
     @extend .baseWorkProperties;

@@ -1,0 +1,175 @@
+#app-about-dom-wrapper{
+  margin-top: 78px;
+  padding-bottom: 70px;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+
+  .title {
+    position: relative;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    padding-left: 18px;
+    letter-spacing: 1px;
+
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background-color: black;
+    }
+  }
+
+  .content {
+    position: relative;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    margin-bottom: 22px;
+    p{
+      margin-bottom: 8px;
+
+      .author{
+        text-align: right;
+      }
+    }
+
+    ul{
+      margin-top: 8px;
+      margin-bottom: 8px;
+      li{
+
+      }
+    }
+
+    a{
+      text-decoration: none;
+      color: #999;
+    }
+
+    .contact-list{
+      a{
+        margin-right: 12px;
+      }
+    }
+  }
+}
+
+.about-content {
+  //position: absolute;
+  position: relative;
+
+  height: 100%;
+  display: none;
+  width: 0;
+  //transition: 0.6s all ease-in-out-quart();
+
+
+  overflow: hidden;
+  background: rgba(255, 255, 255, .9);
+
+  z-index: 10;
+
+  .about-content-wrapper {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: -30px;
+    margin-left: 30px;
+    width: 710px;
+
+    .title, .content{
+      opacity: 0;
+      transform: translate(0, 20px);
+      transition: 0.6s all ease-out-quart();
+
+      &.active{
+        transform: translate(0, 0);
+        opacity: 1;
+      }
+    }
+
+
+    .title {
+      position: relative;
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      padding-left: 18px;
+      letter-spacing: 1px;
+
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        background-color: black;
+      }
+    }
+
+    .content {
+      position: relative;
+      font-size: 12px;
+      letter-spacing: 1px;
+      line-height: 20px;
+      margin-bottom: 22px;
+      p{
+        margin-bottom: 5px;
+      }
+
+      ul{
+        margin-top: 8px;
+        margin-bottom: 8px;
+        li{
+
+        }
+      }
+
+      a{
+        text-decoration: none;
+        color: #999;
+      }
+
+      .contact-list{
+        a{
+          margin-right: 12px;
+        }
+      }
+    }
+  }
+
+  .close-button{
+    cursor: pointer;
+    opacity: 0;
+    transform: translate(0, 20px);
+    transition: 0.6s all ease-out-quart();
+
+    &.active{
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+
+    .cross{
+      position: absolute;
+      left: 777px;
+      margin: 0;
+
+      background-color: rgba(255, 255, 255, 0);
+    }
+
+    &:hover{
+      .cross{
+        background-color: black;
+      }
+    }
+  }
+}
+
