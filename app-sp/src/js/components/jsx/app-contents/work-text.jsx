@@ -107,9 +107,9 @@ class WorkText extends React.Component {
             workCoverDisplay : "block"
         });
 
-        TweenLite.set(this.blackCover, {x: this.textWidth + 5})
+        TweenLite.set(this.blackCover, {x: -this.textWidth-5})
 
-        TweenLite.to(this.blackCover, .3, {x: 0, onComplete: this.textWidthAnimationComplete3.bind(this), ease: Power2.easeInOut })
+        TweenLite.to(this.blackCover, .3, {x: 0, onComplete: this.textWidthAnimationComplete3.bind(this), ease: Power2.easeInOut, delay: .3 })
     }
 
     textWidthAnimationComplete3(){
@@ -117,7 +117,7 @@ class WorkText extends React.Component {
             workDisplay : "block"
         });
 
-        TweenLite.to(this.blackCover, .3, {x: -this.textWidth-5, onComplete: this.textWidthAnimationComplete4.bind(this) })
+        TweenLite.to(this.blackCover, .3, {x: this.textWidth+5, onComplete: this.textWidthAnimationComplete4.bind(this) })
     }
 
     textWidthAnimationComplete4(){

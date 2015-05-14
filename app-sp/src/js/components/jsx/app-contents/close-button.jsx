@@ -130,7 +130,7 @@ class CloseButton extends React.Component {
 
     onTapCloseButtonHandler(){
         this.posY = 0;
-        TweenLite.to(this, .3, { delay: .2, posY : 100, ease: Expo.easeOut, onUpdate: this.onTween1Update.bind(this), onComplete: this.onTween2Complete.bind(this) });
+        TweenLite.to(this, .3, { delay: .2, posY : 100, ease: Expo.easeInOut, onUpdate: this.onTween1Update.bind(this), onComplete: this.onTween2Complete.bind(this) });
     }
 
     onTween2Complete(){

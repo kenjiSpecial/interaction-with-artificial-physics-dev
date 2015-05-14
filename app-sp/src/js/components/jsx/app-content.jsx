@@ -20,7 +20,8 @@ class AppContent extends React.Component {
             className: "content-wrapper",
             titleClassName: "content-title",
             workTextListDisplay: "block",
-            appOverflow: "visible"
+            appOverflow: "visible",
+            contentTitle : "LISTS"
         };
 
         AppStore.on(AppConstants.OPEN_MENU, this.openMenuHandler.bind(this));
@@ -91,6 +92,7 @@ class AppContent extends React.Component {
     onWorkTextAnimationDoneHandler() {
         setTimeout(function () {
             this.setState({
+                contentTitle : "EXPERIMENT",
                 workTextListDisplay: "none",
                 appOverflow: "hidden"
             });
@@ -126,9 +128,11 @@ class AppContent extends React.Component {
 
     onBackToIndexHandler(){
         this.setState({
+            contentTitle : "LISTS",
             workTextListDisplay: "block",
             appOverflow: "visible"
         });
+
     }
 
     render() {
@@ -166,7 +170,7 @@ class AppContent extends React.Component {
                         </div>
                     </div>
                     <div className="content-title">
-                        <div className="content-title-text">LISTS</div>
+                        <div className="content-title-text">{this.state.contentTitle}</div>
                     </div>
                 </div>
 

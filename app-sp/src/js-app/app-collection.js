@@ -46,6 +46,7 @@ function initialize(){
     AppStore.on(CONSTANTS.CLOSE_MENU_ANIMATION_DONE, resume);
 
     backgroundWhite.on("ON_COMPLETE_STOP_ANIMATION", onCompleteStopAnimationHandler)
+    window.addEventListener('orientationchange', onOrientationChangeHandler);
 }
 
 function onLoadStartHandler(){
@@ -79,6 +80,7 @@ function start(){
     window.addEventListener(TOUCH_END, onTouchEndHandler);
 
 
+
     ticker.addListener(CONSTANTS.TICK, update);
 }
 
@@ -89,6 +91,7 @@ function stop(){
     window.removeEventListener(TOUCH_START, onTouchStartHandler);
     window.removeEventListener(TOUCH_MOVE, onTouchMoveHandler);
     window.removeEventListener(TOUCH_END, onTouchEndHandler);
+
 }
 
 function update(){
@@ -105,8 +108,9 @@ function onCompleteStopAnimationHandler(){
 }
 
 function onWindowResize(){
-    windowWid = window.innerWidth;
-    windowHig = window.innerHeight;
+    //windowWid = window.innerWidth;
+    //windowHig = window.innerHeight;
+    onOrientationChangeHandler();
 }
 
 function onTouchStartHandler(ev){
@@ -148,6 +152,21 @@ function resume(){
         ticker.addListener(CONSTANTS.TICK, update);
     }
 
+}
+
+function onOrientationChangeHandler(){
+    windowWid = window.innerWidth;
+    windowHig = window.innerHeight;
+
+    dpr = window.devicePixelRatio || 1;
+
+    canvas.style.width = windowWid + "px";
+    canvas.style.height = windowHig + "px";
+
+    canvas.width = windowWid * dpr;
+    canvas.height = windowHig * dpr;
+
+    ctx.scale( dpr, dpr );
 }
 
 
