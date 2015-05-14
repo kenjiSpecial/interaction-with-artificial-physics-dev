@@ -43,7 +43,7 @@ var AppRouter = Router.extend({
 
     index: function () {
 
-        if (appStore.get("isTransition")) {
+        if (appStore.get("isTransition") || appStore.get("selectedClassName") != "app" ) {
             this.navigate(this.prevRoute);
 
             return;
@@ -59,7 +59,7 @@ var AppRouter = Router.extend({
 
     work: function (query) {
 
-        if (appStore.get("isTransition")) {
+        if ( appStore.get("isTransition") || appStore.get("selectedClassName") != "app") {
             this.navigate(this.prevRoute);
             return;
         }
