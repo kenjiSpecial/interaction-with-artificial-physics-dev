@@ -79,13 +79,10 @@ function start(){
     window.addEventListener(TOUCH_MOVE, onTouchMoveHandler);
     window.addEventListener(TOUCH_END, onTouchEndHandler);
 
-
-
     ticker.addListener(CONSTANTS.TICK, update);
 }
 
 function stop(){
-    //ticker.removeListener(CONSTANTS.TICK, update);
     backgroundWhite.stop();
 
     window.removeEventListener(TOUCH_START, onTouchStartHandler);
@@ -145,11 +142,21 @@ function onTouchEndHandler(ev) {
 
 function resume(){
     if(!AppStore.get("isWorkSelected")) return;
-
+    console.log('resume');
     if(AppStore.isMenuOpen()){
-        ticker.removeListener(CONSTANTS.TICK, update);
+        if(AppStore.get("selectedClassName") == "app"){
+            ticker.removeListener(CONSTANTS.TICK, update);
+            window.removeEventListener(TOUCH_START, onTouchStartHandler);
+            window.removeEventListener(TOUCH_MOVE, onTouchMoveHandler);
+            window.removeEventListener(TOUCH_END, onTouchEndHandler);
+        }
     }else{
-        ticker.addListener(CONSTANTS.TICK, update);
+        if(AppStore.get("selectedClassName") == "app") {
+            ticker.addListener(CONSTANTS.TICK, update);
+            window.addEventListener(TOUCH_START, onTouchStartHandler);
+            window.addEventListener(TOUCH_MOVE, onTouchMoveHandler);
+            window.addEventListener(TOUCH_END, onTouchEndHandler);
+        }
     }
 
 }
