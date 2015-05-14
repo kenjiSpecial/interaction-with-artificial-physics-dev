@@ -58,7 +58,6 @@ var WorkStore = assign({}, EventEmitter.prototype, {
     onForceSetWorkHandler(){
         _work.isSelected = true;
         _work["workData"] = AppStore.getSelectedWorkData();
-        console.log(_work["workData"]);
 
         this.emit(APP_CONSTANTS.FORCE_SET_WORK);
     }

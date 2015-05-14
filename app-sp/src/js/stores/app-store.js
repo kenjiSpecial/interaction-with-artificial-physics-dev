@@ -172,7 +172,6 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
     forceSetWork : function(workID) {
         _apps.selectedWorkNumber = this.getWorkNumber(workID);
-        console.log(_apps.selectedWorkNumber);
 
         this.emit(CONSTANTS.FORCE_SET_WORK);
     },

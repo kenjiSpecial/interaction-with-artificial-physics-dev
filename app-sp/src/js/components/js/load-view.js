@@ -30,7 +30,7 @@ LoadView.prototype.fadeOut = function() {
 
 LoadView.prototype.removeLoadView = function() {
     this.loader.style.display = "none";
-    console.log(this.appMainWrapper);
+
     removeClass(this.appMainWrapper, "full-screen");
 }
 
