@@ -31,6 +31,7 @@ var prevX, prevY, curX, curY, dx, dy;
 var TOUCH_START = "touchstart";
 var TOUCH_END   = "touchend"
 var TOUCH_MOVE  = "touchmove";
+var isStart;
 
 function initialize(){
 
@@ -40,8 +41,9 @@ function initialize(){
     WorkStore.on(CONSTANTS.STOP_WORK_ANIMATION, stop);
 
     AppStore.on(CONSTANTS.LOAD_DONE, onLoadStartHandler);
-
     AppStore.on(CONSTANTS.ON_WINDOW_RESIZE, onWindowResize);
+    AppStore.on(CONSTANTS.OPEN_MENU, resume);
+    AppStore.on(CONSTANTS.CLOSE_MENU_ANIMATION_DONE, resume);
 
     backgroundWhite.on("ON_COMPLETE_STOP_ANIMATION", onCompleteStopAnimationHandler)
 }
@@ -64,6 +66,7 @@ function onLoadStartHandler(){
 }
 
 function start(){
+    isStart = true;
     canvas.style.display = "block";
     var data = WorkStore.getWorkData();
     selectedNumber = data.workNum
@@ -118,7 +121,7 @@ function onTouchMoveHandler(ev){
     var touch = ev.changedTouches[0];
     curX = touch.clientX;
     curY = touch.clientY;
-    
+
     dx = curX - prevX;
     dy = curY - prevY;
 
@@ -134,6 +137,17 @@ function onTouchEndHandler(ev) {
     prevY = curY = touch.clientY;
 
     ev.preventDefault();
+}
+
+function resume(){
+    if(!AppStore.get("isWorkSelected")) return;
+
+    if(AppStore.isMenuOpen()){
+        ticker.removeListener(CONSTANTS.TICK, update);
+    }else{
+        ticker.addListener(CONSTANTS.TICK, update);
+    }
+
 }
 
 
