@@ -27,6 +27,11 @@ var windowWid, windowHig;
 var dpr;
 var canvas, ctx;
 
+var prevX, prevY, curX, curY, dx, dy;
+var TOUCH_START = "touchstart";
+var TOUCH_END   = "touchend"
+var TOUCH_MOVE  = "touchmove";
+
 function initialize(){
 
     appCollection.push(new DemoApp());
@@ -65,12 +70,22 @@ function start(){
     app = appCollection[selectedNumber];
     backgroundWhite.start();
 
+
+    window.addEventListener(TOUCH_START, onTouchStartHandler);
+    window.addEventListener(TOUCH_MOVE, onTouchMoveHandler);
+    window.addEventListener(TOUCH_END, onTouchEndHandler);
+
+
     ticker.addListener(CONSTANTS.TICK, update);
 }
 
 function stop(){
     //ticker.removeListener(CONSTANTS.TICK, update);
     backgroundWhite.stop();
+
+    window.removeEventListener(TOUCH_START, onTouchStartHandler);
+    window.removeEventListener(TOUCH_MOVE, onTouchMoveHandler);
+    window.removeEventListener(TOUCH_END, onTouchEndHandler);
 }
 
 function update(){
@@ -88,8 +103,37 @@ function onCompleteStopAnimationHandler(){
 
 function onWindowResize(){
     windowWid = window.innerWidth;
-
     windowHig = window.innerHeight;
+}
+
+function onTouchStartHandler(ev){
+    var touch = ev.changedTouches[0];
+    prevX = curX = touch.clientX;
+    prevY = curY = touch.clientY;
+
+    ev.preventDefault();
+}
+
+function onTouchMoveHandler(ev){
+    var touch = ev.changedTouches[0];
+    curX = touch.clientX;
+    curY = touch.clientY;
+    
+    dx = curX - prevX;
+    dy = curY - prevY;
+
+    prevX = curX;
+    prevY = curY;
+
+    ev.preventDefault();
+}
+
+function onTouchEndHandler(ev) {
+    var touch = ev.changedTouches[0];
+    prevX = curX = touch.clientX;
+    prevY = curY = touch.clientY;
+
+    ev.preventDefault();
 }
 
 
