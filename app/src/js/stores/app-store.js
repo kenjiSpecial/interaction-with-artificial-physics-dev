@@ -448,7 +448,7 @@ AppStore.dispatchToken = AppDispatcher.register(function(action){
     }
 });
 
-AppStore.setMaxListeners(100);
+AppStore.setMaxListeners(20);
 
 module.exports = AppStore;
 

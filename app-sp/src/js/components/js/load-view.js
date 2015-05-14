@@ -5,6 +5,7 @@ var _ = require('lodash');
 var LoadView = function(){
     _.bindAll(this, 'removeLoadView')
     this.loader = document.getElementById("loader");
+    this.loaderContent = document.getElementById("loader-content");
     this.ballArr = this.loader.querySelectorAll(".ball");
     this.loadText = this.loader.querySelectorAll(".letter");
 };
@@ -20,7 +21,8 @@ LoadView.prototype.fadeOut = function() {
         TweenLite.to(el, .4, {opacity: 0, delay: (loadTextLength - i) * .03, x: +15, ease: Power3.easeOut});
     });
 
-    TweenLite.to(this.loader, .8, {height : 0, delay: .6, ease: Expo.easeInOut, onComplete: this.removeLoadView.bind(this)});
+
+    TweenLite.to(this.loaderContent, .8, {y : -window.innerHeight, delay: .6, ease: Expo.easeInOut, onComplete: this.removeLoadView.bind(this)});
 
     return Promise.delay(600);
 };

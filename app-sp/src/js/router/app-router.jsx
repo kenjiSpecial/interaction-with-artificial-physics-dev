@@ -23,13 +23,14 @@ var loadView = require('../components/js/load-view');
 
 var AppRouter = Router.extend({
     initialize: function () {
-        _.bindAll(this, 'onLoadStartHandler', 'onLoadDoneHandler', 'onWorkBallAnimationDoneHandler', 'onCloseWork');
+        _.bindAll(this, 'onLoadStartHandler', 'onLoadDoneHandler', 'onWorkBallAnimationDoneHandler', 'workTextAnimationDone', 'onTapCloseButtonHandler');
 
         appStore.on(AppConstants.LOAD_START, this.onLoadStartHandler);
         appStore.on(AppConstants.LOAD_DONE, this.onLoadDoneHandler);
 
-        appStore.on(AppConstants.ON_WORK_BALL_ANIMATION_DONE, this.onWorkBallAnimationDoneHandler);
-        appStore.on(AppConstants.CLOSE_WORK, this.onCloseWork);
+        //appStore.on(AppConstants.ON_WORK_BALL_ANIMATION_DONE, this.onWorkBallAnimationDoneHandler);
+        appStore.on(AppConstants.WORK_TEXT_ANIMATION_DONE, this.workTextAnimationDone);
+        appStore.on(AppConstants.TAP_CLOSE_BUTTON, this.onTapCloseButtonHandler);
     },
 
     prevRoute: "",
@@ -81,6 +82,7 @@ var AppRouter = Router.extend({
 
     renderInitIndex: function () {
         //appAction.onMouseMoveSet();
+        appAction.onRenderInitIndex();
     },
 
     renderWork: function (workID) {
@@ -88,12 +90,8 @@ var AppRouter = Router.extend({
     },
 
     renderWorkInit: function (workID) {
-
+        //appAction
         appAction.forceSetWork(workID);
-        setTimeout(function () {
-            appAction.onAnimationDone();
-        }, 1000);
-
     },
 
     renderAction: function (imageArr) {
@@ -174,11 +172,19 @@ var AppRouter = Router.extend({
         }, 0);
     },
 
-    onCloseWork: function () {
-        var self = this;
+    onTapCloseButtonHandler: function () {
         setTimeout(function () {
             this.navigate("", {trigger: true});
         }.bind(this), 0);
+    },
+
+    workTextAnimationDone : function() {
+        var workdata = appStore.getSelectedWorkData();
+        this.navigate("/work/" + workdata.id);
+
+        setTimeout(function () {
+            appAction.changeDirectoryToWork();
+        }, 0);
     }
 
 

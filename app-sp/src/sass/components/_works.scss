@@ -11,7 +11,8 @@
   z-index: 1;
 
   .work-text-wrapper{
-    margin-top: 60px;
+    margin-top: 50px;
+    padding-bottom: 70px;
   }
 
   h1{
@@ -26,11 +27,12 @@
     //width: 100%;
 
     color: #000000;
-    height: 50px;
+    height: 70px;
     vertical-align: middle;
-    line-height: 50px;
+    line-height: 70px;
     font-size: 20px;
     letter-spacing: 1px;
+    position: relative;
 
 
 
@@ -47,13 +49,33 @@
 
     .work-wrapper {
       position: relative;
-      width: 100%;
+      //position: absolute;
+      //width: 100%;
+    }
+
+    .work-cover{
+      @include performance();
+      position: absolute;
+      top: 25px; left: 0;
+      width: 0;
+      overflow: hidden;
+      height: 25px;
+      z-index: 100;
+
+
+      .cover-content{
+        @include performance();
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: black;
+      }
     }
 
     .work-base {
       top: 0;
       left: 0;
-      width: 100%;
+      //width: 100%;
       display: inline-block;
       white-space: nowrap;
     }
@@ -65,7 +87,7 @@
       overflow: hidden;
       width: 0;
 
-      color: #BBB;
+      color: #AAA;
       display: inline-block;
       white-space: nowrap;
     }

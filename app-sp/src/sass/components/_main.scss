@@ -17,6 +17,7 @@
     position: relative;
     top: 0;
     left: 0;
+    //display: none;
     //overflow: hidden;
     @extend %full-size;
   }
@@ -34,6 +35,7 @@
 
 
           #app-canvas {
+            display: none;
             position: absolute;
             top: 0;
             left: 0;
@@ -43,14 +45,14 @@
       .content-wrapper{
         @extend %full-size;
         position: absolute;
-        //position: relative;
         backface-visibility: hidden;
         transform-style: preserve-3d;
         transform: translate3d(0,0,0);
         display: none;
 
         .menu &{
-          box-shadow: 0 0 40px rgba(0,0,0,0.4);
+          //box-shadow: 0 0 40px rgba(0,0,0,0.4);
+          border-top: 1px solid #AAAAAA;
           overflow: hidden;
         }
 

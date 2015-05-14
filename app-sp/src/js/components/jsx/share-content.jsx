@@ -37,6 +37,7 @@ class ShareContent extends React.Component {
     componentDidMount(){
         this.containerDom = document.getElementById("app-share-wrapper");
         this.cover = this.containerDom.querySelector(".content-title");
+        TweenLite.set(this.containerDom, {y: window.innerHeight});
     }
 
     onBackgroundAnimationDoneHandler() {
@@ -111,6 +112,8 @@ class ShareContent extends React.Component {
                         <div className="content-title-text">SHARE</div>
                     </div>
                 </div>
+
+
             </Tappable>
         );
     }

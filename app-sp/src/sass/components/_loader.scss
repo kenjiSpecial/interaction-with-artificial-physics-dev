@@ -1,12 +1,21 @@
 $RAD: 200px;
 $ANIM_SEC: 5s;
 
+#loader-content{
+  position: relative;
+  @include performance();
+  @extend %full-size;
+  background-color: #000000;
+}
+
 #loader{
+  @include performance();
   @extend %full-size;
   position: absolute;
   top: 0; left: 0;
-  background-color: #000000;
+
   z-index: 9999;
+  overflow: hidden;
 
   .load-wrapper{
     position: absolute;

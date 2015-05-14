@@ -60,7 +60,7 @@ var WorkStore = assign({}, EventEmitter.prototype, {
 WorkStore.dispatchToken = AppDispatcher.register(function(action){
     switch(action.actionType){
         case APP_CONSTANTS.CHANGE_DIRECTORY_TO_WORK:
-            WorkStore.setWork(action.workData)
+            WorkStore.setWork()
             break;
         case APP_CONSTANTS.START_WORK_ANIMATION:
             WorkStore.startWorkAnimation();

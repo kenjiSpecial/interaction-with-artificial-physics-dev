@@ -41,6 +41,8 @@ class AboutContent extends React.Component {
     componentDidMount(){
         this.containerDom = document.getElementById("app-about-wrapper");
         this.cover = this.containerDom.querySelector(".content-title");
+
+        TweenLite.set(this.containerDom, {y: window.innerHeight});
     }
 
     onBackgroundAnimationDoneHandler() {
@@ -98,7 +100,7 @@ class AboutContent extends React.Component {
                       onTap={this.onTapHandler.bind(this)}>
                 <div className="content-container" >
                     <div id="app-about-dom-wrapper">
-                        <p className="title">Interaction with Artificial Physics</p>
+                        <p className="title">About</p>
                         <div className="content">
                             <p>"Interaction with Artificial Physics" is the collction of interactinve experiments with Artificial Physics. The Artificial Physics is the system which controls the motion and coollisiton of objects by several parameters such as gravity and friction with JavaScript. Each experiment has ist own unique physics with its unique parameter and system to add the taste artificially.</p>
                         </div>

@@ -4,7 +4,7 @@ var AppConstants = require('../utils/constants');
 var AppAction = {
     startRenderingIndex : function (){
         AppDispatcher.dispatch({
-            actionType : AppConstants.CHANGE_DIRECTORY_TO_INDEX
+            actionType : AppConstants.START_RENDERING_INDEX
         });
     },
 
@@ -125,20 +125,14 @@ var AppAction = {
         });
     },
 
-    onClickWork: function ( workNumber, workPosX ) {
+    /** WorkList */
+    onTapWork : function(workNumber) {
         AppDispatcher.dispatch({
-            actionType: AppConstants.ON_CLICK_WORK,
-            workNumber: workNumber,
-            workPosX: workPosX
-        });
-    },
-
-    onClickText : function(workNumber) {
-        AppDispatcher.dispatch({
-            actionType : AppConstants.ON_CLICK_TEXT,
+            actionType : AppConstants.ON_TAP_WORK,
             workNumber : workNumber
-        });
+        })
     },
+    /** WorkList */
 
     onUpdateCameraPosition: function (cameraPositionY) {
         AppDispatcher.dispatch({
@@ -175,7 +169,7 @@ var AppAction = {
         })
     },
 
-    statrWorkAnimation: function(){
+    startWorkAnimation: function(){
         AppDispatcher.dispatch({
             actionType: AppConstants.START_WORK_ANIMATION
         });
@@ -271,7 +265,36 @@ var AppAction = {
         AppDispatcher.dispatch({
             actionType : AppConstants.TAP_BOTTOM_CONTENT
         });
+    },
+
+    /** ----------------------- */
+
+    workTextAnimationDone : function() {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.WORK_TEXT_ANIMATION_DONE
+        });
+    },
+
+    onRenderInitIndex : function() {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.RENDER_INIT_INDEX
+        })
+    },
+
+    onTapCloseButton : function() {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.TAP_CLOSE_BUTTON
+        })
+    },
+
+    renderIndexDone : function() {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.RENDER_INDEX_DONE
+        })
     }
+
+    /** ----------------------- */
+
 
 };
 

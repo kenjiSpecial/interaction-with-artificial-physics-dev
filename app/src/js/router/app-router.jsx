@@ -120,7 +120,7 @@ var AppRouter = Router.extend({
 
     onLoadStartHandler: function () {
         var images = appData.demoImg;
-        if (images.length > 0) {
+        if (images.length > 0) {ff
             Promise.all(images.map(x => load(x))).then(this.renderAction);
         } else {
 

@@ -27,8 +27,7 @@ module.exports = keyMirror({
     "ON_DRAG_BALL_START" : null,
     "ON_DRAG_BALL_DONE"  : null,
 
-    "ON_CLICK_WORK" : null,
-    "ON_CLICK_TEXT" : null,
+    "ON_TAP_WORK" : null,
 
     "ON_CAMERA_POSITION_UPDATE"   : null,
     "ON_CAMERA_POSITION_X_UPDATE" : null,
@@ -48,6 +47,7 @@ module.exports = keyMirror({
     "CLOSE_WORK" : null,
 
     "RENDER_WORK" : null,
+    "WORK_TEXT_ANIMATION_DONE" : null,
 
     "OPEN_MENU" : null,
     "MENU_ANIMATION_DONE" : null,
@@ -60,4 +60,12 @@ module.exports = keyMirror({
     "KEYBOARD_DOWN" : null,
     "TICK"          : null,
     "WORK_UPDATE"   : null,
+
+    //
+    "RENDER_INIT_INDEX" : null,
+    "RENDER_INDEX_DONE" : null,
+    "TAP_CLOSE_BUTTON"  : null,
+
+    "START_RENDERING_INDEX" : null
+
 });

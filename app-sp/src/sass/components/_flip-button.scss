@@ -1,0 +1,105 @@
+$size: 30px;
+
+.flip-container {
+  perspective: 1000;
+  width: $size;
+  height: $size;
+
+  transform: translate(-20px, 0);
+
+  .flipper {
+    &.rotated{
+      transform: rotateY(180deg);
+    }
+
+    width: $size;
+    height: $size;
+    transition: 0.6s all ease-in-out-quart();
+    transform-style: preserve-3d;
+
+    position: relative;
+
+    .front, .back {
+      backface-visibility: hidden;
+
+      position: absolute;
+
+      width: $size;
+      height: $size;
+      border-radius: 50%;
+      text-align: center;
+      vertical-align: middle;
+      line-height: $size;
+      font-size: $size/2;
+      font-weight: bold;
+
+    }
+
+    .front {
+      z-index: 2;
+      background: black;
+      color: white;
+
+      transform: rotateY(0deg);
+
+    }
+    .back {
+      transform: rotateY(180deg);
+
+    }
+  }
+}
+
+.cross {
+
+  position: relative;
+  border: 2px solid black;
+
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  //background: white;
+
+  .flip-container.active &{
+    background-color: black;
+  }
+
+  &:before, &:after {
+    position: absolute;
+
+    top: 7px;
+    left: 12px;
+
+    content: ' ';
+    height: 12px;
+    width: 2px;
+    background: black;
+
+    .flip-container.active &{
+      background-color: white;
+    }
+  }
+
+  &:before{
+    transform: rotate(45deg);
+  }
+
+  &:after{
+    transform: rotate(-45deg);
+  }
+
+}
+
+
+.flip-wrapper{
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+
+  &.active{
+    .close-button{
+
+    }
+  }
+
+}

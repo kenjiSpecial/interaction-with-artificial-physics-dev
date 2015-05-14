@@ -1,5 +1,6 @@
 @import "reset";
 
+@import "utils/mixin";
 @import "utils/extends/extends";
 @import "utils/error";
 @import "utils/easing";
@@ -17,3 +18,4 @@
 @import "components/link_text";
 @import "components/about-content";
 @import "components/bottom-content";
+@import "components/flip-button";

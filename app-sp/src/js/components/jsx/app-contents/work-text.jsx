@@ -7,54 +7,173 @@ var AppAction = require('../../../actions/app-action');
 
 var TweenLite= require('gsap');
 var s = require('react-prefixr');
+var Tappable = require('react-tappable');
 
 class WorkText extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {posX : 0, posY: 60, widthRate: 0, display: "block"};
+        this.state = {display: "block", workDisplay: "block", workCoverDisplay: "none", textWidth: 0, textLeft: 0, widthRate: 0};
         this.widthRate = 0;
+
+        AppStore.on(APP_CONSTANTS.ON_TAP_WORK, this.onTapWorkHandler.bind(this));
+        AppStore.on(APP_CONSTANTS.FORCE_SET_WORK, this.onForceSetWorkHandler.bind(this));
+        AppStore.on(APP_CONSTANTS.BACK_TO_INDEX, this.onBackToIndexHandler.bind(this))
     }
 
     componentWillMount(){
         var WORK_UPDATE = "WORK_TYPE" + this.props.number;
+    }
 
-        /*
-        AppStore.on(WORK_UPDATE, this.onMouseMoveHandler.bind(this));
-        AppStore.on(APP_CONSTANTS.ON_MOUSE_ENTER_BALL, this.onMouseEnterBallHandler.bind(this));
-        AppStore.on(APP_CONSTANTS.ON_MOUSE_LEAVE_BALL, this.onMouseLeaveBallHandler.bind(this));
+    componentDidMount(){
+        var workID = "work-" + this.props.number;
+        var workBaseID = "work-base" + this.props.number;
 
-        AppStore.on(APP_CONSTANTS.ON_CLICK_WORK,  this.onClickWorkHandler.bind(this));
-        AppStore.on(APP_CONSTANTS.WINDOW_RESIZE_IN_WORK, this.onWindowResizeInWork.bind(this));
-        AppStore.on(APP_CONSTANTS.FORCE_SET_WORK, this.onForceSetWorkHandler.bind(this));
-        AppStore.on(APP_CONSTANTS.CHANGE_DIRECTORY_TO_INDEX, this.onChangeDirectoryToIndexHandler.bind(this));
-        AppStore.on(APP_CONSTANTS.ON_WORK_BALL_ANIMATION_DONE, this.onWorkBallAnimationDoneHandler.bind(this));
-        */
+
+
+        this.textDom = document.getElementById(workBaseID);
+        this.blackCover = document.getElementById(workID).querySelector(".cover-content");
+    }
+
+    // ================================
+    onTouchStatHandler(){
+        TweenLite.to(this, .3, {widthRate: 100, onUpdate: this.onTweenUpdateHandler.bind(this), ease: Expo.easeOut });
+    }
+
+    onTouchEndHandler(){
+        TweenLite.to(this, .3, {widthRate: 0, onUpdate: this.onTweenUpdateHandler.bind(this), ease: Expo.easeOut });
+    }
+
+    onTapHandler(){
+        if(AppStore.get("isAnimationWork") || AppStore.get("isMenuOpen")) return;
+
+
+        AppAction.onTapWork(this.props.number);
+    }
+
+    onTapWorkHandler(){
+        this.textWidth = this.textDom.clientWidth;
+
+        this.setState({
+            textWidth        : this.textWidth,
+            workCoverDisplay : "block"
+        });
+
+        TweenLite.set(this.blackCover, {x: -this.textWidth})
+
+        TweenLite.to(this.blackCover, .3, {x: 0, onComplete: this.textWidthAnimationComplete1.bind(this), ease: Power2.easeInOut })
+    }
+
+    textWidthAnimationComplete1(){
+
+        this.setState({
+            workDisplay : "none"
+        });
+
+        TweenLite.to(this.blackCover, .3, {x: this.textWidth, onComplete: this.textWidthAnimationComplete2.bind(this), ease: Power4.easeOut })
+    }
+
+    textWidthAnimationComplete2(){
+
+        if(this.props.number === AppStore.get("selectedWorkNumber")){
+            AppAction.workTextAnimationDone();
+        }
+
+    }
+
+
+    onTweenUpdateHandler(){
+        this.setState({
+            widthRate : this.widthRate
+        });
+
+    }
+
+    onForceSetWorkHandler() {
+        this.textWidth = this.textDom.clientWidth;
+
+        this.setState({
+            textWidth        : this.textWidth,
+            workCoverDisplay : "none",
+            workDisplay : "none"
+        });
+
+
+    }
+
+    onBackToIndexHandler(){
+        this.setState({
+            workCoverDisplay : "block"
+        });
+
+        TweenLite.set(this.blackCover, {x: this.textWidth})
+
+        TweenLite.to(this.blackCover, .3, {x: 0, onComplete: this.textWidthAnimationComplete3.bind(this), ease: Power2.easeInOut })
+    }
+
+    textWidthAnimationComplete3(){
+        this.setState({
+            workDisplay : "block"
+        });
+
+        TweenLite.to(this.blackCover, .3, {x: -this.textWidth, onComplete: this.textWidthAnimationComplete4.bind(this), ease: Power4.easeOut })
+    }
+
+    textWidthAnimationComplete4(){
+        this.setState({
+            workCoverDisplay : "none"
+        })
+
+        if(this.props.number === AppStore.get("selectedWorkNumber")){
+            AppAction.renderIndexDone();
+        }
 
     }
 
     // ================================
 
-    // ================================
-
     render(){
-        //divStyle.display = this.state.display;
-
+        var workTextID = "work-" + this.props.number;
         var workBaseID = "work-base" + this.props.number;
         var workActiveID = "work-active" + this.props.number;
+
+        var mainStyle = {
+            display: this.state.display
+        }
+
+        var divStyle = {
+            width: this.state.textWidth,
+            display: this.state.workCoverDisplay
+            //left : this.state.textLeft
+        }
+        //var divStyle = s({transform: `translate(${posX}px, )`});
+
         var activeStyle = {
             width: this.state.widthRate + "%"
         }
 
+        var textStyle = {
+            display : this.state.workDisplay,
+            width   : this.state.textWidth
+        }
+
         return (
-            <div className="work-text"
-                 >
-                <div className="work-wrapper">
+            <Tappable
+                className="work-text"
+                style={mainStyle}
+                onTap={this.onTapHandler.bind(this)}
+                id={workTextID}
+                >
+
+                <div className="work-wrapper" style={textStyle}>
                     <div className="work-base" id={workBaseID}><p>{this.props.name}</p></div>
-                    <div className="work-active" id={workActiveID} style={activeStyle}><p>{this.props.name}</p></div>
                 </div>
 
-            </div>
+                <div className="work-cover" style={divStyle}>
+                    <div className="cover-content"></div>
+                </div>
+
+            </Tappable>
         );
     }
 }

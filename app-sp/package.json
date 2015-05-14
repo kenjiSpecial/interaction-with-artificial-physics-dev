@@ -10,6 +10,7 @@
     "url": "https://github.com/kenjiSpecial"
   },
   "dependencies": {
+    "babelify": "^6.1.0",
     "bluebird": "^2.9.25",
     "domready": "^1.0.7",
     "events": "^1.0.2",
@@ -25,7 +26,6 @@
     "react-tappable": "^0.5.0-beta.3"
   },
   "devDependencies": {
-    "babelify": "^6.0.2",
     "browserify": "^9.0.3",
     "budo": "^4.0.0-rc1",
     "errorify": "^0.2.4",
