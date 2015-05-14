@@ -51,7 +51,7 @@ Background.prototype.onCompleteHandler = function() {
 }
 
 Background.prototype.stop = function() {
-    console.log('stop');
+
     this.isAnimation = true;
     this.height = -3;
 

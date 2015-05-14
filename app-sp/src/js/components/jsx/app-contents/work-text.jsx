@@ -17,6 +17,7 @@ class WorkText extends React.Component {
         this.widthRate = 0;
 
         AppStore.on(APP_CONSTANTS.ON_TAP_WORK, this.onTapWorkHandler.bind(this));
+        AppStore.on(APP_CONSTANTS.RENDER_WORK, this.onTapWorkHandler.bind(this));
         AppStore.on(APP_CONSTANTS.FORCE_SET_WORK, this.onForceSetWorkHandler.bind(this));
         AppStore.on(APP_CONSTANTS.BACK_TO_INDEX, this.onBackToIndexHandler.bind(this))
     }
@@ -59,7 +60,7 @@ class WorkText extends React.Component {
             workCoverDisplay : "block"
         });
 
-        TweenLite.set(this.blackCover, {x: -this.textWidth})
+        TweenLite.set(this.blackCover, {x: -this.textWidth-5})
 
         TweenLite.to(this.blackCover, .3, {x: 0, onComplete: this.textWidthAnimationComplete1.bind(this), ease: Power2.easeInOut })
     }
@@ -70,7 +71,7 @@ class WorkText extends React.Component {
             workDisplay : "none"
         });
 
-        TweenLite.to(this.blackCover, .3, {x: this.textWidth, onComplete: this.textWidthAnimationComplete2.bind(this), ease: Power4.easeOut })
+        TweenLite.to(this.blackCover, .3, {x: this.textWidth + 5, onComplete: this.textWidthAnimationComplete2.bind(this) })
     }
 
     textWidthAnimationComplete2(){
@@ -106,7 +107,7 @@ class WorkText extends React.Component {
             workCoverDisplay : "block"
         });
 
-        TweenLite.set(this.blackCover, {x: this.textWidth})
+        TweenLite.set(this.blackCover, {x: this.textWidth + 5})
 
         TweenLite.to(this.blackCover, .3, {x: 0, onComplete: this.textWidthAnimationComplete3.bind(this), ease: Power2.easeInOut })
     }
@@ -116,7 +117,7 @@ class WorkText extends React.Component {
             workDisplay : "block"
         });
 
-        TweenLite.to(this.blackCover, .3, {x: -this.textWidth, onComplete: this.textWidthAnimationComplete4.bind(this), ease: Power4.easeOut })
+        TweenLite.to(this.blackCover, .3, {x: -this.textWidth-5, onComplete: this.textWidthAnimationComplete4.bind(this) })
     }
 
     textWidthAnimationComplete4(){

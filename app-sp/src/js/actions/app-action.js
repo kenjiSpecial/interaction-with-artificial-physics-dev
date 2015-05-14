@@ -162,7 +162,7 @@ var AppAction = {
     },
 
     renderWork : function(workID) {
-        console.log("appactio renderWork " + workID);
+
         AppDispatcher.dispatch({
             workID : workID,
             actionType : AppConstants.RENDER_WORK

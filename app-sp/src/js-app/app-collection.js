@@ -62,7 +62,6 @@ function start(){
     canvas.style.display = "block";
     var data = WorkStore.getWorkData();
     selectedNumber = data.workNum
-    console.log("selectedNumber: " + selectedNumber);
     app = appCollection[selectedNumber];
     backgroundWhite.start();
 
@@ -89,10 +88,8 @@ function onCompleteStopAnimationHandler(){
 
 function onWindowResize(){
     windowWid = window.innerWidth;
-    if(windowWid < CONSTANTS_DATA.MIN_WIDTH) windowWid = CONSTANTS_DATA.MIN_WIDTH;
 
     windowHig = window.innerHeight;
-    if(windowHig < CONSTANTS_DATA.MIN_HEIGHT) windowHig = CONSTANTS_DATA.MIN_HEIGHT;
 }
 
 

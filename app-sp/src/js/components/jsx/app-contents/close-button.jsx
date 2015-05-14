@@ -25,7 +25,7 @@ class CloseButton extends React.Component {
     componentWillMount() {
 
         WorkStore.on(APP_CONSTANTS.CHANGE_DIRECTORY_TO_WORK, this.onChangeDirectoryToWork.bind(this));
-        AppStore.on(APP_CONSTANTS.FORCE_SET_WORK, this.onChangeDirectoryToWork.bind(this));
+        WorkStore.on(APP_CONSTANTS.FORCE_SET_WORK, this.onChangeDirectoryToWork.bind(this));
 
         AppStore.on(APP_CONSTANTS.CHANGE_DIRECTORY_TO_INDEX, this.onChangeDirectoryToIndex.bind(this));
         AppStore.on(APP_CONSTANTS.BACK_TO_INDEX, this.onBackToIndex.bind(this));
@@ -43,8 +43,14 @@ class CloseButton extends React.Component {
 
     onChangeDirectoryToWork() {
         this.posY = 100;
+        var workChar = ""
+        var workname = WorkStore.getWorkData();
+        if(workname && workname.name) {
+            workChar = workname.name.charAt(0).toUpperCase();
+        }
 
         this.setState({
+            char : workChar,
             posY : this.posY,
             flipClass : "flipper",
             display: "block"
@@ -152,7 +158,7 @@ class CloseButton extends React.Component {
                     <div className={this.state.flipClass}>
 
                         <div className="front">
-                            {this.state.name}
+                            {this.state.char}
                         </div>
                         <div className="back">
                             <div className="cross"></div>

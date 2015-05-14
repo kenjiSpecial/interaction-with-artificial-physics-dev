@@ -52,13 +52,13 @@ var WorkStore = assign({}, EventEmitter.prototype, {
         _work.isWorkStart = false;
         _work["workData"] = null;
 
-        console.log("stopWorkAnimation");
         this.emit(APP_CONSTANTS.STOP_WORK_ANIMATION);
     },
 
     onForceSetWorkHandler(){
         _work.isSelected = true;
         _work["workData"] = AppStore.getSelectedWorkData();
+        console.log(_work["workData"]);
 
         this.emit(APP_CONSTANTS.FORCE_SET_WORK);
     }
@@ -66,8 +66,10 @@ var WorkStore = assign({}, EventEmitter.prototype, {
 });
 
 WorkStore.dispatchToken = AppDispatcher.register(function(action){
+
     switch(action.actionType){
         case APP_CONSTANTS.CHANGE_DIRECTORY_TO_WORK:
+
             WorkStore.setWork()
             break;
         case APP_CONSTANTS.START_WORK_ANIMATION:
@@ -77,7 +79,7 @@ WorkStore.dispatchToken = AppDispatcher.register(function(action){
             WorkStore.stopWorkAnimation();
             break;
         case APP_CONSTANTS.FORCE_SET_WORK:
-            //AppDispatcher.waitFor([AppStore.dispatchToken]);
+            AppDispatcher.waitFor([AppStore.dispatchToken]);
             WorkStore.onForceSetWorkHandler();
             break;
     }

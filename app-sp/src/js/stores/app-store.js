@@ -147,6 +147,16 @@ var AppStore = assign({}, EventEmitter.prototype, {
         this.emit(CONSTANTS.ON_TAP_WORK);
     },
 
+    renderWork : function( workID ) {
+        _apps.isTransition = true;
+        _apps.isAnimationWork = true;
+        _apps.isWorkSelected = true;
+        _apps.selectedWorkNumber = this.getWorkNumber(workID)
+
+        this.emit(CONSTANTS.RENDER_WORK);
+
+    },
+
     onWorkTextAnimationDone : function() {
 
         this.emit(CONSTANTS.WORK_TEXT_ANIMATION_DONE);
@@ -162,6 +172,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
     forceSetWork : function(workID) {
         _apps.selectedWorkNumber = this.getWorkNumber(workID);
+        console.log(_apps.selectedWorkNumber);
 
         this.emit(CONSTANTS.FORCE_SET_WORK);
     },
@@ -193,7 +204,8 @@ var AppStore = assign({}, EventEmitter.prototype, {
         _apps.isAnimationWork = false;
 
         this.emit(CONSTANTS.RENDER_INDEX_DONE);
-    }
+    },
+
 });
 
 AppStore.dispatchToken = AppDispatcher.register(function (action) {
@@ -248,6 +260,9 @@ AppStore.dispatchToken = AppDispatcher.register(function (action) {
             break;
         case CONSTANTS.BACK_TO_INDEX:
             AppStore.backToIndex();
+            break;
+        case CONSTANTS.RENDER_WORK:
+            AppStore.renderWork(action.workID);
             break;
     }
 
