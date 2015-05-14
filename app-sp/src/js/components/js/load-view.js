@@ -8,6 +8,7 @@ var LoadView = function(){
     this.loaderContent = document.getElementById("loader-content");
     this.ballArr = this.loader.querySelectorAll(".ball");
     this.loadText = this.loader.querySelectorAll(".letter");
+    this.appMainWrapper = document.getElementById("main-wrapper")
 };
 
 LoadView.prototype.fadeOut = function() {
@@ -29,6 +30,13 @@ LoadView.prototype.fadeOut = function() {
 
 LoadView.prototype.removeLoadView = function() {
     this.loader.style.display = "none";
+    console.log(this.appMainWrapper);
+    removeClass(this.appMainWrapper, "full-screen");
+}
+
+function removeClass(el, className) {
+    if (el.classList) el.classList.remove(className);
+    else el.className = el.className.replace(new RegExp('\\b'+ className+'\\b', 'g'), '');
 }
 
 

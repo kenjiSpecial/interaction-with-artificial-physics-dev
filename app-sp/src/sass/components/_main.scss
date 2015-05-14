@@ -11,6 +11,10 @@
   position: relative;
   @extend %full-size;
 
+  &.full{
+    overflow: hidden;
+  }
+
 }
 
   #app {

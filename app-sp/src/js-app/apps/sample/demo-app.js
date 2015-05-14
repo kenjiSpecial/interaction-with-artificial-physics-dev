@@ -16,6 +16,7 @@ class App extends ParentApp {
 
         ctx.fillStyle = "#ff0000";
         this.x += 10;
+        if(this.x > window.innerWidth) this.x = 0;
 
         ctx.beginPath();
         ctx.arc(this.x, window.innerHeight/2, 10, 0, 2 * Math.PI, false);
