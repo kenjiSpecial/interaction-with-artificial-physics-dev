@@ -53,6 +53,7 @@ class CloseButton extends React.Component {
             char : workChar,
             posY : this.posY,
             flipClass : "flipper",
+            flipContainerClass : "flip-container",
             display: "block"
         });
 
