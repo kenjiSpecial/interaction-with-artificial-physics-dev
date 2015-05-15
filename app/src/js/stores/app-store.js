@@ -9,6 +9,12 @@ var assign = require('object-assign');
 
 APP_CONSTANTS.WORKS_UPDATE = [];
 
+var windowWid = window.innerWidth;
+if(windowWid < CONSTANT_DATA.MIN_WIDTH) windowWid = CONSTANT_DATA.MIN_WIDTH;
+
+var windowHig = window.innerHeight;
+if(windowHig < CONSTANT_DATA.MIN_HEIGHT) windowHig = CONSTANT_DATA.MIN_HEIGHT;
+
 
 var _apps = {
     isLoad : false,
@@ -17,6 +23,9 @@ var _apps = {
     workTotalSize : 0,
     scrollX : 0,
     scrollY : 0,
+
+    windowWid : windowWid,
+    windowHig : windowHig,
 
     minScrollX : -9999,
     maxScrollX : 9999,
@@ -72,6 +81,14 @@ var AppStore = assign({}, EventEmitter.prototype, {
         return parseInt(workNumber);
     },
 
+    getWindowWidth : function() {
+        return _apps.windowWid;
+    },
+
+    getWindowHeight : function() {
+        return _apps.windowWid;
+    },
+
     // -----------------
     //    set method
     // -----------------
@@ -104,6 +121,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
             var WORK_UPDATE = "WORK_TYPE" + ii;
 
             var workObj = { id: workID, workNum: ii, type: WORK_UPDATE, name : workName, originXPos: xPos, curXPos: xPos, ballPos: xPos, workData: null }
+            console.log(workObj);
 
             _apps.works.push(workObj);
             //APP_CONSTANTS.WORKS_UPDATE.push(WORK_UPDATE);
@@ -246,7 +264,9 @@ var AppStore = assign({}, EventEmitter.prototype, {
         var windowHig = window.innerHeight;
         if(windowHig < CONSTANT_DATA.MIN_HEIGHT) windowHig = CONSTANT_DATA.MIN_HEIGHT;
 
+        console.log();
         var workData = this.getSelectedWorkData();
+        console.log(workData);
         var workCurXPos = workData.curXPos;
         var cameraPosX = -constants.selectedWorkCameraXPos + workCurXPos;
         var cameraPosY     = -windowHig;
@@ -293,7 +313,12 @@ var AppStore = assign({}, EventEmitter.prototype, {
         var windowWid = window.innerWidth;
         if(windowWid < CONSTANT_DATA.MIN_WIDTH) windowWid = CONSTANT_DATA.MIN_WIDTH;
 
+        var windowHig = window.innerHeight;
+        if(windowHig < CONSTANT_DATA.MIN_HEIGHT) windowHig = CONSTANT_DATA.MIN_HEIGHT;
+
         _apps.maxScrollX = windowWid - constants.workGap;
+        _apps.windowWid = windowWid;
+        _apps.windowHig = windowHig;
 
         this.emit(APP_CONSTANTS.ON_WINDOW_RESIZE);
     },
@@ -305,7 +330,6 @@ var AppStore = assign({}, EventEmitter.prototype, {
     },
 
     onCloseAboutContentStart : function() {
-        console.log('onCloseAboutContentStart');
         this.emit(APP_CONSTANTS.CLOSE_ABOUT_CONTENT_START);
     },
     onCloseAboutContenDone : function() {
