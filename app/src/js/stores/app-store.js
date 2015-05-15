@@ -86,7 +86,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
     },
 
     getWindowHeight : function() {
-        return _apps.windowWid;
+        return _apps.windowHig;
     },
 
     // -----------------
@@ -121,10 +121,9 @@ var AppStore = assign({}, EventEmitter.prototype, {
             var WORK_UPDATE = "WORK_TYPE" + ii;
 
             var workObj = { id: workID, workNum: ii, type: WORK_UPDATE, name : workName, originXPos: xPos, curXPos: xPos, ballPos: xPos, workData: null }
-            console.log(workObj);
 
             _apps.works.push(workObj);
-            //APP_CONSTANTS.WORKS_UPDATE.push(WORK_UPDATE);
+            APP_CONSTANTS.WORKS_UPDATE.push(WORK_UPDATE);
 
             _apps.workTotalSize += constants.workGap;
         }
@@ -264,9 +263,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
         var windowHig = window.innerHeight;
         if(windowHig < CONSTANT_DATA.MIN_HEIGHT) windowHig = CONSTANT_DATA.MIN_HEIGHT;
 
-        console.log();
         var workData = this.getSelectedWorkData();
-        console.log(workData);
         var workCurXPos = workData.curXPos;
         var cameraPosX = -constants.selectedWorkCameraXPos + workCurXPos;
         var cameraPosY     = -windowHig;
@@ -344,6 +341,9 @@ var AppStore = assign({}, EventEmitter.prototype, {
         _apps.cameraPosY = -windowHig;
 
         this.emit(APP_CONSTANTS.WINDOW_RESIZE_IN_WORK, dy);
+    },
+    mouseDownInCanvasApp : function() {
+        this.emit(APP_CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP);
     }
 
 });
@@ -467,6 +467,9 @@ AppStore.dispatchToken = AppDispatcher.register(function(action){
             break;
         case APP_CONSTANTS.WINDOW_RESIZE_IN_WORK:
             AppStore.onWindowResizeInWork();
+            break;
+        case APP_CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP:
+            AppStore.mouseDownInCanvasApp();
             break;
 
     }

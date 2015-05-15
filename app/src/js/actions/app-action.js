@@ -229,6 +229,12 @@ var AppAction = {
         AppDispatcher.dispatch({
             actionType : AppConstants.WINDOW_RESIZE_IN_WORK
         })
+    },
+
+    onMouseDownInCanvasApp : function() {
+        AppDispatcher.dispatch({
+            actionType: AppConstants.MOUSE_DOWN_IN_CANVAS_APP
+        })
     }
 
 };

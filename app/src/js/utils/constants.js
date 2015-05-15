@@ -48,6 +48,7 @@ module.exports = keyMirror({
     "CLOSE_WORK" : null,
 
     "RENDER_WORK" : null,
+    "MOUSE_DOWN_IN_CANVAS_APP" : null,
 
 
     // keyboar

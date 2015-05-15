@@ -44,4 +44,8 @@
   top: 0;
   left: 0;
   @extend %full-size;
+
+  &.interactive{
+    cursor: pointer;
+  }
 }

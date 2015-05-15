@@ -1,3 +1,8 @@
+var MOUSE_MOVE = "mousemove"
+var MOUSE_DOWN = "mousedown";
+var MOUSE_UP   = "mouseup";
+var MOUSE_OUT  = "mouseout";
+
 var CONSTANTS = require('../js/utils/constants');
 var CONSTANTS_DATA = require('../js/utils/constants_app');
 
@@ -17,8 +22,8 @@ var backgroundWhite = require('./component/background-white');
 // =============
 
 var BoilerApp = require('./apps/boiler-plate/app');
-//var DemoApp   = require('./apps/sample/demo-app');
-var App01 = require('./apps/00-line-animation-with-circles/app');
+var App00 = require('./apps/00-line-animation-with-circles/app');
+var App01 = require('./apps/01-how-many-ball/app');
 
 // ==========
 
@@ -29,6 +34,7 @@ var windowWid, windowHig;
 
 function initialize(){
 
+    appCollection.push(new App00());
     appCollection.push(new App01());
 
     WorkStore.on(CONSTANTS.START_WORK_ANIMATION, start);
@@ -39,19 +45,26 @@ function initialize(){
 
 function start(){
     var data = WorkStore.getWorkData();
-    selectedNumber = data.workNum
+    selectedNumber = data.workNum;
     app = appCollection[selectedNumber];
-    backgroundWhite.start();
+
+    if(app.isBackgroundAnimation) backgroundWhite.start();
+    else                          backgroundWhite.reset();
+
+    if(app.start) app.start();
 
     ticker.addListener(CONSTANTS.TICK, update);
+    addWindowEvent();
 }
 
 function stop(){
     backgroundWhite.stop();
+    app.stop();
+    removeWindowEvent();
 }
 
 function update(){
-    app.update(canvasApp.ctx);
+    app.update(canvasApp.ctx, backgroundWhite);
 
     backgroundWhite.update(canvasApp.ctx);
 }
@@ -61,6 +74,17 @@ function onCompleteStopAnimationHandler(){
     AppAction.backToIndex();
 }
 
+function addWindowEvent(){
+    window.addEventListener(MOUSE_DOWN, onMouseDownAppHandler);
+}
+
+function removeWindowEvent(){
+    window.removeEventListener(MOUSE_DOWN, onMouseDownAppHandler);
+}
+
+function onMouseDownAppHandler(){
+    AppAction.onMouseDownInCanvasApp();
+}
 
 
 initialize();

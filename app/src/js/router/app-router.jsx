@@ -119,8 +119,26 @@ var AppRouter = Router.extend({
     },
 
     onLoadStartHandler: function () {
+
+
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://fonts.googleapis.com/css?family=Roboto:700';
+        document.getElementsByTagName('head')[0].appendChild(link);
+
+        // Trick from http://stackoverflow.com/questions/2635814/
+        var id;
+        var image = new Image;
+        image.onerror = this.onLoadedFontHandler.bind(this);
+        image.src = link.href;
+
+
+    },
+
+    onLoadedFontHandler : function() {
         var images = appData.demoImg;
-        if (images.length > 0) {ff
+        if (images.length > 0) {
             Promise.all(images.map(x => load(x))).then(this.renderAction);
         } else {
 
@@ -129,7 +147,6 @@ var AppRouter = Router.extend({
                 appAction.loadDone(imageObj);
             }, 600);
         }
-
     },
 
     onLoadDoneHandler: function () {

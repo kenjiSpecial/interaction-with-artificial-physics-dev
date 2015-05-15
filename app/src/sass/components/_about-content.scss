@@ -22,7 +22,7 @@
 
     .title, .content{
       opacity: 0;
-      transform: translate(0, 20px);
+      transform: translate(0, 40px);
       transition: 0.6s all ease-out-quart();
 
       &.active{
@@ -86,7 +86,7 @@
   .close-button{
     cursor: pointer;
     opacity: 0;
-    transform: translate(0, 20px);
+    transform: translate(0, 40px);
     transition: 0.6s all ease-out-quart();
 
     &.active{
