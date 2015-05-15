@@ -30,6 +30,8 @@ ScrollBar.prototype = {
         var wid = 50;
         var hig = 3;
         var xPos = (windowWid - wid) * rate;
+        if(xPos < 0) xPos = 0;
+        if( xPos > windowWid -wid ) xPos = windowWid -wid;
         ctx.fillStyle = "#000";
         ctx.fillRect(xPos, top-hig, wid, hig);
     }
