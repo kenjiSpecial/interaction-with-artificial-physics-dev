@@ -1,4 +1,4 @@
 module.exports = {
-  gravity  : 10,
+  gravity  : 15,
   timeStep : 1 / 30,
 };

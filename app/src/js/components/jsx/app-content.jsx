@@ -9,6 +9,7 @@ var AppConstants = require('../../utils/constants');
 
 // components
 var Footer = require('./footer.jsx');
+var workEnd = require('../../data/app-data').end;
 
 class AppContent extends React.Component {
     constructor(props) {
@@ -44,8 +45,9 @@ class AppContent extends React.Component {
                             this.state.works.map(function (result) {
                                 count++;
                                 var keyID = "work-text" + count;
+                                var name = result + workEnd[count];
                                 return (
-                                    <WorkText key={keyID} name={result} number={count}></WorkText>
+                                    <WorkText key={keyID} name={name} number={count}></WorkText>
                                 );
                             })
                         }

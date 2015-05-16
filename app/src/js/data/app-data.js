@@ -4,6 +4,7 @@ module.exports = {
         'Line Painting With Circles',
         'How Many Ball'
     ],
+    'end' : [".", "?"],
     demoImg : [
 
     ]

@@ -19,6 +19,9 @@ var cw, ch;
 var scale = 1;
 var count = 1;
 var width;
+var loopDuration = 600;
+var colors = ['#FFEB3B', '#FDD835', '#FBC02D', '#F9A825', '#F57F17'];
+
 
 var App = function () {
     this.isBackgroundAnimation = true;
@@ -27,39 +30,44 @@ var App = function () {
 };
 
 App.prototype.start = function () {
+    count = 1;
     width = AppStore.getWindowWidth();
 
     this.mObjects = null;
     this.mObjects = [];
 
-    var box = new Box(1, 0, 300, 100, 100);
-    this.mObjects.push(box);
+
 
     this.ballArr = null;
     this.ballArr = [];
 
-    var rad = 30;
-    var ball = new Ball(10, 30, new Vector2(100, -rad), new Vector2(0, 0));
-    ball.num = this.ballArr.length;
+    this.planeArr = [];
 
     this.scale = 1;
 
-    var plane = new Plane(width / 4, AppStore.getWindowHeight() + 1, width/2);
-    this.mObjects.push(plane);
+    for(var ii = 0; ii < 4; ii++){
+        var plane = new Plane(width * 2, AppStore.getWindowHeight() * (ii+1) + 1, width * 4, colors[ii+1]);
+        this.planeArr.push(plane);
+        this.mObjects.push(plane);
+    }
 
-    this.curTimer = setTimeout(this.loop, 1000);
+    var box = new Box(1, 0, 300, 100, 100);
+    this.mObjects.push(box);
+
+    this.curTimer = setTimeout(this.loop, loopDuration );
 };
 
 
 App.prototype.loop = function () {
-    var rad = parseInt(10 + Math.random() * 40);
+
+    var rad = parseInt(30 + Math.random() * 70);
     var ball = new Ball(10, rad, new Vector2(100, -rad), new Vector2(0, 0));
     ball.num = this.ballArr.length;
     this.ballArr.push(ball);
     this.mObjects.push(ball);
 
 
-    this.curTimer = setTimeout(this.loop, 1000);
+    this.curTimer = setTimeout(this.loop, loopDuration );
 };
 
 App.prototype.stop = function () {
@@ -79,6 +87,9 @@ App.prototype.update = function (ctx) {
         if (this.mObjects[ii]) this.mObjects[ii].update(dt);
     }
 
+    var winWid = AppStore.getWindowWidth();
+    var winHig = AppStore.getWindowHeight();
+
 
     var posArr = [];
     for (var ii = 0; ii < count; ii++) {
@@ -88,20 +99,35 @@ App.prototype.update = function (ctx) {
     for (var ii in this.ballArr) {
         var ball = this.ballArr[ii];
         if (ball) {
-            var pos = parseInt(ball.pos.y / window.innerHeight);
+            var pos = parseInt(ball.pos.y / winHig);
             if (pos < 0) pos = 0;
             posArr[pos] = posArr[pos] + 1;
         }
     }
 
+    for(var ii in posArr){
+        var posNumber = posArr[ii];
+        var cirNum = 3 * ( parseInt(ii) + 1);
+        if(posNumber >= cirNum) this.planeArr[ii].setDiable();
+    }
+
+
     // -------------------------
     //  draw
     // -------------------------
+
+    var curWinWid = winWid / this.scale;
+
     ctx.save();
     ctx.scale(this.scale, this.scale)
 
-    ctx.fillStyle = "#ffeb3b";
-    ctx.fillRect(0, 0, window.innerWidth / this.scale, window.innerHeight / this.scale);
+    var countScale = 1/this.scale;
+
+    for(var ii = 0; ii < countScale; ii++){
+        ctx.fillStyle = colors[ii];
+
+        ctx.fillRect(0, ii * winHig, curWinWid, winHig);
+    }
 
 
     for (var ii in this.mObjects) {
@@ -110,11 +136,11 @@ App.prototype.update = function (ctx) {
 
     ctx.textAlign = "end";
 
-    ctx.font = `700 ${AppStore.getWindowHeight()}px "Roboto"`;
+    ctx.font = `700 ${winHig}px "Roboto"`;
     ctx.fillStyle = "#000";
 
     for (var ii = 0; ii < posArr.length; ii++) {
-        ctx.fillText(posArr[ii], window.innerWidth / this.scale, window.innerHeight * (ii + 1));
+        ctx.fillText(posArr[ii], curWinWid, winHig * (ii + 1));
     }
 
 
@@ -127,7 +153,7 @@ App.prototype.update = function (ctx) {
             ballPosY = Math.max(ballPosY, ball.pos.y);
             var posX = ball.pos.x;
             var rad = ball.rad;
-            if (posX < -ball.rad || posX > window.innerWidth * count + rad) {
+            if (posX < -ball.rad || posX > winWid * count + rad) {
                 var num = ball.num;
                 this.ballArr[num] = null;
             }
@@ -152,16 +178,8 @@ App.prototype.scaleDown = function () {
     count++;
     TweenLite.to(this, 2, {scale: 1 / count, ease: Expo.easeOut});
     var windHig = AppStore.getWindowHeight();
-    var width = AppStore.getWindowWidth() / 2;
+    var width = AppStore.getWindowWidth();
 
-    var box = new Box(1, width * (count - 1 ) + 100, 100 + windHig * (count - 1), 100, 100);
-    this.mObjects.push(box);
-
-    var box = new Box(1, width * (count - 1 + 1 ) - 100, windHig * (count - 1 + 1) - 350, 100, 100);
-    this.mObjects.push(box);
-
-    var plane = new Plane(width / 2 * count, windHig * count, width * count);
-    this.mObjects.push(plane);
 
 };
 
