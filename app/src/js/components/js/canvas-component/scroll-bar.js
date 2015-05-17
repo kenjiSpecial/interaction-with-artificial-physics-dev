@@ -4,7 +4,7 @@ var _ = require('lodash');
 var Top = 60;
 
 var ScrollBar = function(){
-
+    this.x = 0;
 };
 
 ScrollBar.prototype = {
@@ -32,6 +32,7 @@ ScrollBar.prototype = {
         var xPos = (windowWid - wid) * rate;
         if(xPos < 0) xPos = 0;
         if( xPos > windowWid -wid ) xPos = windowWid -wid;
+
         ctx.fillStyle = "#000";
         ctx.fillRect(xPos, top-hig, wid, hig);
     }

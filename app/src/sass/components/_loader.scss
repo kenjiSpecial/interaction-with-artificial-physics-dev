@@ -5,8 +5,16 @@ $ANIM_SEC: 5s;
   @extend %full-size;
   position: absolute;
   top: 0; left: 0;
-  background-color: #000000;
+  overflow: hidden;
   z-index: 9999;
+
+  .loader-cover{
+    @include performance();
+    @extend %full-size;
+    position: absolute;
+    top: 0; left: 0;
+    background-color: #000000;
+  }
 
   .load-wrapper{
     position: absolute;

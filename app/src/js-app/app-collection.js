@@ -21,9 +21,13 @@ var backgroundWhite = require('./component/background-white');
 //   component
 // =============
 
-var BoilerApp = require('./apps/boiler-plate/app');
+//var BoilerApp = require('./apps/boiler-plate/app');
 var App00 = require('./apps/00-line-animation-with-circles/app');
 var App01 = require('./apps/01-how-many-ball/app');
+var App02 = require('./apps/02-four-different-grivities/app');
+var App03 = require('./apps/03-balls-are-being-wiped/app');
+var App04 = require('./apps/04-colorful-balls-animation/app');
+var App05 = require('./apps/05-coordintes-animation/app');
 
 // ==========
 
@@ -36,6 +40,10 @@ function initialize(){
 
     appCollection.push(new App00());
     appCollection.push(new App01());
+    appCollection.push(new App02());
+    appCollection.push(new App03());
+    appCollection.push(new App04());
+    appCollection.push(new App05());
 
     WorkStore.on(CONSTANTS.START_WORK_ANIMATION, start);
     WorkStore.on(CONSTANTS.STOP_WORK_ANIMATION, stop);

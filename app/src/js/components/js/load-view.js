@@ -1,12 +1,14 @@
 var TweenLite = require('gsap');
 var Promise = require('bluebird');
 var _ = require('lodash');
+var AppStore = require('../../stores/app-store');
 
 var LoadView = function(){
     _.bindAll(this, 'removeLoadView')
     this.loader = document.getElementById("loader");
     this.ballArr = this.loader.querySelectorAll(".ball");
     this.loadText = this.loader.querySelectorAll(".letter");
+    this.loadCover = this.loader.querySelector(".loader-cover");
 };
 
 LoadView.prototype.fadeOut = function() {
@@ -20,7 +22,8 @@ LoadView.prototype.fadeOut = function() {
         TweenLite.to(el, .4, {opacity: 0, delay: (loadTextLength - i) * .03, x: +15, ease: Power3.easeOut});
     });
 
-    TweenLite.to(this.loader, .8, {width: 0, delay: .6, ease: Expo.easeInOut, onComplete: this.removeLoadView.bind(this)});
+    var winWidth = AppStore.getWindowWidth();
+    TweenLite.to(this.loadCover, .8, {x: -winWidth, delay: .6, ease: Expo.easeInOut, onComplete: this.removeLoadView.bind(this)});
 
     return Promise.delay(600);
 };
