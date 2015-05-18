@@ -49,7 +49,7 @@ module.exports = keyMirror({
 
     "RENDER_WORK" : null,
     "MOUSE_DOWN_IN_CANVAS_APP" : null,
-
+    "MOUSE_MOVE_IN_CANVAS_APP" : null,
 
     // keyboar
     "KEYBOARD_DOWN" : null,

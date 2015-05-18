@@ -44,6 +44,9 @@ var _apps = {
     isAnimationFromTopToWork : false,
     isAnimationFromWorkToTop : false,
 
+    mouseX : null,
+    mouseY : null,
+
     isTransition : false,
 };
 
@@ -87,6 +90,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
     getWindowHeight : function() {
         return _apps.windowHig;
+    },
+
+    getImages : function() {
+        return _apps.images
     },
 
     // -----------------
@@ -344,6 +351,12 @@ var AppStore = assign({}, EventEmitter.prototype, {
     },
     mouseDownInCanvasApp : function() {
         this.emit(APP_CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP);
+    },
+    mouseMoveInCanvasApp : function(mouse){
+        _apps.mouseX = mouse.x;
+        _apps.mouseY = mouse.y;
+
+        this.emit(APP_CONSTANTS.MOUSE_MOVE_IN_CANVAS_APP);
     }
 
 });
@@ -470,6 +483,9 @@ AppStore.dispatchToken = AppDispatcher.register(function(action){
             break;
         case APP_CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP:
             AppStore.mouseDownInCanvasApp();
+            break;
+        case APP_CONSTANTS.MOUSE_MOVE_IN_CANVAS_APP:
+            AppStore.mouseMoveInCanvasApp(action.mouse);
             break;
 
     }

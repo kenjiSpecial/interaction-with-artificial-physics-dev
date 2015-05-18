@@ -235,6 +235,13 @@ var AppAction = {
         AppDispatcher.dispatch({
             actionType: AppConstants.MOUSE_DOWN_IN_CANVAS_APP
         })
+    },
+
+    onMouseMoveInCanvasApp : function( mX, mY ) {
+        AppDispatcher.dispatch({
+            mouse : { x: mX, y: mY },
+            actionType: AppConstants.MOUSE_MOVE_IN_CANVAS_APP
+        })
     }
 
 };

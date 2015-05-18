@@ -6,10 +6,17 @@ module.exports = {
         "Four Different Gravities",
         "Balls Are Beging Wiped",
         "Colorful Balls Animation",
-        "Coordinates Animation"
+        "Coordinates Animation",
+        "Reflection Balls",
+        "Painting With Balls"
     ],
-    'end' : [".", "?", ".", ".", ".", "."],
+    'end' : [".", "?", ".", ".", ".", ".", ".", "."],
     demoImg : [
-
+        "/images/frame.png",
+        "/images/goch.png",
+        "/images/pop-art.png",
+        "/images/weave.png",
+        "/images/pop2.png",
+        "/images/pop3.png",
     ]
 }
