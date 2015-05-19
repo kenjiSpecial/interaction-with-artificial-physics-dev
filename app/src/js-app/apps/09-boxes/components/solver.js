@@ -1,5 +1,5 @@
 var numInteraction = 10;
-var kFriction = 1;
+var kFriction = .3;
 var solveType;
 
 var CONSTANTS = require('./constants.js');

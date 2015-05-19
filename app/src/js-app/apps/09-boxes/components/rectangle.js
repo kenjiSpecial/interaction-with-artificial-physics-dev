@@ -92,10 +92,26 @@ Rectangle.prototype.draw = function(ctx) {
 
   ctx.save();
 
-  ctx.strokeStyle = "#000000";
-  ctx.beginPath();
   ctx.translate(this.pos.x, this.pos.y);
   ctx.rotate(this.angle);
+
+  if(this.height == 1){
+    //ctx.strokeRect(-this.width/2, -this.height/2, this.width, this.height);
+    ctx.moveTo(-this.width/2, 0);
+    ctx.lineTo(this.width/2, 0);
+    ctx.stroke();
+  }else{
+
+    ctx.moveTo(this.localSpacePoints[0].x|0, this.localSpacePoints[0].y|0);
+    ctx.lineTo(this.localSpacePoints[1].x|0, this.localSpacePoints[1].y|0);
+    ctx.lineTo(this.localSpacePoints[2].x|0, this.localSpacePoints[2].y|0);
+    ctx.lineTo(this.localSpacePoints[3].x|0, this.localSpacePoints[3].y|0);
+    ctx.closePath();
+    ctx.fillStyle = "#000000";
+    ctx.fill();
+  }
+
+  ctx.strokeStyle = "#fff";
 
   ctx.beginPath();
   ctx.moveTo( -5, 0);
@@ -106,24 +122,6 @@ Rectangle.prototype.draw = function(ctx) {
   ctx.moveTo( 0, -5);
   ctx.lineTo( 0, 5);
   ctx.stroke();
-
-
-  if(this.height == 1){
-    //ctx.strokeRect(-this.width/2, -this.height/2, this.width, this.height);
-    ctx.moveTo(-this.width/2, 0);
-    ctx.lineTo(this.width/2, 0);
-    ctx.stroke();
-  }else{
-
-    ctx.moveTo(this.localSpacePoints[0].x, this.localSpacePoints[0].y);
-    ctx.lineTo(this.localSpacePoints[1].x, this.localSpacePoints[1].y);
-    ctx.lineTo(this.localSpacePoints[2].x, this.localSpacePoints[2].y);
-    ctx.lineTo(this.localSpacePoints[3].x, this.localSpacePoints[3].y);
-    ctx.closePath();
-    ctx.strokeStyle = "#000000";
-    ctx.stroke();
-  }
-
 
   ctx.restore();
 

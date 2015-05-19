@@ -98,6 +98,8 @@ WorkRope.prototype = {
         ctx.beginPath();
         ctx.strokeStyle = "#000";
         ctx.lineWidth = 1;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
         ///*
         for(var ii = 0; ii < this.line.particles.length; ii++){
             var particle = this.line.particles[ii];
