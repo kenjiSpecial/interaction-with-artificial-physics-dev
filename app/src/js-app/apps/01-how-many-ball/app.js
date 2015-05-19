@@ -46,7 +46,7 @@ App.prototype.start = function () {
     this.scale = 1;
 
     for(var ii = 0; ii < 4; ii++){
-        var plane = new Plane(width * 2, AppStore.getWindowHeight() * (ii+1) + 1, width * 4, colors[ii+1]);
+        var plane = new Plane(width * 2, AppStore.getWindowHeight() * (ii+1), width * 4, colors[ii+1]);
         this.planeArr.push(plane);
         this.mObjects.push(plane);
     }
@@ -210,5 +210,15 @@ App.prototype.collide = function () {
 
     return contacts;
 };
+
+App.prototype.onWindowResize = function() {
+    var width = AppStore.getWindowWidth();
+    var height = AppStore.getWindowHeight();
+
+    for(var ii = 0; ii < 4; ii++){
+        this.planeArr[ii].onWindowResize( width * 2, height * (ii + 1), width*4 );
+    }
+
+}
 
 module.exports = App;

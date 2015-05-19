@@ -63,4 +63,8 @@ App.prototype.onMouseDownInCanvasApp = function() {
     this.particles.changePainting()
 };
 
+App.prototype.onWindowResize = function() {
+    this.particles.onWindowResize();
+};
+
 module.exports = App;

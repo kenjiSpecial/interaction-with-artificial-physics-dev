@@ -252,6 +252,22 @@ class ParticleManager{
         this.isTransit = false;
     }
 
+    onWindowResize(){
+        this.frameLeft = (AppStore.getWindowWidth() - frameWid)/2;
+        this.frameTop  = (AppStore.getWindowHeight() - frameHig)/2 - 120;
+
+        this.miniFrameLeft = (AppStore.getWindowWidth() - frameWid/2)/2;
+        this.miniFrameTop  = this.frameTop + frameHig + 50;
+
+        this.leftPos = left + this.frameLeft-1.0
+        this.topPos = top + this.frameTop;
+
+        this.minX = this.leftPos;
+        this.maxX = this.leftPos + wid;
+        this.minY = this.topPos;
+        this.maxY = this.topPos + hig;
+    }
+
 }
 
 module.exports = ParticleManager;

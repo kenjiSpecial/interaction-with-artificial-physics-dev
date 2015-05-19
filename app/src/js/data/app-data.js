@@ -10,7 +10,7 @@ module.exports = {
         "Coordinates Animation",
         "Reflection Balls",
         "Lines reacting to Unseen Impulse",
-        "Boxes"
+        "RGB Boxes"
     ],
     'end' : [".", "?", ".", ".", ".", ".", ".", ".", ".", "."],
     demoImg : [

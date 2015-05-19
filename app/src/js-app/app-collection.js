@@ -51,12 +51,13 @@ function initialize(){
     appCollection.push(new App05());
     appCollection.push(new App06());
     appCollection.push(new App08());
-    appCollection.push(new App09())
+    appCollection.push(new App09());
 
     WorkStore.on(CONSTANTS.START_WORK_ANIMATION, start);
     WorkStore.on(CONSTANTS.STOP_WORK_ANIMATION, stop);
 
     backgroundWhite.on("ON_COMPLETE_STOP_ANIMATION", onCompleteStopAnimationHandler)
+
 }
 
 function start(){
@@ -100,11 +101,13 @@ function onCompleteStopAnimationHandler(){
 function addWindowEvent(){
     window.addEventListener(MOUSE_DOWN, onMouseDownAppHandler);
     window.addEventListener(MOUSE_MOVE, onMouseMoveHandler);
+    AppStore.addListener(CONSTANTS.ON_WINDOW_RESIZE, onWindowResizeHandler);
 }
 
 function removeWindowEvent(){
     window.removeEventListener(MOUSE_DOWN, onMouseDownAppHandler);
     window.removeEventListener(MOUSE_MOVE, onMouseMoveHandler);
+    AppStore.removeListener(CONSTANTS.ON_WINDOW_RESIZE, onWindowResizeHandler);
 }
 
 function onMouseDownAppHandler(){
@@ -118,6 +121,13 @@ function onMouseMoveHandler(ev){
     AppAction.onMouseMoveInCanvasApp(mX, mY);
 }
 
+function onWindowResizeHandler(ev){
+
+    backgroundWhite.onWindowResize();
+    if(app && app.onWindowResize) app.onWindowResize();
+}
+
+// ======================================
 
 initialize();
 

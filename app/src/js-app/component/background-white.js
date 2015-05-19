@@ -7,13 +7,11 @@ var AppStore = require('../../js/stores/app-store');
 var Background = function () {
     EventEmitter.call(this);
     _.bindAll(this, 'onCompleteHandler', 'onCompleteStopAnimationHandler');
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
+    this.width = AppStore.getWindowWidth();
+    this.height = AppStore.getWindowHeight();
 }
 
-Background.prototype = Object.create(EventEmitter.prototype); // See note below
-
-// Set the "constructor" property to refer to Student
+Background.prototype = Object.create(EventEmitter.prototype);
 Background.prototype.constructor = Background;
 
 Background.prototype.start = function () {
@@ -52,9 +50,10 @@ Background.prototype.onCompleteHandler = function () {
 Background.prototype.stop = function () {
     this.isAnimation = true;
     this.width = -3;
+    var width = AppStore.getWindowWidth() + 3;
 
     TweenLite.to(this, .8, {
-        width: window.innerWidth + 3,
+        width: width,
         ease: Power3.easeInOut,
         onComplete: this.onCompleteStopAnimationHandler
     })
@@ -68,6 +67,10 @@ Background.prototype.onCompleteStopAnimationHandler = function () {
 
         this.isAnimation = false;
     }.bind(this), 500);
+}
+
+Background.prototype.onWindowResize = function() {
+
 }
 
 

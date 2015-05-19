@@ -38,8 +38,6 @@ class App{
         var floor3 = new Floor( winWid/2 -100, winHig/2-20, 200, 40);
         this.mObjects.push(floor3);
 
-
-
         for(var ii = 0; ii < 30; ii++){
             var boxWid = 30 + parseInt(70 * Math.random());
             var boxHig = 30 + parseInt(70 * Math.random());

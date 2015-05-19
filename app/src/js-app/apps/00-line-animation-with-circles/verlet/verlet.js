@@ -39,83 +39,7 @@ class Verlet {
         this.MAX_TYPE = 5;
         this.type = this.MAX_TYPE - 1;
 
-        var windowWid = AppStore.getWindowWidth();
-        var windowHig = AppStore.getWindowHeight();
 
-        this.ballCase0Theta = 0;
-        this.ballsCase0 = [
-            new Ball( windowWid / 2, 50, 50),
-            new Ball( windowWid / 2 - 300, windowHig / 2, 100),
-            new Ball( windowWid / 2 + 300, windowHig / 2, 100)
-        ]
-
-        // ---------------------
-
-        this.ballsCase1 = [];
-        this.ballCase2Rad = Math.min( windowWid, windowHig ) * .3;
-        this.ballCase2Theta = 0;
-
-        for(var ii = 0; ii < 20; ii++){
-            var theta = ii / 10 * Math.PI;
-            var xPos = windowWid/2 + this.ballCase2Rad * Math.cos(theta);
-            var yPos = windowHig/2 + this.ballCase2Rad * Math.sin(theta);
-            var ball = new Ball( xPos,  yPos, 30);
-            this.ballsCase1.push(ball);
-        }
-
-        // ---------------------
-        this.ballsCase2 = [];
-        this.ballsCase2VelTheta = [];
-        this.ballsCase2Theta = [];
-
-        var startPos = 0;
-        var count = 1;
-        while(startPos < windowHig - 100){
-            var xPos = windowWid / 2;
-            var yPos = startPos;
-            var ball = new Ball( xPos, yPos, 80);
-
-            this.ballsCase2.push(ball);
-
-            startPos += 80;
-
-            this.ballsCase2VelTheta.push(count * .003);
-            this.ballsCase2Theta.push(0);
-
-            count++;
-        }
-
-        // ------------------
-
-        this.ballCase3 = [
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-        ]
-
-        // -----------------
-
-        this.ballsCase4Theta = 0;
-        this.ballCase4 = [];
-        for(var ii = 0; ii <= 21; ii++){
-            var size = windowWid /20;
-            var xPos =  size * (ii - 1);
-            var yPos = windowHig/2;
-            var ball = new Ball( xPos, yPos, size/2);
-
-            this.ballCase4.push(ball);
-        }
-
-        this.balls = [
-            this.ballsCase0,
-            this.ballCase4,
-            this.ballsCase1,
-            this.ballsCase2,
-            this.ballCase3
-        ]
 
     }
 
@@ -243,8 +167,7 @@ class Verlet {
                 }
 
                 ctx.lineWidth = 1;
-                ctx.strokeStyle = `rgba( ${this.col}, ${this.alphaArr[cc]} )`;
-                //ctx.strokeStyle = "#000"
+                ctx.strokeStyle = `rgba( ${this.col}, .1 )`;
                 ctx.stroke();
             }
         }
@@ -283,6 +206,92 @@ class Verlet {
 
     }
 
+    remove(){
+        this.composites = null;
+        this.composites = [];
+
+        this.type = 0;
+        this.col = colArr[ parseInt(colArr.length * Math.random())];
+
+        var windowWid = AppStore.getWindowWidth();
+        var windowHig = AppStore.getWindowHeight();
+
+        this.ballCase0Theta = 0;
+        this.ballsCase0 = [
+            new Ball( windowWid / 2, 50, 50),
+            new Ball( windowWid / 2 - 300, windowHig / 2, 100),
+            new Ball( windowWid / 2 + 300, windowHig / 2, 100)
+        ]
+
+        // ---------------------
+
+        this.ballsCase1 = [];
+        this.ballCase2Rad = Math.min( windowWid, windowHig ) * .3;
+        this.ballCase2Theta = 0;
+
+        for(var ii = 0; ii < 20; ii++){
+            var theta = ii / 10 * Math.PI;
+            var xPos = windowWid/2 + this.ballCase2Rad * Math.cos(theta);
+            var yPos = windowHig/2 + this.ballCase2Rad * Math.sin(theta);
+            var ball = new Ball( xPos,  yPos, 30);
+            this.ballsCase1.push(ball);
+        }
+
+        // ---------------------
+        this.ballsCase2 = [];
+        this.ballsCase2VelTheta = [];
+        this.ballsCase2Theta = [];
+
+        var startPos = 0;
+        var count = 1;
+        while(startPos < windowHig - 100){
+            var xPos = windowWid / 2;
+            var yPos = startPos;
+            var ball = new Ball( xPos, yPos, 80);
+
+            this.ballsCase2.push(ball);
+
+            startPos += 80;
+
+            this.ballsCase2VelTheta.push(count * .003);
+            this.ballsCase2Theta.push(0);
+
+            count++;
+        }
+
+        // ------------------
+
+        this.ballCase3 = [
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
+        ]
+
+        // -----------------
+
+        this.ballsCase4Theta = 0;
+        this.ballCase4 = [];
+        for(var ii = 0; ii <= 21; ii++){
+            var size = windowWid /20;
+            var xPos =  size * (ii - 1);
+            var yPos = windowHig/2;
+            var ball = new Ball( xPos, yPos, size/2);
+
+            this.ballCase4.push(ball);
+        }
+
+        this.balls = [
+            this.ballsCase0,
+            this.ballCase4,
+            this.ballsCase1,
+            this.ballsCase2,
+            this.ballCase3
+        ]
+    }
+
     reset(){
         this.type = (this.type + 1) % this.MAX_TYPE;
         this.col = colArr[ parseInt(colArr.length * Math.random())];
@@ -290,6 +299,16 @@ class Verlet {
 
         for(var ii = 0; ii < this.composites.length; ii++){
             this.composites[ii].reset();
+        }
+    }
+
+    onWindowResize(){
+        var winWidth = AppStore.getWindowWidth();
+
+        for(var ii = 0; ii < this.composites.length; ii++){
+            //console.log(this.composites[ii]);
+            //this.composites[ii].onWindowResize();
+
         }
     }
 

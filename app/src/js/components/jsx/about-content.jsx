@@ -72,7 +72,7 @@ class AboutContent extends React.Component {
                 <div className="about-content-wrapper">
                     <div className={this.state.contents[0]}>About</div>
                     <div className={this.state.contents[1]}>
-                        <p>"Interaction with Artificial Physics" is the collction of interactinve experiments with Artificial Physics. The Artificial Physics is the system which controls the motion and coollisiton of objects by several parameters such as gravity and friction with JavaScript. Each experiment has ist own unique physics with its unique parameter and system to add the taste artificially.</p>
+                        <p>"Interaction with Artificial Physics" is the collction of interactinve experiments with Artificial Physics. The Artificial Physics is the system which controls the motion and coollisiton of objects by several parameters such as gravity and friction with JavaScript. Each experiment has ist own unique physics system with its unique parameter and system to add the taste artificially.</p>
                     </div>
                     <div className={this.state.contents[2]}>Thechnology behind</div>
                     <div className={this.state.contents[3]}>
@@ -83,10 +83,11 @@ class AboutContent extends React.Component {
                             <li>- <LinkText name="Verlet.js" link="https://github.com/subprotocol/verlet-js" /></li>
                             <li>- <LinkText name="Speculative Contacts – a continuous collision engine approach" link="http://www.wildbunny.co.uk/blog/2011/03/25/speculative-contacts-an-continuous-collision-engine-approach-part-1/" /></li>
                         </ul>
-                        <p>I used React, Flux, GreenSock, and didn't use any 2D canvas libary and jQuery to build this site.</p>
+                        <p>I used React, Flux, GreenSock, Babel, and didn't use any 2D canvas libary and jQuery to build this site.</p>
                     </div>
                     <div className={this.state.contents[4]}>
-                        <p>If you're interested in me, please chect out the below:</p>
+                        <p>Kenji SAITO has designed ande developed this site.</p>
+                        <p>If you're interested in him, please chect out the below:</p>
                         <p className="contact-list">
                             <LinkText name="WebSite" link="http://kenji-special.info" />
                             <LinkText name="Twitter" link="https://twitter.com/kenji_special" />

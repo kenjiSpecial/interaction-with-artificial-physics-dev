@@ -45,7 +45,12 @@ class App {
         this.canvas = document.getElementById('app-canvas');
         addClass(this.canvas, interactive);
 
-        this.sim.reset();
+        this.sim.remove();
+
+        for(var ii = 0; ii < 5; ii++){
+            this.addLine(ii);
+        }
+
         this.globalOpacity  = 1;
         AppStore.addListener(CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP, this.onMouseDownHandler)
     }
@@ -116,6 +121,16 @@ class App {
         this.globalAlpha = 0;
         this.isTransit = false;
         this.sim.reset();
+    }
+
+    onWindowResize(){
+        this.sim.remove();
+
+        for(var ii = 0; ii < 5; ii++){
+            this.addLine(ii);
+        }
+
+
     }
 
 }

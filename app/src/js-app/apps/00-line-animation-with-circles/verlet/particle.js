@@ -14,6 +14,12 @@ class Particle {
         this.pos.x = this.originPos.x;
         this.pos.y = this.originPos.y;
     }
+
+    onWindowResize(xx, yy){
+        this.originPos.set( xx, yy );
+        this.pos.set( xx, yy );
+        this.lastPos.set( xx, yy );
+    }
 }
 
 module.exports = Particle;

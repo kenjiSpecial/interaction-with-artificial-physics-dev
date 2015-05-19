@@ -36,6 +36,15 @@ var Plane = function( x, y, width, col ) {
 
 };
 
+Plane.prototype.onWindowResize = function( xx, yy, width) {
+    this.pos.set( xx, yy);
+
+    this.halfMinusExtent.x = -width/2;
+    this.halfPluseExtent.x = width/2;
+    this.drawY = yy - 1;
+    this.origDrawY = this.drawY;
+}
+
 Plane.prototype.update = function(dt) {
 
   // body...
