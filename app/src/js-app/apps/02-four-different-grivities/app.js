@@ -27,8 +27,8 @@ var App = function() {
     }
 
 
-    var ball = new OutlineBall();
-    this.mObjects.push(ball);
+    this.outlineBall = new OutlineBall();
+    this.mObjects.push(this.outlineBall);
     this.count = 0;
 
 };
@@ -97,6 +97,10 @@ App.prototype.collide = function() {
     }
 
     return contacts;
+}
+
+App.prototype.onWindowResize = function() {
+    this.outlineBall.onWindowResize();
 }
 
 module.exports = App;

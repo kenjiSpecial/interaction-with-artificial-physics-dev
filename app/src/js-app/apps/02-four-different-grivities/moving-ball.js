@@ -1,37 +1,41 @@
 var BaseBall = require("./components/ball");
 var CONSTANTS = require('./components/constants.js');
 var Vector2 = require('ks-vector').Vector2;
+var AppStore = require('../../../js/stores/app-store');
 
 var Ball = function() {
     var mass = 10;
     var rad = 20 + parseInt(30 * Math.random());
     var xPos, yPos;
 
+    var winWidth = AppStore.getWindowWidth();
+    var winHeight = AppStore.getWindowHeight();
+
     if (Math.random() < .25) {
         this.id = 0;
-        xPos = window.innerWidth / 2 - 100 + 200 * Math.random();
+        xPos = winWidth / 2 - 100 + 200 * Math.random();
         yPos = -200 * Math.random() - rad;
 
         this.gravityX = 0;
         this.gravityY = 1;
     } else if (Math.random() < .5) {
         this.id = 1;
-        xPos = window.innerWidth / 2 - 100 + 200 * Math.random();
-        yPos = 200 * Math.random() + window.innerHeight + rad;
+        xPos = winWidth / 2 - 100 + 200 * Math.random();
+        yPos = 200 * Math.random() + winHeight + rad;
 
         this.gravityX = 0;
         this.gravityY = -1;
     } else if (Math.random() < .75) {
         this.id = 2;
         xPos = -100 * Math.random() - rad;
-        yPos = window.innerHeight / 2 - 100 + 200 * Math.random();
+        yPos = winHeight / 2 - 100 + 200 * Math.random();
 
         this.gravityX = 1;
         this.gravityY = 0;
     } else {
         this.id = 3;
-        xPos = window.innerWidth + 100 * Math.random() + rad;
-        yPos = window.innerHeight / 2 - 100 + 200 * Math.random();
+        xPos = winWidth + 100 * Math.random() + rad;
+        yPos = winHeight / 2 - 100 + 200 * Math.random();
 
         this.gravityX = -1;
         this.gravityY = 0;
@@ -72,24 +76,27 @@ Ball.prototype.update = function(dt) {
 Ball.prototype.draw = function(ctx) {
     BaseBall.prototype.draw.call(this, ctx);
 
+    var winWidth = AppStore.getWindowWidth();
+    var winHeight = AppStore.getWindowHeight();
+
     if (this.id == 0) {
-        if (this.pos.x < -this.rad || this.pos.x > window.innerWidth + this.rad || this.pos.y > window.innerHeight + this.rad) {
+        if (this.pos.x < -this.rad || this.pos.x > winWidth + this.rad || this.pos.y > winHeight + this.rad) {
             this.reset1();
             return;
         }
     } else if (this.id == 1) {
-        if (this.pos.x < -this.rad || this.pos.x > window.innerWidth + this.rad || this.pos.y < -this.rad) {
+        if (this.pos.x < -this.rad || this.pos.x > winWidth + this.rad || this.pos.y < -this.rad) {
             this.reset2();
             return;
         }
     } else if (this.id == 2) {
-        if (this.pos.x > window.innerWidth + this.rad || this.pos.y < -this.rad || this.pos.y > window.innerHeight + this.rad) {
+        if (this.pos.x > winWidth + this.rad || this.pos.y < -this.rad || this.pos.y > winHeight + this.rad) {
             this.reset3();
             return;
         }
 
     } else if (this.id == 3) {
-        if (this.pos.x < -this.rad || this.pos.y < -this.rad || this.pos.y > window.innerHeight + this.rad) {
+        if (this.pos.x < -this.rad || this.pos.y < -this.rad || this.pos.y > winHeight + this.rad) {
             this.reset4();
             return;
         }
@@ -101,13 +108,13 @@ Ball.prototype.draw = function(ctx) {
 
 
 Ball.prototype.reset1 = function() {
-    this.pos = new Vector2(window.innerWidth / 2 - 100 + 200 * Math.random(), -100 * Math.random() - this.rad);
+    this.pos = new Vector2(AppStore.getWindowWidth() / 2 - 100 + 200 * Math.random(), -100 * Math.random() - this.rad);
     this.vel = new Vector2(0, 0);
     this.angularVel = 0;
 };
 
 Ball.prototype.reset2 = function() {
-    this.pos = new Vector2(window.innerWidth / 2 - 100 + 200 * Math.random(), window.innerHeight + 100 * Math.random() + this.rad);
+    this.pos = new Vector2(AppStore.getWindowWidth() / 2 - 100 + 200 * Math.random(), AppStore.getWindowHeight() + 100 * Math.random() + this.rad);
     this.vel = new Vector2(0, 0);
     this.angularVel = 0;
 };
@@ -115,7 +122,7 @@ Ball.prototype.reset2 = function() {
 Ball.prototype.reset3 = function() {
     var xPos, yPos;
     xPos = -100 * Math.random() - this.rad;
-    yPos = window.innerHeight / 2 - 100 + 200 * Math.random();
+    yPos = AppStore.getWindowHeight() / 2 - 100 + 200 * Math.random();
     this.pos = new Vector2(xPos, yPos);
     this.vel = new Vector2(0, 0);
     this.angularVel = 0;
@@ -123,8 +130,8 @@ Ball.prototype.reset3 = function() {
 
 Ball.prototype.reset4 = function() {
     var xPos, yPos;
-    xPos = window.innerWidth + 100 * Math.random() + this.rad;
-    yPos = window.innerHeight / 2 - 100 + 200 * Math.random();
+    xPos = AppStore.getWindowWidth() + 100 * Math.random() + this.rad;
+    yPos = AppStore.getWindowHeight() / 2 - 100 + 200 * Math.random();
 
     this.pos = new Vector2(xPos, yPos);
     this.vel = new Vector2(0, 0);

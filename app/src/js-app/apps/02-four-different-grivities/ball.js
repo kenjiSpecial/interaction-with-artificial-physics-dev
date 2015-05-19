@@ -1,10 +1,15 @@
 var BaseBall = require("./components/ball");
 var Vector2   = require('ks-vector').Vector2;
 
+var AppStore = require('../../../js/stores/app-store');
+
 var Ball = function(){
+    var winWidth = AppStore.getWindowWidth();
+    var winHeight = AppStore.getWindowHeight();
+
     var _mass = 0;
-    var _rad = Math.min(window.innerWidth, window.innerHeight) / 4 - 20;
-    var _pos = new Vector2(window.innerWidth/2, window.innerHeight/2);
+    var _rad = Math.min( winWidth, winHeight ) / 4 - 20;
+    var _pos = new Vector2( winWidth/2, winHeight/2);
     var _vel = new Vector2(0, 0);
 
     BaseBall.call(this, _mass, _rad, _pos, _vel );
@@ -65,6 +70,16 @@ Ball.prototype.resetAll = function() {
   this.vel = new Vector2(0, velY);
   this.angularVel = -2*Math.PI + Math.random() * Math.PI;
 };
+
+Ball.prototype.onWindowResize = function() {
+    var winWidth = AppStore.getWindowWidth();
+    var winHeight = AppStore.getWindowHeight();
+
+    this.rad = Math.min( winWidth, winHeight ) / 4 - 20;
+    this.pos.set( winWidth/2, winHeight/2 );
+
+    this.br = this.rad;
+}
 
 
 

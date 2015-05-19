@@ -99,5 +99,11 @@ App.prototype.collide = function () {
     return contacts;
 }
 
+App.prototype.onWindowResize = function() {
+
+
+
+}
+
 
 module.exports = App;
