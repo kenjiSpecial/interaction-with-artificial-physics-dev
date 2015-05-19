@@ -51,7 +51,6 @@ class App {
     }
 
     stop(){
-        console.log(this.canvas);
         AppStore.removeListener(CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP, this.onMouseDownHandler)
         removeClass(this.canvas, interactive);
     }

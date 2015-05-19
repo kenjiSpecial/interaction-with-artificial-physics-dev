@@ -61,6 +61,8 @@ function initialize(){
 
 function start(){
     var data = WorkStore.getWorkData();
+    if(!data) return;
+
     selectedNumber = data.workNum;
     app = appCollection[selectedNumber];
 
@@ -74,8 +76,13 @@ function start(){
 }
 
 function stop(){
+
     backgroundWhite.stop();
-    app.stop();
+
+    if(app && app.stop) {
+        app.stop();
+    }
+
     removeWindowEvent();
 }
 

@@ -234,7 +234,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
     },
 
     onClickWork : function(num, workPosX) {
-
+        _apps.isTransition = true;
         _apps.selectedWorkNumber = num;
 
         this.emit(APP_CONSTANTS.ON_CLICK_WORK, num, workPosX);
@@ -246,6 +246,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
     },
 
     onClickText : function(workNumber) {
+        _apps.isTransition = true;
         _apps.isDragMouse = false;
         this.emit(APP_CONSTANTS.ON_CLICK_TEXT, workNumber);
     },
