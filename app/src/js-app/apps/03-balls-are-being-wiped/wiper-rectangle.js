@@ -34,6 +34,10 @@ WiperRectangle.prototype.update = function(dt){
   }
 }
 
+WiperRectangle.prototype.updateAnchor = function() {
+    this.setAnchor( 10/this.width, .5 );
+}
+
 
 
 module.exports = WiperRectangle;

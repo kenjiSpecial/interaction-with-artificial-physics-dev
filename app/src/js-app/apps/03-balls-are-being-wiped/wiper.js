@@ -29,6 +29,8 @@ Wiper.prototype.onWindowResize = function() {
     this.bigRectangle.originalX = this.bigRectangle.pos.x;
     this.bigRectangle.originalY = this.bigRectangle.pos.y;
 
+    this.bigRectangle.updateAnchor();
+
     // ================================================
 
     this.smallRectangle.pos.x = AppStore.getWindowWidth() / 2;
@@ -36,6 +38,8 @@ Wiper.prototype.onWindowResize = function() {
 
     this.smallRectangle.originalX = this.smallRectangle.pos.x;
     this.smallRectangle.originalY = this.smallRectangle.pos.y;
+
+    this.smallRectangle.updateAnchor();
 }
 
 module.exports = Wiper;
