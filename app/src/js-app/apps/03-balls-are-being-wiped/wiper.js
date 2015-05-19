@@ -22,4 +22,20 @@ var Wiper = function( objects ){
     objects.push(smallRectangle);
 };
 
+Wiper.prototype.onWindowResize = function() {
+    this.bigRectangle.pos.x = AppStore.getWindowWidth() / 2;
+    this.bigRectangle.pos.y = AppStore.getWindowHeight() - 40;
+
+    this.bigRectangle.originalX = this.bigRectangle.pos.x;
+    this.bigRectangle.originalY = this.bigRectangle.pos.y;
+
+    // ================================================
+
+    this.smallRectangle.pos.x = AppStore.getWindowWidth() / 2;
+    this.smallRectangle.pos.y = AppStore.getWindowHeight() - 40;
+
+    this.smallRectangle.originalX = this.smallRectangle.pos.x;
+    this.smallRectangle.originalY = this.smallRectangle.pos.y;
+}
+
 module.exports = Wiper;

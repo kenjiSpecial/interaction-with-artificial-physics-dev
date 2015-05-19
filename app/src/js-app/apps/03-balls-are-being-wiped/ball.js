@@ -1,6 +1,8 @@
 var BaseBall = require("./components/ball");
 var Vector2   = require('ks-vector').Vector2;
 
+var AppStore = require('../../../js/stores/app-store');
+
 var Ball = function(_mass, _rad, _pos, _vel){
     BaseBall.call(this, _mass, _rad, _pos, _vel );
 
@@ -29,7 +31,7 @@ Ball.prototype.update = function(dt){
 Ball.prototype.draw = function(ctx) {
   BaseBall.prototype.draw.call(this, ctx);
 
-  if(this.pos.x < -this.rad || this.pos.x > window.innerWidth + this.rad || this.pos.y > window.innerHeight + this.rad){
+  if(this.pos.x < -this.rad || this.pos.x > AppStore.getWindowWidth() + this.rad || this.pos.y > AppStore.getWindowHeight() + this.rad){
      this.resetAll();
      return;
    }
@@ -42,7 +44,7 @@ Ball.prototype.draw = function(ctx) {
 
 Ball.prototype.resetAll = function() {
   var velY = 150 + 50 * Math.random();
-  this.pos = new Vector2(window.innerWidth * Math.random(), -100 * Math.random() - this.rad );
+  this.pos = new Vector2( AppStore.getWindowWidth() * Math.random(), -100 * Math.random() - this.rad );
   this.vel = new Vector2(0, velY);
   this.angularVel = -2*Math.PI + Math.random() * Math.PI;
 };

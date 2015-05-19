@@ -19,7 +19,7 @@ var App = function () {
     this.mObjects = [];
     this.isBackgroundAnimation = true;
 
-    var wiper = new Wiper(this.mObjects);
+    this.wiper = new Wiper(this.mObjects);
 
     var wid = AppStore.getWindowWidth();
     var hig = AppStore.getWindowHeight();
@@ -100,9 +100,7 @@ App.prototype.collide = function () {
 }
 
 App.prototype.onWindowResize = function() {
-
-
-
+    this.wiper.onWindowResize();
 }
 
 
