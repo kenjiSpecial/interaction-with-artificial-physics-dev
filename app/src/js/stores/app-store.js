@@ -120,10 +120,20 @@ var AppStore = assign({}, EventEmitter.prototype, {
     },
 
     setWorks : function(){
+        var workTotalSize = constants.workGap * (appData.works.length - 1);
+        var startXPos;
+        if( workTotalSize < _apps.windowWid){
+            startXPos = (_apps.windowWid - workTotalSize)/2;
+        }else{
+            startXPos = constants.workXPos;
+        }
+
+        this.startXPos = startXPos;
+
         for(var ii in appData.works){
             var workName = appData.works[ii];
             var workID = workName.replace(/ /g,"-").toLowerCase();
-            var xPos = constants.workGap * (parseInt(ii)) + constants.workXPos;
+            var xPos = constants.workGap * (parseInt(ii)) + startXPos;
 
             var WORK_UPDATE = "WORK_TYPE" + ii;
 
@@ -132,13 +142,12 @@ var AppStore = assign({}, EventEmitter.prototype, {
             _apps.works.push(workObj);
             APP_CONSTANTS.WORKS_UPDATE.push(WORK_UPDATE);
 
-            _apps.workTotalSize += constants.workGap;
         }
 
-        _apps.minScrollX = - constants.workGap * (appData.works.length - 1);
+        _apps.minScrollX = - constants.workGap * (appData.works.length - 1) - (startXPos - constants.workXPos);
         var windowWid = window.innerWidth;
         if(windowWid < CONSTANT_DATA.MIN_WIDTH) windowWid = CONSTANT_DATA.MIN_WIDTH;
-        _apps.maxScrollX = windowWid - constants.workGap;
+        _apps.maxScrollX = windowWid - constants.workGap - (startXPos - constants.workXPos);
 
     },
 
@@ -320,9 +329,19 @@ var AppStore = assign({}, EventEmitter.prototype, {
         var windowHig = window.innerHeight;
         if(windowHig < CONSTANT_DATA.MIN_HEIGHT) windowHig = CONSTANT_DATA.MIN_HEIGHT;
 
-        _apps.maxScrollX = windowWid - constants.workGap;
         _apps.windowWid = windowWid;
         _apps.windowHig = windowHig;
+
+        _apps.minScrollX = - constants.workGap * (appData.works.length - 1) - (this.startXPos - constants.workXPos);
+        _apps.maxScrollX = windowWid - constants.workGap - (this.startXPos - constants.workXPos);
+
+        var xPos = _apps.scrollX - _apps.cameraPosX;
+
+        if(xPos > _apps.maxScrollX){
+            _apps.scrollX = _apps.maxScrollX + _apps.cameraPosX;
+        }else if(xPos < _apps.minScrollX){
+            _apps.scrollX = _apps.minScrollX + _apps.cameraPosX;
+        }
 
         this.emit(APP_CONSTANTS.ON_WINDOW_RESIZE);
     },

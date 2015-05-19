@@ -1,6 +1,7 @@
 module.exports = {
     'font'  : 'http://fonts.googleapis.com/css?family=Roboto:700',
     'works' : [
+        "Copied Paints With Balls",
         'Line Painting With Circles',
         'How Many Ball',
         "Four Different Gravities",
@@ -8,10 +9,10 @@ module.exports = {
         "Colorful Balls Animation",
         "Coordinates Animation",
         "Reflection Balls",
-        "Painting With Balls",
-        "Lines reacting to Impulse"
+        "Lines reacting to Unseen Impulse",
+        "Boxes"
     ],
-    'end' : [".", "?", ".", ".", ".", ".", ".", ".", "."],
+    'end' : [".", "?", ".", ".", ".", ".", ".", ".", ".", "."],
     demoImg : [
         "/images/frame.png",
         "/images/goch.png",
