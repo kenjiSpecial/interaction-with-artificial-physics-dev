@@ -31,16 +31,19 @@ App.prototype.start = function() {
     this.planes = null;
     this.planes = [];
 
-    var plane0 = new Plane(windowWid / 2, windowHig, windowWid);
+    var plane0 = new Plane(windowWid / 2, windowHig + 1, windowWid);
     this.mObjects.push(plane0)
+    this.plane0 = plane0;
     this.planes.push(plane0)
 
-    var plane1 = new Plane(0, windowHig / 2, windowHig);
+    var plane1 = new Plane(-1, windowHig / 2, windowHig);
     plane1.angle = Math.PI / 2;
+    this.plane1 = plane1;
     this.mObjects.push(plane1);
 
-    var plane2 = new Plane(windowWid, windowHig / 2, windowHig);
+    var plane2 = new Plane(windowWid+1, windowHig / 2, windowHig);
     plane2.angle = Math.PI / 2;
+    this.plane2 = plane2;
     this.mObjects.push(plane2);
 
     this.balls = null;
@@ -196,6 +199,15 @@ App.prototype.collide = function () {
 App.prototype.reset = function() {
     this.ctx.fillStyle = "#ffffff";
     this.ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+}
+
+App.prototype.onWindowResize = function() {
+    var windowWid = AppStore.getWindowWidth();
+    var windowHig = AppStore.getWindowHeight();
+
+    this.plane0.onWindowResize( windowWid/2, windowHig+1, windowWid );
+    this.plane1.onWindowResize( -1, windowHig / 2, windowHig);
+    this.plane2.onWindowResize( windowWid+1, windowHig/2, windowHig );
 }
 
 module.exports = App;

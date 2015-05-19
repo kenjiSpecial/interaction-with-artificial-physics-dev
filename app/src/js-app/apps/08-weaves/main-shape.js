@@ -83,18 +83,28 @@ class MainShape {
             var xPos = (this.points[i].x + this.points[i + 1].x)/2;
             var yPos = (this.points[i].y + this.points[i + 1].y)/2;
 
-
             if(i == 0) ctx.moveTo(xPos, yPos);
             else       ctx.quadraticCurveTo( this.points[i].x, this.points[i].y, xPos, yPos);
 
         }
-
 
         ctx.strokeStyle = this.col;
         ctx.stroke();
 
         ctx.restore();
 
+    }
+
+    onWindowResize( yPos ){
+        this.y = yPos;
+        var width = AppStore.getWindowWidth();
+        var gapDistance = width / (this.pointNumber - 1);
+        var ii;
+        for( ii = 0; ii < this.pointNumber; ii++ ){
+            var xPos = gapDistance * ii;
+            //var myPt = new Point( xPos, 0);
+            this.points[ii].x = xPos;
+        }
     }
 
 

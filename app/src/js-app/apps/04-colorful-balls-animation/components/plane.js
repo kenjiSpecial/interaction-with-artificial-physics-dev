@@ -47,6 +47,12 @@ Plane.prototype.getNormal = function() {
   return new Vector2(-Math.sin(this.angle), Math.cos(this.angle));
 };
 
+Plane.prototype.onWindowResize = function( xx, yy, width) {
+    this.pos.set(xx, yy);
+    this.halfMinusExtent.set(-width/2, 0);
+    this.halfPluseExtent.set(width/2, 0);
+}
+
 /**
 *  @param {Vector2} pt
 *

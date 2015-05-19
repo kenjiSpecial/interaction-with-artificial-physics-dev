@@ -102,7 +102,6 @@ class ImpulseBall {
     }
 
     onWaitHandler(){
-        console.log(this.isWait);
         this.isWait = false;
     }
 }

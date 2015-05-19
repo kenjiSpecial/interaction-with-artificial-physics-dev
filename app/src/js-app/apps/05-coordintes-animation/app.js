@@ -199,4 +199,13 @@ App.prototype.reset = function() {
     this.ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 }
 
+App.prototype.onWindowResize = function() {
+    var windowWid = AppStore.getWindowWidth();
+    var windowHig = AppStore.getWindowHeight();
+
+    this.plane0.onWindowResize( windowWid/2, windowHig+1, windowWid );
+    this.plane1.onWindowResize( -1, windowHig / 2, windowHig);
+    this.plane2.onWindowResize( windowWid+1, windowHig/2, windowHig );
+}
+
 module.exports = App;

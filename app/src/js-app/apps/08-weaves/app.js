@@ -52,6 +52,15 @@ class App {
             this.ballArr[jj].update( this.mainShapeArr, ctx );
         }
     }
+
+    onWindowResize(){
+        this.gap = (AppStore.getWindowHeight()) / (this.number + 1);
+
+        for(var ii in this.mainShapeArr){
+            var yPos = ( parseInt(ii) + 1) * this.gap
+            this.mainShapeArr[ii].onWindowResize(yPos);
+        }
+    }
 }
 
 module.exports = App;

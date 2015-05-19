@@ -28,14 +28,17 @@ class App{
 
         var floor1 = new Floor( 100, winHig/2-40, 200, 40)
         floor1.angle = Math.PI / 12;
+        this.floor1 = floor1;
         this.mObjects.push(floor1);
 
 
         var floor2 = new Floor( winWid - 300 , winHig/2-40 , 200, 40)
         floor2.angle = -Math.PI / 12;
+        this.floor2 = floor2;
         this.mObjects.push(floor2);
 
         var floor3 = new Floor( winWid/2 -100, winHig/2-20, 200, 40);
+        this.floor3 = floor3;
         this.mObjects.push(floor3);
 
         for(var ii = 0; ii < 30; ii++){
@@ -142,6 +145,23 @@ class App{
         }
 
         return contacts;
+    }
+
+    onWindowResize(){
+        var winWid = AppStore.getWindowWidth();
+        var winHig = AppStore.getWindowHeight();
+
+        this.rotatingFloor.pos.x = winWid/2;
+        this.rotatingFloor.pos.y = 250;
+
+        this.floor.pos.y = winHig - 150;
+
+        this.floor1.pos.y = winHig/2 - 40;
+        this.floor2.pos.x = winWid - 300;
+        this.floor2.pos.y = winHig/2 - 40;
+        this.floor3.pos.x = winWid/2 - 100;
+        this.floor3.pos.y = winHig/2 - 20;
+
     }
 
 }
