@@ -30,6 +30,7 @@ var App04 = require('./apps/04-colorful-balls-animation/app');
 var App05 = require('./apps/05-coordintes-animation/app');
 var App06 = require('./apps/06-reflection-balls/app');
 var App07 = require('./apps/07-painting-with-balls/app');
+var App08 = require('./apps/08-weaves/app');
 
 // ==========
 
@@ -48,6 +49,7 @@ function initialize(){
     appCollection.push(new App05());
     appCollection.push(new App06());
     appCollection.push(new App07());
+    appCollection.push(new App08());
 
     WorkStore.on(CONSTANTS.START_WORK_ANIMATION, start);
     WorkStore.on(CONSTANTS.STOP_WORK_ANIMATION, stop);

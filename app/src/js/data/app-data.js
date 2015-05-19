@@ -8,9 +8,10 @@ module.exports = {
         "Colorful Balls Animation",
         "Coordinates Animation",
         "Reflection Balls",
-        "Painting With Balls"
+        "Painting With Balls",
+        "Lines reacting to Impulse"
     ],
-    'end' : [".", "?", ".", ".", ".", ".", ".", "."],
+    'end' : [".", "?", ".", ".", ".", ".", ".", ".", "."],
     demoImg : [
         "/images/frame.png",
         "/images/goch.png",

@@ -78,11 +78,9 @@ WorkRope.prototype = {
         var self = this;
         var vel = 10;
         var lastNum = this.line.particles.length-1;
+        self.line.particles[lastNum].pos.x -= 1;
+        self.line.particles[lastNum].pos.y -= self.lineWid ;
 
-        setTimeout(function(){
-            self.line.particles[lastNum].pos.x -= 1;
-            self.line.particles[lastNum].pos.y -= self.lineWid ;
-        }, 100);
     },
     update : function(ctx){
         var cameraPosY = AppStore.get("cameraPosY");

@@ -29,15 +29,16 @@ class Ball extends BaseObject{
     draw(ctx, imageData, minX, minY, wid, hig ){
         var xPos = parseInt( (this.position.x - minX) / wid * imgWid );
         var yPos = parseInt( (this.position.y - minY) / hig * imgHig );
-        xPos = Math.min( Math.max(0, xPos), imgWid);
-        yPos = Math.min( Math.max(0, yPos), imgHig);
+        xPos = Math.min( Math.max(0, xPos), imgWid - 1);
+        yPos = Math.min( Math.max(0, yPos), imgHig - 1);
+
 
         var imagePos = 4 * (yPos * imageData.width + xPos);
 
 
-        var colR = imageData.data[imagePos + 0] || 255;
-        var colG = imageData.data[imagePos + 1] || 255;
-        var colB = imageData.data[imagePos + 2] || 255;
+        var colR = imageData.data[imagePos + 0] || 0;
+        var colG = imageData.data[imagePos + 1] || 0;
+        var colB = imageData.data[imagePos + 2] || 0;
 
 
         this.col[0] += ( colR - this.col[0]) * .1;

@@ -138,7 +138,6 @@ class WorkBall extends React.Component {
 
         TweenLite.to(this, duration, {
             selectedWorkPosY: -windowHig / 2,
-            delay: .1,
             ease: Power4.easeOut,
             onUpdate: this.onClickedWorkUpdate.bind(this),
             onComplete: this.onCompleteBallYAnimationHandler.bind(this)

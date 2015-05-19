@@ -12,15 +12,15 @@ var frameImg = "/images/frame.png";
 var art1Img = "/images/weave.png";
 var art2Img = "/images/pop-art.png";
 var art3Img = "/images/goch.png";
-var art4Img = "/images/pop1.png";
-var art5Img = "/images/pop2.png";
+var art4Img = "/images/pop2.png";
+var art5Img = "/images/pop3.png";
 
-var artImgArr = [art2Img, art3Img, art4Img, art5Img, art1Img];
+var artImgArr = [art5Img, art2Img, art3Img, art4Img,  art1Img];
 
-var frameWid = 1050/2;
-var frameHig = 750/2;
-var left = 50;
-var top = (750 - 585)/4;
+var frameWid = 1100/2;
+var frameHig = 800/2;
+var left = 50 + 12.5;
+var top = (800 - 585)/4;
 var wid = 425;
 var hig = 585/2;
 
@@ -49,10 +49,10 @@ class ParticleManager{
         this.imageNum = 0;
 
         this.frameLeft = (AppStore.getWindowWidth() - frameWid)/2;
-        this.frameTop  = (AppStore.getWindowHeight() - frameHig)/2 - 100;
+        this.frameTop  = (AppStore.getWindowHeight() - frameHig)/2 - 120;
 
         this.miniFrameLeft = (AppStore.getWindowWidth() - frameWid/2)/2;
-        this.miniFrameTop  = this.frameTop + frameHig + 30;
+        this.miniFrameTop  = this.frameTop + frameHig + 50;
 
         this.leftPos = left + this.frameLeft-1.0
         this.topPos = top + this.frameTop;
@@ -122,6 +122,7 @@ class ParticleManager{
         for(var ii in artImgArr){
             var img = allImages[artImgArr[ii]];
             ctx.drawImage( img, 0, 0);
+
             var imageData = ctx.getImageData(0, 0, 213, 148);
             this.imageDataArr.push(imageData);
         }
@@ -241,7 +242,7 @@ class ParticleManager{
         this.isTransit = true;
 
         this.prevImageNum = this.imageNum;
-        this.imageNum = (this.imageNum + 1) % 3;
+        this.imageNum = (this.imageNum + 1) % artImgArr.length;
 
         this.alpha = 1;
         TweenLite.to(this, .6, {alpha: 0, onComplete: this.onAlphaTweenComplete.bind(this)});
