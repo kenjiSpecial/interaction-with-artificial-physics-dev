@@ -150,6 +150,7 @@ class ParticleManager{
 
         var mX = AppStore.get("mouseX");
         var mY = AppStore.get("mouseY");
+        var isMouseenter = AppStore.get("isMouseenter");
 
         for(var xx = 0; xx < NUM_ITERATIONS; xx++){
             for(var ii = 0; ii < this.balls.length; ii++){
@@ -179,22 +180,23 @@ class ParticleManager{
                     }
                 }
 
-                var mDx = circle.position.x - mX;
-                var mDy = circle.position.y - mY;
+                if(isMouseenter) {
+                    var mDx = circle.position.x - mX;
+                    var mDy = circle.position.y - mY;
 
-                var mDis = Math.sqrt((mDx * mDx + mDy * mDy));
-                if(mDis < circle.rad + 40){
-                    var mDiff = circle.rad + 40 - mDis;
-                    var mDiffX = mDiff * mDx/mDis;
-                    var mDiffY = mDiff * mDy/mDis;
+                    var mDis = Math.sqrt((mDx * mDx + mDy * mDy));
+                    if (mDis < circle.rad + 40) {
+                        var mDiff = circle.rad + 40 - mDis;
+                        var mDiffX = mDiff * mDx / mDis;
+                        var mDiffY = mDiff * mDy / mDis;
 
-                    circle.position.x += mDiffX
-                    circle.position.y += mDiffY;
+                        circle.position.x += mDiffX
+                        circle.position.y += mDiffY;
+                    }
+
+                    circle.position.x = Math.min(Math.max(this.minX + rad, circle.position.x), this.maxX - rad);
+                    circle.position.y = Math.min(Math.max(this.minY + rad, circle.position.y), this.maxY - rad);
                 }
-
-
-                circle.position.x = Math.min( Math.max( this.minX + rad, circle.position.x), this.maxX - rad );
-                circle.position.y = Math.min( Math.max( this.minY + rad, circle.position.y), this.maxY - rad );
 
             }
         }

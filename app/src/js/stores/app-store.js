@@ -18,6 +18,7 @@ if(windowHig < CONSTANT_DATA.MIN_HEIGHT) windowHig = CONSTANT_DATA.MIN_HEIGHT;
 
 var _apps = {
     isLoad : false,
+    isMouseenter : false,
     images : {},
     works : [],
     workTotalSize : 0,
@@ -377,6 +378,15 @@ var AppStore = assign({}, EventEmitter.prototype, {
         _apps.mouseY = mouse.y;
 
         this.emit(APP_CONSTANTS.MOUSE_MOVE_IN_CANVAS_APP);
+    },
+    onMouseEnter : function() {
+        _apps.isMouseenter = true;
+        this.emit(APP_CONSTANTS.MOUSE_ENTER);
+    },
+
+    onMouseLeave : function() {
+        _apps.isMouseenter = false;
+        this.emit(APP_CONSTANTS.MOUSE_LEAVE);
     }
 
 });
@@ -506,6 +516,12 @@ AppStore.dispatchToken = AppDispatcher.register(function(action){
             break;
         case APP_CONSTANTS.MOUSE_MOVE_IN_CANVAS_APP:
             AppStore.mouseMoveInCanvasApp(action.mouse);
+            break;
+        case APP_CONSTANTS.MOUSE_ENTER:
+            AppStore.onMouseEnter();
+            break;
+        case APP_CONSTANTS.MOUSE_LEAVE:
+            AppStore.onMouseLeave();
             break;
 
     }

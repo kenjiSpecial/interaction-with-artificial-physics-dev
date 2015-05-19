@@ -33,20 +33,23 @@ class ImpulseBall {
 
         var mX = AppStore.get("mouseX");
         var mY = AppStore.get("mouseY");
+        var isMouseenter = AppStore.get("isMouseenter");
 
-        var dMx = mX - this.pos.x;
-        var dMy = mY - this.pos.y;
+        if(isMouseenter) {
+            var dMx = mX - this.pos.x;
+            var dMy = mY - this.pos.y;
 
-        var disM = Math.sqrt(dMx*dMx + dMy * dMy);
+            var disM = Math.sqrt(dMx * dMx + dMy * dMy);
 
-        if(disM < MOUSE_RAD + this.rad){
-            var theta = Math.atan2( dMy, dMx ) + Math.PI;
-            this.theta = theta;
+            if (disM < MOUSE_RAD + this.rad) {
+                var theta = Math.atan2(dMy, dMx) + Math.PI;
+                this.theta = theta;
 
-            var xPos = (MOUSE_RAD + this.rad )* Math.cos(theta) + mX;
-            var yPos = (MOUSE_RAD + this.rad )* Math.sin(theta) + mY;
+                var xPos = (MOUSE_RAD + this.rad ) * Math.cos(theta) + mX;
+                var yPos = (MOUSE_RAD + this.rad ) * Math.sin(theta) + mY;
 
-            this.pos.set(xPos, yPos);
+                this.pos.set(xPos, yPos);
+            }
         }
 
         for(var ii in mainShapeArr){
@@ -67,27 +70,6 @@ class ImpulseBall {
             }
         }
 
-
-        /*
-        ctx.fillStyle = "#ff0000";
-        ctx.beginPath();
-        ctx.arc( this.pos.x, this.pos.y, this.rad, 0, 2 * Math.PI);
-        ctx.fill();
-
-
-        ctx.fillStyle = "#0000ff";
-        ctx.beginPath();
-        ctx.arc( mX, mY, MOUSE_RAD, 0, 2 * Math.PI);
-        ctx.fill();
-
-        var xxPos = MOUSE_RAD * Math.cos(this.theta) + mX;
-        var yyPos = MOUSE_RAD * Math.sin(this.theta) + mY;
-
-        ctx.fillStyle = "#000";
-        ctx.beginPath();
-        ctx.arc( xxPos, yyPos, 10, 0, 2 * Math.PI);
-        ctx.fill();
-        */
 
 
         if(this.pos.y > AppStore.getWindowHeight() + this.rad) this.reset();

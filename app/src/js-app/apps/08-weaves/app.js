@@ -34,6 +34,8 @@ class App {
         for(var jj = 0; jj < this.ballArr.length; jj++){
             this.ballArr[jj].start();
         }
+
+        this.onWindowResize();
     }
     stop(){
 

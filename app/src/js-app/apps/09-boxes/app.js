@@ -20,7 +20,7 @@ class App{
         var winWid = AppStore.getWindowWidth();
         var winHig = AppStore.getWindowHeight();
 
-        this.rotatingFloor = new Floor( winWid/2 - 60, 250, 80, 30 );
+        this.rotatingFloor = new Floor( winWid/2 - 40, 250, 80, 30 );
         this.mObjects.push(this.rotatingFloor);
 
         this.floor = new Floor( winWid/2 - 200, winHig - 150, 400, 20 );
@@ -57,6 +57,8 @@ class App{
     }
 
     start(){
+        this.onWindowResize();
+
         for(var ii in this.boxes){
             var box = this.boxes[ii];
 
@@ -151,16 +153,11 @@ class App{
         var winWid = AppStore.getWindowWidth();
         var winHig = AppStore.getWindowHeight();
 
-        this.rotatingFloor.pos.x = winWid/2;
-        this.rotatingFloor.pos.y = 250;
-
-        this.floor.pos.y = winHig - 150;
-
-        this.floor1.pos.y = winHig/2 - 40;
-        this.floor2.pos.x = winWid - 300;
-        this.floor2.pos.y = winHig/2 - 40;
-        this.floor3.pos.x = winWid/2 - 100;
-        this.floor3.pos.y = winHig/2 - 20;
+        this.rotatingFloor.resetPos(winWid/2-40, 250);
+        this.floor.resetPos(winWid/2 - 200, winHig - 100)
+        this.floor1.resetPos(100, winHig/2 - 40);
+        this.floor2.resetPos(winWid - 300, winHig/2 - 40);
+        this.floor3.resetPos(winWid/2 - 100, winHig/2 - 20);
 
     }
 

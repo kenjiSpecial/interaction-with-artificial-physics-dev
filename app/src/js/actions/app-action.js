@@ -241,6 +241,18 @@ var AppAction = {
             mouse : { x: mX, y: mY },
             actionType: AppConstants.MOUSE_MOVE_IN_CANVAS_APP
         })
+    },
+
+    onMouseEnter : function() {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.MOUSE_ENTER
+        });
+    },
+
+    onMouseLeave : function() {
+        AppDispatcher.dispatch({
+           actionType : AppConstants.MOUSE_LEAVE
+        });
     }
 
 };

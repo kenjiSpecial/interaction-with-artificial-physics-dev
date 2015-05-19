@@ -35,6 +35,7 @@ class MainShape {
 
         var mX = AppStore.get("mouseX");
         var mY = AppStore.get("mouseY");
+        var isMouseenter = AppStore.get("isMouseenter");
 
         for(ii = 0; ii < this.pointNumber; ii++){
             var fExtensionY = 0;
@@ -50,9 +51,7 @@ class MainShape {
                 fForceY += this.fK * fExtensionY;
             }
 
-            var dx = mX - this.points[ii].x - this.x ;
-            var dy = mY - this.points[ii].y - this.y ;
-            var dis = Math.sqrt(dx * dx + dy * dy);
+
 
 
             fExtensionY = this.points[ii].y - this.points[ii].baseY;
@@ -66,8 +65,14 @@ class MainShape {
 
             this.points[ii].vel *= .9;
 
-            if(dis < MOUSE_RAD){
-                this.points[ii].y += 40;
+            if(isMouseenter) {
+                var dx = mX - this.points[ii].x - this.x;
+                var dy = mY - this.points[ii].y - this.y;
+                var dis = Math.sqrt(dx * dx + dy * dy);
+
+                if (dis < MOUSE_RAD) {
+                    this.points[ii].y += 40;
+                }
             }
 
         }

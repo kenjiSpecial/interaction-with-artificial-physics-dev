@@ -54,8 +54,10 @@ App.prototype.update = function (ctx) {
     ctx.fillStyle = "#FFE0B2";
     ctx.fillRect( 0, 0, winWidth, winHeight );
 
-    this.particles.update(dt)
+    this.particles.update(dt);
     this.particles.draw(ctx);
+
+
 };
 
 

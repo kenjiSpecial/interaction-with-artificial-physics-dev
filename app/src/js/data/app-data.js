@@ -12,7 +12,7 @@ module.exports = {
         "Lines reacting to Unseen Impulse",
         "RGB Boxes"
     ],
-    'end' : [".", "?", ".", ".", ".", ".", ".", ".", ".", "."],
+    'end' : [".", ".", "?", ".", ".", ".", ".", ".", ".", "."],
     demoImg : [
         "/images/frame.png",
         "/images/goch.png",

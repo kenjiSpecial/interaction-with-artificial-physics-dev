@@ -51,6 +51,9 @@ module.exports = keyMirror({
     "MOUSE_DOWN_IN_CANVAS_APP" : null,
     "MOUSE_MOVE_IN_CANVAS_APP" : null,
 
+    "MOUSE_ENTER" : null,
+    "MOUSE_LEAVE" : null,
+
     // keyboar
     "KEYBOARD_DOWN" : null,
     "TICK"          : null,

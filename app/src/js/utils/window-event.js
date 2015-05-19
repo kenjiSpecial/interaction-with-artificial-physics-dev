@@ -74,6 +74,16 @@ window.addEventListener("resize", function(){
     AppAction.onWindowResize();
 });
 
+var mainWrapperDom = document.getElementById('main-wrapper');
+
+mainWrapperDom.addEventListener("mouseenter", function(){
+    AppAction.onMouseEnter();
+});
+
+mainWrapperDom.addEventListener("mouseleave", function(){
+    AppAction.onMouseLeave();
+});
+
 // ======================================
 
 AppStore.on(CONSTANTS.ON_MOUSE_MOVE_EVENT, onMouseMoveEventOnHandler);
