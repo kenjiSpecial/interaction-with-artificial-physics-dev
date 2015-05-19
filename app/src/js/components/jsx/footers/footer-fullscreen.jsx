@@ -1,9 +1,28 @@
 var screenfull = require('screenfull');
 
+var AppStore = require('../../../stores/app-store');
+var CONSTANTS = require('../../../utils/constants');
+
 class FooterFullscreen extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {className: "sub fullscreen"};
+        this.state = {className: "sub fullscreen", title: "FullScreen"};
+
+        AppStore.on(CONSTANTS.ON_WINDOW_RESIZE, this.onWindowResizeHandler.bind(this));
+    }
+
+    componentWillMount(){
+
+        this.isPrevFullscreen = screenfull.isFullscreen;
+
+        var title;
+        if(!this.isPrevFullscreen) title = "FullScreen";
+        else                      title = "EXIT FullScreen";
+
+        this.setState({
+            title : title
+        });
+
     }
 
     onMouseEnter() {
@@ -26,6 +45,23 @@ class FooterFullscreen extends React.Component {
         }
     }
 
+    onWindowResizeHandler(){
+
+        if(screenfull.isFullscreen && !this.isPrevFullscreen){
+            this.setState({
+                title : "EXIT FullScreen"
+            });
+        }
+
+        if(!screenfull.isFullscreen && this.isPrevFullscreen){
+            this.setState({
+                title : "FullScreen"
+            })
+        }
+
+        this.isPrevFullscreen = screenfull.isFullscreen
+    }
+
     render(){
         return (
             <div
@@ -33,7 +69,7 @@ class FooterFullscreen extends React.Component {
                 onMouseLeave={this.onMouseLeave.bind(this)}
                 onClick={this.onClick.bind(this)}
                 className={this.state.className}>
-                FullScreen
+                {this.state.title}
             </div>
         )
     }
