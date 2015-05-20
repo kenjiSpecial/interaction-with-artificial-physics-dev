@@ -16,7 +16,16 @@ var backgroundWhite = require('./component/background-white');
 // =============
 
 var BoilerApp = require('./apps/boiler-plate/app');
-var DemoApp   = require('./apps/sample/demo-app');
+var App07 = require('./apps/07-painting-with-balls/app');
+var App00 = require('./apps/00-line-animation-with-circles/app');
+var App01 = require('./apps/01-how-many-ball/app');
+var App02 = require('./apps/02-four-different-grivities/app');
+var App03 = require('./apps/03-balls-are-being-wiped/app');
+var App04 = require('./apps/04-colorful-balls-animation/app');
+var App05 = require('./apps/05-coordintes-animation/app');
+var App06 = require('./apps/06-reflection-balls/app');
+var App08 = require('./apps/08-weaves/app');
+var App09 = require('./apps/09-boxes/app');
 
 // ==========
 
@@ -35,10 +44,21 @@ var isStart;
 
 function initialize(){
 
-    appCollection.push(new DemoApp());
+    //appCollection.push(new DemoApp());
 
     AppStore.on(CONSTANTS.START_WORK_ANIMATION, start);
     WorkStore.on(CONSTANTS.STOP_WORK_ANIMATION, stop);
+
+    appCollection.push(new App07());
+    appCollection.push(new App00());
+    appCollection.push(new App01());
+    appCollection.push(new App02());
+    appCollection.push(new App03());
+    appCollection.push(new App04());
+    appCollection.push(new App05());
+    appCollection.push(new App06());
+    appCollection.push(new App08());
+    appCollection.push(new App09());
 
     AppStore.on(CONSTANTS.LOAD_DONE, onLoadStartHandler);
     AppStore.on(CONSTANTS.ON_WINDOW_RESIZE, onWindowResize);

@@ -6,126 +6,133 @@ var Composite = require('./verlet/composite.js');
 var Ball = require('./verlet/ball.js');
 var DistanceConstraint = require('./verlet/constraints/distance.js');
 
+var TweenLite = require('gsap');
+
+// -----------------------------
+
+var CONSTANT_DATA = require('../../../js/utils/constants_app');
+var CONSTANTS = require('../../../js/utils/constants');
+var AppStore = require('../../../js/stores/app-store');
+var canvasApp = require('../../../js/components/js/canvas-app');
+
+var interactive = "interactive";
+
+function addClass(el, className) {
+    if (el.classList) el.classList.add(className);
+    else if (!hasClass(el, className)) el.className += ' ' + className;
+}
+
+function removeClass(el, className) {
+    if (el.classList) el.classList.remove(className);
+    else el.className = el.className.replace(new RegExp('\\b'+ className+'\\b', 'g'), '');
+}
+
 class App {
-	constructor() {
-		// this.timerLoop = this.timerLoop.call(this);
+    constructor() {
+        this.onMouseDownHandler = this.onMouseDownHandler.bind(this);
+        this.isTransit = false;
+        this.globalAlpha = 0;
 
-		this.canvas = document.getElementById('c');
+        this.sim = new Verlet(AppStore.getWindowWidth(), AppStore.getWindowHeight());
 
-		var dpr = window.devicePixelRatio || 1;
+        for(var ii = 0; ii < 5; ii++){
+            this.addLine(ii);
+        }
 
-		this.canvas.style.width = window.innerWidth + "px";
-		this.canvas.style.height = window.innerHeight + "px";
+    }
 
-		this.canvas.width = window.innerWidth * dpr;
-		this.canvas.height = window.innerHeight * dpr;
+    start(){
+        this.canvas = document.getElementById('app-canvas');
+        addClass(this.canvas, interactive);
 
-		var ctx = this.canvas.getContext("2d");
-		this.ctx = ctx;
-		ctx.scale( dpr, dpr );
+        this.sim.remove();
 
-		this.sim = new Verlet(window.innerWidth, window.innerHeight, ctx);
+        for(var ii = 0; ii < 5; ii++){
+            this.addLine(ii);
+        }
 
-		var line = new Composite();
-		var kankaku = (window.innerWidth - 40) / 4/10;
-		kankaku = 20;
-		//var vecArr = [new Vec2(20,10), new Vec2(kankaku * 1 + 20,10), new Vec2(kankaku * 2 + 20,10), new Vec2(kankaku * 3 + 20,10), new Vec2(kankaku * 4 + 20,10)];
+        this.globalOpacity  = 1;
+        AppStore.addListener(CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP, this.onMouseDownHandler)
+    }
 
-		var vecArr = [];
-		for(var ii = 0; ii < 20; ii++){
-			var xPos = 200 + kankaku * ii;
-			var yPos = -100 * Math.random();
-			vecArr.push(new Vec2(xPos, yPos));
-		}
+    stop(){
+        AppStore.removeListener(CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP, this.onMouseDownHandler)
+        removeClass(this.canvas, interactive);
+    }
 
-		var finalXPos = 400;//200 + kankaku * 10;
-		// vecArr.push(new Vec2(finalXPos, 40));
+    addLine(num){
+        var line = new Composite();
+        var vecArr = [];
 
-		// setTimeout(this.timerLoop, 500);
-		setTimeout(() => this.timerLoop(), 500);
+        var xPos = -100 * Math.random();
+        var finalXPos = 100 * Math.random() + window.innerWidth;
 
-
-
-
-		var stiffness = 5;
-		for(var ii in vecArr){
-			var vec = vecArr[ii];
-			line.particles.push(new Particle(vec.x, vec.y));
-			if(ii > 0){
-				var constraint = new DistanceConstraint( line.particles[ii], line.particles[ii - 1], stiffness )
-				line.constraints.push(constraint);
-			}
-		}
-
-		// line.pin(0);
-
-		this.sim.addComposites(line);
-
-		this.ball = new Ball( window.innerWidth/2, window.innerHeight/2, 100 );
-
-		this.sim.addBalls(this.ball);
-
-		this.ball = new Ball( window.innerWidth/2 - 300, window.innerHeight/2, 100 );
-		this.sim.addBalls(this.ball);
-
-		this.ball = new Ball( window.innerWidth/2 + 300, window.innerHeight/2, 100 );
-		this.sim.addBalls(this.ball);
-
-		this.ball = new Ball( window.innerWidth/2 + 300, window.innerHeight/2, 100 );
-		this.sim.addBalls(this.ball);
-
-	}
-
-	timerLoop(){
-		var kankaku = 20;
-		var line = new Composite();
-		var vecArr = [];
-		var centerPos = window.innerWidth * (.3 + .4*Math.random());
-
-/*
-		for(var ii = -10; ii < 10; ii++){
-			var xPos = centerPos +  kankaku * ii;
-			var yPos = -100 * Math.random();
-
-		}*/
-		var xPos = -200 * Math.random() + 100
-		var finalXPos = -200 * Math.random() + 100 + window.innerWidth;
-		while(xPos < finalXPos){
-			var yPos = -100 * Math.random();
-			var width = 10 + 20 * Math.random();
+        while (xPos < finalXPos) {
+            var yPos = -50 * Math.random() - 50 * num;
+            var width = 20 + 40 * Math.random();
 
 
-			vecArr.push(new Vec2(xPos, yPos));
+            vecArr.push(new Vec2(xPos, yPos));
 
-			xPos += width;
-		}
+            xPos += width;
+        }
 
-		var stiffness = 5;
-		for(var ii in vecArr){
-			var vec = vecArr[ii];
-			line.particles.push(new Particle(vec.x, vec.y));
-			if(ii > 0){
-				var constraint = new DistanceConstraint( line.particles[ii], line.particles[ii - 1], stiffness )
-				line.constraints.push(constraint);
-			}
-		}
+        var stiffness = 5;
+        for (var ii in vecArr) {
+            var vec = vecArr[ii];
+            line.particles.push(new Particle(vec.x, vec.y));
+            if (ii > 0) {
+                var constraint = new DistanceConstraint(line.particles[ii], line.particles[ii - 1], stiffness)
+                line.constraints.push(constraint);
+            }
+        }
 
-		this.sim.addComposites(line);
+        this.sim.addComposites(line);
+    }
+
+    update(ctx, bg) {
+        if(bg.isAnimation){
+
+        }else{
+
+            this.sim.frame();
+            this.sim.draw(ctx);
+
+            if(this.isTransit){
+                ctx.save();
+                ctx.globalAlpha = this.globalAlpha;
+                ctx.fillStyle = "#fff";
+                ctx.fillRect(0, 0, AppStore.getWindowWidth(), AppStore.getWindowHeight());
+                ctx.restore();
+            }
+        }
+    }
+
+    onMouseDownHandler(ev){
+        if(this.isTransit) return;
+
+        this.isTransit = true;
+
+        this.globalAlpha = 0;
+        TweenLite.to( this, .3, {globalAlpha: 1, onComplete: this.alphaTweenCompleteHandler.bind(this)} )
+    }
+
+    alphaTweenCompleteHandler(){
+        this.globalAlpha = 0;
+        this.isTransit = false;
+        this.sim.reset();
+    }
+
+    onWindowResize(){
+        this.sim.remove();
+
+        for(var ii = 0; ii < 5; ii++){
+            this.addLine(ii);
+        }
 
 
+    }
 
-		setTimeout(() => this.timerLoop(), 500);
-	}
-
-	render(){
-		this.sim.frame();
-		this.sim.draw();
-		// this.ball.draw(this.ctx);
-	}
-
-	reset(){
-
-	}
 }
 
 module.exports = App;
