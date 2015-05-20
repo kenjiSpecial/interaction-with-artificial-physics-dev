@@ -6,14 +6,14 @@ var AppStore = require('../../../js/stores/app-store');
 
 var Ball = require('./ball');
 
-var frameImg = "/images/frame.png";
+var frameImg = "/images/sp/frame.png";
 
 //
-var art1Img = "/images/weave.png";
-var art2Img = "/images/pop-art.png";
-var art3Img = "/images/goch.png";
-var art4Img = "/images/pop2.png";
-var art5Img = "/images/pop3.png";
+var art1Img = "/images/sp/weave.png";
+var art2Img = "/images/sp/pop-art.png";
+var art3Img = "/images/sp/goch.png";
+var art4Img = "/images/sp/pop2.png";
+var art5Img = "/images/sp/pop3.png";
 
 var artImgArr = [art5Img, art2Img, art3Img, art4Img, art1Img];
 
