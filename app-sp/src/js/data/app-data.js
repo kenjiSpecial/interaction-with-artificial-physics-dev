@@ -2,14 +2,14 @@ module.exports = {
     'font'  : 'http://fonts.googleapis.com/css?family=Roboto:700',
     'works' : [
         "Copied Paints With Balls",
-        'Line Painting With Circles',
+        "Unseen Impulse",
         'How Many Ball',
         "Four Different Gravities",
         "Balls Are Beging Wiped",
         "Colorful Balls Animation",
         "Coordinates Animation",
         "Reflection Balls",
-        "Lines reacting to Unseen Impulse",
+        'Line Painting With Circles',
         "RGB Boxes"
     ],
     'end' : [".", ".", "?", ".", ".", ".", ".", ".", ".", "."],

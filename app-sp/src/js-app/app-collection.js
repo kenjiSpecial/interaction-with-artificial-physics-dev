@@ -54,14 +54,14 @@ function initialize(){
     WorkStore.on(CONSTANTS.STOP_WORK_ANIMATION, stop);
 
     appCollection.push(new App07());
-    appCollection.push(new App00());
+    appCollection.push(new App08());
     appCollection.push(new App01());
     appCollection.push(new App02());
     appCollection.push(new App03());
     appCollection.push(new App04());
     appCollection.push(new App05());
     appCollection.push(new App06());
-    appCollection.push(new App08());
+    appCollection.push(new App00());
     appCollection.push(new App09());
 
     AppStore.on(CONSTANTS.LOAD_DONE, onLoadStartHandler);
@@ -270,7 +270,6 @@ function onDeviceOrientationChangeHandler(ev){
     var ori = window.orientation || 0
     var theta = (alpha - ori + 90) / 180 * Math.PI;
     AppAction.onDeviceChangeHandler(theta)
-
 
     ev.preventDefault();
 

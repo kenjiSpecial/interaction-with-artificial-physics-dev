@@ -9,6 +9,8 @@ var TweenLite= require('gsap');
 var s = require('react-prefixr');
 var Tappable = require('react-tappable');
 
+var AppData = require('../../../data/app-data');
+
 class WorkText extends React.Component {
     constructor(props) {
         super(props)
@@ -158,6 +160,8 @@ class WorkText extends React.Component {
             width   : this.state.textWidth
         }
 
+        var workText = this.props.name + AppData.end[this.props.number];
+
         return (
             <Tappable
                 className="work-text"
@@ -167,7 +171,7 @@ class WorkText extends React.Component {
                 >
 
                 <div className="work-wrapper" style={textStyle}>
-                    <div className="work-base" id={workBaseID}><p>{this.props.name}</p></div>
+                    <div className="work-base" id={workBaseID}><p>{workText}</p></div>
                 </div>
 
                 <div className="work-cover" style={divStyle}>
