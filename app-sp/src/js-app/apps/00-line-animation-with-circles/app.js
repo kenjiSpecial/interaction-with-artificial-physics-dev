@@ -51,11 +51,11 @@ class App {
         }
 
         this.globalOpacity  = 1;
-        AppStore.addListener(CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP, this.onMouseDownHandler)
+        AppStore.addListener(CONSTANTS.TAP_CANVAS_APP, this.onMouseDownHandler)
     }
 
     stop(){
-        AppStore.removeListener(CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP, this.onMouseDownHandler)
+        AppStore.removeListener(CONSTANTS.TAP_CANVAS_APP, this.onMouseDownHandler)
         removeClass(this.canvas, interactive);
     }
 

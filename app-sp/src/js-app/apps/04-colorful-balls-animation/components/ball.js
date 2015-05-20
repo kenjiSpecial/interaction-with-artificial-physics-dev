@@ -53,8 +53,6 @@ Ball.prototype.update = function( dt ) {
   this.vel.x += this.force.x * this.invMass;
   this.vel.y += this.force.y * this.invMass;
 
-  // console.log(this.vel);
-
 
   RigidBody.prototype.update.call(this, dt);
 
@@ -63,7 +61,7 @@ Ball.prototype.update = function( dt ) {
 Ball.prototype.start = function() {
   this.isDisable = false;
   this.cross = 5;
-  this.duration = 4000 + parseInt(Math.random() * 7000);
+  this.duration = 2000 + parseInt(Math.random() * 3000);
   this.timerId = setTimeout(this.disableTimer.bind(this), this.duration);
 };
 

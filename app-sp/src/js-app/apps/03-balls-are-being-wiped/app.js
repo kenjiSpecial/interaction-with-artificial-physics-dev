@@ -24,11 +24,12 @@ var App = function () {
     var wid = AppStore.getWindowWidth();
     var hig = AppStore.getWindowHeight();
 
-    for (var ii = 0; ii < 60; ii++) {
+    for (var ii = 0; ii < 30; ii++) {
         var xPos = wid * Math.random();
         var yPos = hig * Math.random() * -1;
         var velY = 250 + 50 * Math.random();
-        var ball = new Ball(10, 30, new Vector2(xPos, yPos), new Vector2(0, velY));
+        var rad = 20;
+        var ball = new Ball(10, rad, new Vector2(xPos, yPos), new Vector2(0, velY));
         this.mObjects.push(ball);
     }
 

@@ -4,7 +4,7 @@ var cw, ch;
 
 var Particles = require('./particles');
 var dt = 1 / 30;
-var particleNum = 150;
+var particleNum = 100;
 var interactive = "interactive";
 
 var CONSTANT_DATA = require('../../../js/utils/constants_app');
@@ -36,14 +36,14 @@ App.prototype.start = function() {
     addClass(this.canvas, interactive);
     this.particles.start();
 
-    AppStore.addListener(CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP, this.onMouseDownInCanvasApp)
+    AppStore.addListener(CONSTANTS.TAP_CANVAS_APP, this.onMouseDownInCanvasApp)
 }
 
 App.prototype.stop = function() {
     removeClass(this.canvas, interactive);
     this.particles.stop();
 
-    AppStore.removeListener(CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP, this.onMouseDownInCanvasApp)
+    AppStore.removeListener(CONSTANTS.TAP_CANVAS_APP, this.onMouseDownInCanvasApp)
 }
 
 App.prototype.update = function (ctx) {

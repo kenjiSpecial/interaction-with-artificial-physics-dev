@@ -33,15 +33,18 @@ App.prototype.start = function() {
 
     var plane0 = new Plane(windowWid / 2, windowHig, windowWid);
     this.mObjects.push(plane0)
+    this.plane0 = plane0;
     this.planes.push(plane0)
 
     var plane1 = new Plane(0, windowHig / 2, windowHig);
     plane1.angle = Math.PI / 2;
+    this.plane1 = plane1;
     this.mObjects.push(plane1);
 
     var plane2 = new Plane(windowWid, windowHig / 2, windowHig);
     plane2.angle = Math.PI / 2;
     this.mObjects.push(plane2);
+    this.plane2 = plane2;
 
     this.balls = null;
     this.balls = [];

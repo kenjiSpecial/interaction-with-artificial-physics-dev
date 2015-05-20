@@ -63,7 +63,7 @@ Ball.prototype.update = function( dt ) {
 Ball.prototype.start = function() {
   this.isDisable = false;
   this.cross = 5;
-  this.duration = 4000 + parseInt(Math.random() * 7000);
+  this.duration = 3000 + parseInt(Math.random() * 2000);
   this.timerId = setTimeout(this.disableTimer.bind(this), this.duration);
 };
 

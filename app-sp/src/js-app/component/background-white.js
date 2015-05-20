@@ -31,7 +31,6 @@ Background.prototype.update = function(ctx) {
     if(!this.isAnimation) return;
 
     ctx.fillStyle = "#ffffff";
-
     //if(this.width>0) ctx.fillRect(window.innerWidth - this.width, 0, this.width, this.height);
     ctx.fillRect( 0, 0, this.width, this.height );
 
@@ -48,8 +47,10 @@ Background.prototype.onCompleteHandler = function() {
 }
 
 Background.prototype.stop = function() {
+    console.log('bg stop');
 
     this.isAnimation = true;
+    this.width = window.innerWidth;
     this.height = -3;
 
     TweenLite.to(this, .6, {height: window.innerHeight + 2, ease: Power3.easeInOut, onComplete: this.onCompleteStopAnimationHandler });

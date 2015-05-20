@@ -34,14 +34,17 @@ App.prototype.start = function() {
     var plane0 = new Plane(windowWid / 2, windowHig, windowWid);
     this.mObjects.push(plane0)
     this.planes.push(plane0)
+    this.plane0 = plane0;
 
     var plane1 = new Plane(0, windowHig / 2, windowHig);
     plane1.angle = Math.PI / 2;
     this.mObjects.push(plane1);
+    this.plane1 = plane1;
 
     var plane2 = new Plane(windowWid, windowHig / 2, windowHig);
     plane2.angle = Math.PI / 2;
     this.mObjects.push(plane2);
+    this.plane2 = plane2;
 
     this.balls = null;
     this.balls = [];
@@ -63,7 +66,7 @@ App.prototype.loop = function () {
 
     this.count++;
 
-    if(this.count > 30) return;
+    if(this.count > 20) return;
     this.timerID = setTimeout(this.loop, 300);
 
 };
@@ -76,7 +79,7 @@ App.prototype.onTweenComplete = function(val){
 };
 
 App.prototype.add = function(){
-    var rad = 40 + parseInt(60 * Math.random());
+    var rad = 30 + parseInt(30 * Math.random());
     var isCollide;
     var count = 0;
     while( !isCollide || count < 3){
@@ -110,28 +113,15 @@ App.prototype.add = function(){
 };
 
 App.prototype.onRemovedHandler = function(num) {
-    var rad = 40 + parseInt(60 * Math.random());
+    var rad = 30 + parseInt(30 * Math.random());
     var isCollide;
     var xPos, yPos;
     var count = 0;
 
-    while( !isCollide || count < 3){
         yPos = -200 * Math.random() - rad;
         xPos = Math.random() * (AppStore.getWindowWidth() - rad * 2) + rad;
         isCollide = true;
-        count++;
 
-        for(var ballNum in this.balls){
-            var ballPos = this.balls[ballNum].pos;
-            var ballRad = this.balls[ballNum].rad;
-            var dx = ballPos.x - xPos;
-            var dy = ballPos.y - yPos;
-            var dis = Math.sqrt( dx * dx + dy * dy);
-
-            if(ballRad + rad > dis) isCollide = false;
-        }
-
-    }
 
 
     //console.log(`${rad}, ${xPos}, ${yPos}`);
@@ -200,8 +190,8 @@ App.prototype.reset = function() {
 }
 
 App.prototype.onWindowResize = function() {
-    var windowWid = AppStore.getWindowWidth();
-    var windowHig = AppStore.getWindowHeight();
+    var windowWid = window.innerWidth;
+    var windowHig = window.innerHeight;
 
     this.plane0.onWindowResize( windowWid/2, windowHig+1, windowWid );
     this.plane1.onWindowResize( -1, windowHig / 2, windowHig);

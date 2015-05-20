@@ -20,7 +20,7 @@ var Plane = function (x, y, width, col) {
 
     this.pos = new Vector2(x, y);
 
-    this.drawY = y - 1;
+    this.drawY = y;
     this.origDrawY = this.drawY;
 
     this.halfMinusExtent = new Vector2(-width / 2, 0);
@@ -41,7 +41,7 @@ Plane.prototype.onWindowResize = function (xx, yy, width) {
 
     this.halfMinusExtent.x = -width / 2;
     this.halfPluseExtent.x = width / 2;
-    this.drawY = yy - 1;
+    this.drawY = yy;
     this.origDrawY = this.drawY;
 }
 

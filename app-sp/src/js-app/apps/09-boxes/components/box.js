@@ -72,16 +72,16 @@ Box.prototype.reset = function() {
 
     switch(this.id){
         case 0:
-            xPos = winWid /2 - 250 + 50;
+            xPos = winWid /2 - 100;
             break;
         case 1:
             xPos = winWid/2 ;
             break;
         case 2:
-            xPos = winWid/2 + 200;
+            xPos = winWid/2 + 100;
             break;
     }
-    yPos = 100;
+    yPos = 75;
 
     this.pos.set(xPos, yPos)
 };

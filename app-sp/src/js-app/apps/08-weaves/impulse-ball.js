@@ -1,7 +1,7 @@
 var AppStore = require('../../../js/stores/app-store');
 var Vector2 = require('ks-vector').Vector2;
-var MAX_IMPULSE = 5;
-var MOUSE_RAD = 100;
+var MAX_IMPULSE = 3;
+var MOUSE_RAD = 30;
 var gravity = new Vector2(0, 1);
 
 class ImpulseBall {
@@ -14,7 +14,7 @@ class ImpulseBall {
     }
 
     reset(){
-        this.rad = 10 + 90 * Math.random() | 0;
+        this.rad = 10 + 40 * Math.random() | 0;
         var xPos = (AppStore.getWindowWidth() - this.rad * 2) * Math.random() + this.rad;
         var yPos = -this.rad - 100 * Math.random();
 

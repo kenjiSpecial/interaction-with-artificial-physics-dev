@@ -279,7 +279,6 @@ var AppStore = assign({}, EventEmitter.prototype, {
     },
 
     onDeviceChange : function( theta ) {
-        console.log(theta);
         _apps.gravTheta = theta;
 
         this.emit(CONSTANTS.ON_DEVICE_MOTION);

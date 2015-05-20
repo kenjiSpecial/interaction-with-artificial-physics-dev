@@ -14,7 +14,7 @@ class Particles {
 
         var rad, xPos, yPos;
         for (var ii = 0; ii < this.num; ii++) {
-            rad = parseInt(15 + 30 * Math.random());
+            rad = parseInt(10 + 10 * Math.random());
             xPos = (.1 + .8 * Math.random()) * AppStore.getWindowWidth();
             yPos = (.1 + .8 * Math.random()) * AppStore.getWindowHeight();
 
@@ -53,12 +53,12 @@ class Particles {
     }
 
     satisfyConstraints() {
-        var winWid = AppStore.getWindowWidth();
-        var winHig = AppStore.getWindowHeight();
+        var winWid = window.innerWidth;
+        var winHig = window.innerHeight;
 
-        var mX = AppStore.get("mouseX");
-        var mY = AppStore.get("mouseY");
-        var isMouseenter = AppStore.get("isMouseenter");
+        var mX = AppStore.get("touchX");
+        var mY = AppStore.get("touchY");
+        var isTouchOnCanvasApp = AppStore.get("isTouchOnCanvasApp");
 
         for (var xx = 0; xx < NUM_ITERATIONS; xx++) {
             for (var ii = 0; ii < this.num; ii++) {
@@ -88,7 +88,7 @@ class Particles {
                         circle2.position.y += diffY;
                     }
 
-                    if (isMouseenter) {
+                    if (isTouchOnCanvasApp) {
                         var mDx = circle.position.x - mX;
                         var mDy = circle.position.y - mY;
 

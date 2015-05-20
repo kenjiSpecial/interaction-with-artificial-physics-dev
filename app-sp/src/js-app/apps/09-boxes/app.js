@@ -20,30 +20,20 @@ class App{
         var winWid = AppStore.getWindowWidth();
         var winHig = AppStore.getWindowHeight();
 
-        this.rotatingFloor = new Floor( winWid/2 - 40, 250, 80, 30 );
+
+        this.rotatingFloor = new Floor( winWid/2 - 20, 100, 40, 10 );
         this.mObjects.push(this.rotatingFloor);
 
-        this.floor = new Floor( winWid/2 - 200, winHig - 150, 400, 20 );
+        this.floor = new Floor( winWid/2 - 100, winHig - 100, 200, 50 );
         this.mObjects.push(this.floor);
 
-        var floor1 = new Floor( 100, winHig/2-40, 200, 40)
-        floor1.angle = Math.PI / 12;
-        this.floor1 = floor1;
-        this.mObjects.push(floor1);
-
-
-        var floor2 = new Floor( winWid - 300 , winHig/2-40 , 200, 40)
-        floor2.angle = -Math.PI / 12;
-        this.floor2 = floor2;
-        this.mObjects.push(floor2);
-
-        var floor3 = new Floor( winWid/2 -100, winHig/2-20, 200, 40);
+        var floor3 = new Floor( winWid/2 -50, winHig/2-20, 100, 40);
         this.floor3 = floor3;
         this.mObjects.push(floor3);
 
-        for(var ii = 0; ii < 30; ii++){
-            var boxWid = 30 + parseInt(70 * Math.random());
-            var boxHig = 30 + parseInt(70 * Math.random());
+        for(var ii = 0; ii < 15; ii++){
+            var boxWid = 20 + parseInt(20 * Math.random());
+            var boxHig = 20 + parseInt(20 * Math.random());
             var yPos = - 50 - boxHig;
             var xPos = window.innerWidth/2 - 50 + 100 * Math.random();
             var randomID = parseInt(3 * Math.random());
@@ -99,11 +89,11 @@ class App{
             this.mObjects[ii].draw(ctx);
         }
 
-        var side = 100;
+        var side = 50;
         for( ii = 0; ii < colArr.length; ii++){
             var col = colArr[ii];
 
-            var xPos = winWid/2 - 250 + 200 * ii;
+            var xPos = winWid/2 - 125 + 100 * ii;
             var yPos = 50;
 
             ctx.fillStyle = col;
@@ -153,11 +143,9 @@ class App{
         var winWid = AppStore.getWindowWidth();
         var winHig = AppStore.getWindowHeight();
 
-        this.rotatingFloor.resetPos(winWid/2-40, 250);
-        this.floor.resetPos(winWid/2 - 200, winHig - 100)
-        this.floor1.resetPos(100, winHig/2 - 40);
-        this.floor2.resetPos(winWid - 300, winHig/2 - 40);
-        this.floor3.resetPos(winWid/2 - 100, winHig/2 - 20);
+        this.rotatingFloor.resetPos(winWid/2-20, 150);
+        this.floor.resetPos(winWid/2 - 200, winHig - 120)
+        this.floor3.resetPos(winWid/2 -50, winHig/2 + 20);
 
     }
 

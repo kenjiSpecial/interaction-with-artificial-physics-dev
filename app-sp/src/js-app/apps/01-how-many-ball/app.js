@@ -18,7 +18,7 @@ var cw, ch;
 var scale = 1;
 var count = 1;
 var width;
-var loopDuration = 600;
+var loopDuration = 800;
 var colors = ['#FFEB3B', '#FDD835', '#FBC02D', '#F9A825', '#F57F17'];
 
 
@@ -50,7 +50,7 @@ App.prototype.start = function () {
         this.mObjects.push(plane);
     }
 
-    var box = new Box(1, 0, 300, 100, 100);
+    var box = new Box(1, 0, 100, 50, 50);
     this.mObjects.push(box);
 
     this.curTimer = setTimeout(this.loop, loopDuration );
@@ -59,8 +59,8 @@ App.prototype.start = function () {
 
 App.prototype.loop = function () {
 
-    var rad = parseInt(30 + Math.random() * 70);
-    var ball = new Ball(10, rad, new Vector2(100, -rad), new Vector2(0, 0));
+    var rad = parseInt(10 + Math.random() * 30);
+    var ball = new Ball(10, rad, new Vector2(30, -rad), new Vector2(0, 0));
     ball.num = this.ballArr.length;
     this.ballArr.push(ball);
     this.mObjects.push(ball);
@@ -135,11 +135,11 @@ App.prototype.update = function (ctx) {
 
     ctx.textAlign = "end";
 
-    ctx.font = `700 ${winHig}px "Roboto"`;
+    ctx.font = `700 ${winHig/2}px "Roboto"`;
     ctx.fillStyle = "#000";
 
     for (var ii = 0; ii < posArr.length; ii++) {
-        ctx.fillText(posArr[ii], curWinWid, winHig * (ii + 1));
+        ctx.fillText(posArr[ii], curWinWid, winHig * (ii + 1) - 10 );
     }
 
 

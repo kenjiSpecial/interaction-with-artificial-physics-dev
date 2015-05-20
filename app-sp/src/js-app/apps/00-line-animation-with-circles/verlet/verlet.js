@@ -89,13 +89,25 @@ class Verlet {
                     var particles = this.composites[cc].particles;
 
                     var velocity = particles[ii].pos.copy().subtract(particles[ii].lastPos).multiply(this.friction);
+                    velocity.x += AppStore.getAclX()/2;
+                    velocity.y += AppStore.getAclY()/2;
 
 
                     // save last good state
                     particles[ii].lastPos = particles[ii].pos.copy();
 
                     // gravity
+                    var gravity = 200;
+                    var theta = AppStore.get("gravTheta");
+                    var gravX = Math.cos(theta) * gravity;
+                    var gravY = Math.sin(theta) * gravity;
+                    this.gravity.set(gravX, gravY);
+
                     particles[ii].pos.addMultipledVector(TIME_STEP * TIME_STEP, this.gravity);
+
+
+
+
                     // console.log(particles[ii].pos);
 
 
@@ -219,8 +231,8 @@ class Verlet {
         this.ballCase0Theta = 0;
         this.ballsCase0 = [
             new Ball( windowWid / 2, 50, 50),
-            new Ball( windowWid / 2 - 300, windowHig / 2, 100),
-            new Ball( windowWid / 2 + 300, windowHig / 2, 100)
+            new Ball( windowWid / 2 - 100, windowHig / 2, 50),
+            new Ball( windowWid / 2 + 100, windowHig / 2, 50)
         ]
 
         // ---------------------
@@ -262,12 +274,12 @@ class Verlet {
         // ------------------
 
         this.ballCase3 = [
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
-            new Ball(Math.random() * windowWid, Math.random() * windowHig, 50 + parseInt(Math.random() * 100) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 20 + parseInt(Math.random() * 50) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 20 + parseInt(Math.random() * 50) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 20 + parseInt(Math.random() * 50) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 20 + parseInt(Math.random() * 50) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 20 + parseInt(Math.random() * 50) ),
+            new Ball(Math.random() * windowWid, Math.random() * windowHig, 20 + parseInt(Math.random() * 50) ),
         ]
 
         // -----------------
@@ -285,7 +297,6 @@ class Verlet {
 
         this.balls = [
             this.ballsCase0,
-            this.ballCase4,
             this.ballsCase1,
             this.ballsCase2,
             this.ballCase3
@@ -293,7 +304,7 @@ class Verlet {
     }
 
     reset(){
-        this.type = (this.type + 1) % this.MAX_TYPE;
+        this.type = (this.type + 1) % this.balls.length;
         this.col = colArr[ parseInt(colArr.length * Math.random())];
 
 

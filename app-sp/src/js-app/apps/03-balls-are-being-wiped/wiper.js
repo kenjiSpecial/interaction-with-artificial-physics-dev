@@ -9,12 +9,12 @@ var Wiper = function( objects ){
     var size = Math.min(winHeight, winWidth );
 
     var bigSize = size  / 2;
-    var bigRectangle = new WiperRectangle( winWidth/2, winHeight - 40, bigSize + 40, 40 );
+    var bigRectangle = new WiperRectangle( winWidth/2, winHeight - 100, bigSize + 40, 40 );
     bigRectangle.isBig = true;
     this.bigRectangle = bigRectangle;
 
     var smallSize = size / 6;
-    var smallRectangle = new WiperRectangle( winWidth/2, winHeight - 40, smallSize +40, 40 );
+    var smallRectangle = new WiperRectangle( winWidth/2, winHeight - 100, smallSize +40, 40 );
     smallRectangle.parentRectangle = bigRectangle;
     this.smallRectangle = smallRectangle;
 
@@ -24,7 +24,7 @@ var Wiper = function( objects ){
 
 Wiper.prototype.onWindowResize = function() {
     this.bigRectangle.pos.x = AppStore.getWindowWidth() / 2;
-    this.bigRectangle.pos.y = AppStore.getWindowHeight() - 40;
+    this.bigRectangle.pos.y = AppStore.getWindowHeight() - 100;
 
     this.bigRectangle.originalX = this.bigRectangle.pos.x;
     this.bigRectangle.originalY = this.bigRectangle.pos.y;
@@ -34,7 +34,7 @@ Wiper.prototype.onWindowResize = function() {
     // ================================================
 
     this.smallRectangle.pos.x = AppStore.getWindowWidth() / 2;
-    this.smallRectangle.pos.y = AppStore.getWindowHeight() - 40;
+    this.smallRectangle.pos.y = AppStore.getWindowHeight() - 100;
 
     this.smallRectangle.originalX = this.smallRectangle.pos.x;
     this.smallRectangle.originalY = this.smallRectangle.pos.y;

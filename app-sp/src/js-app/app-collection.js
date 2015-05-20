@@ -136,9 +136,8 @@ function stop(){
 }
 
 function update(){
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-    app.update(ctx);
+    app.update(ctx, backgroundWhite);
 
     backgroundWhite.update(ctx);
 
@@ -164,6 +163,8 @@ function onWindowResize(){
     ctx.scale( dpr, dpr );
 
 
+    backgroundWhite.onWindowResize();
+    if(app && app.onWindowResize) app.onWindowResize();
 }
 
 function onTouchStartHandler(ev){
@@ -255,7 +256,6 @@ function onOrientationChangeHandler(){
     backgroundWhite.onWindowResize();
     if(app && app.onWindowResize) app.onWindowResize();
 
-    backgroundWhite
 }
 
 function deviceMotionHandler(ev){
@@ -266,7 +266,9 @@ function deviceMotionHandler(ev){
 }
 
 function onDeviceOrientationChangeHandler(ev){
-    var theta = (ev.alpha - window.orientation + 90) / 180 * Math.PI;
+    var alpha = ev.alpha || 0;
+    var ori = window.orientation || 0
+    var theta = (alpha - ori + 90) / 180 * Math.PI;
     AppAction.onDeviceChangeHandler(theta)
 
 

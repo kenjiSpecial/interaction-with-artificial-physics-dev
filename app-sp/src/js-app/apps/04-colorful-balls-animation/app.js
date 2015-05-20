@@ -66,7 +66,7 @@ App.prototype.loop = function () {
 
     this.count++;
 
-    if(this.count > 40) return;
+    if(this.count > 15) return;
     this.timerID = setTimeout(this.loop, 300);
 
 };
@@ -79,7 +79,7 @@ App.prototype.onTweenComplete = function(val){
 };
 
 App.prototype.add = function(){
-    var rad = 30 + parseInt(50 * Math.random());
+    var rad = 20 + parseInt(30 * Math.random());
     var isCollide;
     var count = 0;
     while( !isCollide || count < 3){
@@ -113,16 +113,17 @@ App.prototype.add = function(){
 };
 
 App.prototype.onRemovedHandler = function(num) {
-    var rad = 30 + parseInt(50 * Math.random());
+    var rad = 20 + parseInt(30 * Math.random());
     var isCollide;
     var xPos, yPos;
     var count = 0;
-    while( !isCollide || count < 3 ){
+    //while( !isCollide || count < 3 ){
         yPos = -200 * Math.random() - rad;
         xPos = Math.random() * (AppStore.getWindowWidth() - rad * 2) + rad;
         isCollide = true;
         count++;
 
+    /*
         for(var ballNum in this.balls){
             var ballPos = this.balls[ballNum].pos;
             var ballRad = this.balls[ballNum].rad;
@@ -131,9 +132,9 @@ App.prototype.onRemovedHandler = function(num) {
             var dis = Math.sqrt( dx * dx + dy * dy);
 
             if(ballRad + rad > dis) isCollide = false;
-        }
+        }*/
 
-    }
+    //}
 
 
     //console.log(`${rad}, ${xPos}, ${yPos}`);
@@ -202,8 +203,8 @@ App.prototype.reset = function() {
 }
 
 App.prototype.onWindowResize = function() {
-    var windowWid = AppStore.getWindowWidth();
-    var windowHig = AppStore.getWindowHeight();
+    var windowWid = window.innerWidth;
+    var windowHig = window.innerHeight;
 
     this.plane0.onWindowResize( windowWid/2, windowHig+1, windowWid );
     this.plane1.onWindowResize( -1, windowHig / 2, windowHig);
