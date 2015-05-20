@@ -66,6 +66,13 @@ module.exports = keyMirror({
     "RENDER_INDEX_DONE" : null,
     "TAP_CLOSE_BUTTON"  : null,
 
-    "START_RENDERING_INDEX" : null
+    "START_RENDERING_INDEX" : null,
+
+    "TOUCH_START_CANVAS_APP" : null,
+    "TOUCH_END_CANVAS_APP"   : null,
+    "TOUCH_MOVE_CANVAS_APP"  : null,
+    "TAP_CANVAS_APP"         : null,
+    "ON_DEVICE_MOTION"       : null,
+    "ON_DEVICE_CHANGE"       : null
 
 });

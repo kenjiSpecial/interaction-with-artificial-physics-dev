@@ -15,55 +15,45 @@ var art3Img = "/images/goch.png";
 var art4Img = "/images/pop2.png";
 var art5Img = "/images/pop3.png";
 
-var artImgArr = [art5Img, art2Img, art3Img, art4Img,  art1Img];
+var artImgArr = [art5Img, art2Img, art3Img, art4Img, art1Img];
 
-var frameWid = 1100/2;
-var frameHig = 800/2;
-var left = 50 + 12.5;
-var top = (800 - 585)/4;
-var wid = 425;
-var hig = 585/2;
+var baseImgWidth = 550;
+var baseImgHeight = 400;
+var frameWid = baseImgWidth / 2;
+var frameHig = baseImgHeight / 2;
+var wid = 425 / 2;
+var hig = 585 / 4;
+var left = (baseImgWidth / 2 - wid) / 2;
+var top = (baseImgHeight / 2 - hig) / 2;
 
-var halfLeft = left/2-1;
-var halfTop = top/2;
+var halfLeft = left / 2 - 1;
+var halfTop = top / 2;
 var mouseRad = 30;
 
-class ParticleManager{
-    constructor(){
-        this.MAX_NUM = 200;
-        this.maxRad = 24;
-        this.minRad = 8;
+class ParticleManager {
+    constructor() {
+        this.MAX_NUM = 120;
+        this.maxRad = 13;
+        this.minRad = 5;
         this.balls = [];
         this.isTransit = false;
 
-        for( var ii = 0; ii < this.MAX_NUM; ii++){
+        for (var ii = 0; ii < this.MAX_NUM; ii++) {
             var ball = new Ball();
             this.balls.push(ball);
         }
 
 
-        AppStore.on(CONSTANTS.APP_LOAD_DONE, this.onLoadDoneHandler.bind(this));
+        AppStore.on(CONSTANTS.LOAD_DONE, this.onLoadDoneHandler.bind(this));
     }
 
-    start(){
+    start() {
         this.imageNum = 0;
 
-        this.frameLeft = (AppStore.getWindowWidth() - frameWid)/2;
-        this.frameTop  = (AppStore.getWindowHeight() - frameHig)/2 - 120;
-
-        this.miniFrameLeft = (AppStore.getWindowWidth() - frameWid/2)/2;
-        this.miniFrameTop  = this.frameTop + frameHig + 50;
-
-        this.leftPos = left + this.frameLeft-1.0
-        this.topPos = top + this.frameTop;
-
-        this.minX = this.leftPos;
-        this.maxX = this.leftPos + wid;
-        this.minY = this.topPos;
-        this.maxY = this.topPos + hig;
+        this.setLayout();
 
         var isCollided;
-        for(var ii = 0; ii < this.balls.length; ii++) {
+        for (var ii = 0; ii < this.balls.length; ii++) {
             var circle = this.balls[ii];
             circle.start();
 
@@ -103,27 +93,29 @@ class ParticleManager{
             var disFromTop = this.balls[ii].position.y - this.minY;
             var disFromBottom = this.maxY - this.balls[ii].position.y;
 
-            var rad = Math.max( Math.min(minDis, disFromLeft, disFromRight, disFromTop, disFromBottom, this.maxRad), this.minRad);
+            var rad = Math.max(Math.min(minDis, disFromLeft, disFromRight, disFromTop, disFromBottom, this.maxRad), this.minRad);
             this.balls[ii].rad = rad;
         }
 
     }
 
-    onLoadDoneHandler(){
+    onLoadDoneHandler() {
         var canvas = document.createElement("canvas");
-        canvas.width = 213;
-        canvas.height = 148;
+        var canvasWidth = 107;
+        var canvasHeight = 74;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
         var ctx = canvas.getContext("2d");
 
         var allImages = AppStore.getImages();
 
         this.imageDataArr = [];
 
-        for(var ii in artImgArr){
+        for (var ii in artImgArr) {
             var img = allImages[artImgArr[ii]];
-            ctx.drawImage( img, 0, 0);
+            ctx.drawImage(img, 0, 0);
 
-            var imageData = ctx.getImageData(0, 0, 213, 148);
+            var imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
             this.imageDataArr.push(imageData);
         }
 
@@ -132,13 +124,13 @@ class ParticleManager{
         this.frameHig = this.frameImg.height;
     }
 
-    stop(){
+    stop() {
 
     }
 
-    update(){
+    update() {
         var dt = 1 / 30;
-        for(var ii = 0; ii < this.balls.length; ii++){
+        for (var ii = 0; ii < this.balls.length; ii++) {
             this.balls[ii].update(dt)
         }
 
@@ -146,30 +138,30 @@ class ParticleManager{
         this.satisfyConstraints();
     }
 
-    satisfyConstraints(){
+    satisfyConstraints() {
 
-        var mX = AppStore.get("mouseX");
-        var mY = AppStore.get("mouseY");
-        var isMouseenter = AppStore.get("isMouseenter");
+        var mX = AppStore.get("touchX");
+        var mY = AppStore.get("touchY");
+        var isTouchOnCanvasApp = AppStore.get("isTouchOnCanvasApp");
 
-        for(var xx = 0; xx < NUM_ITERATIONS; xx++){
-            for(var ii = 0; ii < this.balls.length; ii++){
+        for (var xx = 0; xx < NUM_ITERATIONS; xx++) {
+            for (var ii = 0; ii < this.balls.length; ii++) {
                 var circle = this.balls[ii];
                 var rad = circle.rad;
 
 
-                for(var jj = 0; jj < ii; jj++){
+                for (var jj = 0; jj < ii; jj++) {
                     var circle2 = this.balls[jj];
                     var circleRadDis = circle.rad + circle2.rad;
 
                     var dx = circle.position.x - circle2.position.x;
                     var dy = circle.position.y - circle2.position.y;
-                    var dis = Math.sqrt( dx * dx + dy * dy );
+                    var dis = Math.sqrt(dx * dx + dy * dy);
 
-                    if(dis < circleRadDis){
+                    if (dis < circleRadDis) {
                         var diff = dis - circleRadDis;
-                        var diffX = diff * dx / dis /2;
-                        var diffY = diff * dy / dis /2;
+                        var diffX = diff * dx / dis / 2;
+                        var diffY = diff * dy / dis / 2;
 
 
                         circle.position.x -= diffX;
@@ -180,13 +172,13 @@ class ParticleManager{
                     }
                 }
 
-                if(isMouseenter) {
+                if (isTouchOnCanvasApp) {
                     var mDx = circle.position.x - mX;
                     var mDy = circle.position.y - mY;
 
                     var mDis = Math.sqrt((mDx * mDx + mDy * mDy));
-                    if (mDis < circle.rad + 40) {
-                        var mDiff = circle.rad + 40 - mDis;
+                    if (mDis < circle.rad + 20) {
+                        var mDiff = circle.rad + 20 - mDis;
                         var mDiffX = mDiff * mDx / mDis;
                         var mDiffY = mDiff * mDy / mDis;
 
@@ -194,53 +186,50 @@ class ParticleManager{
                         circle.position.y += mDiffY;
                     }
 
-                    circle.position.x = Math.min(Math.max(this.minX + rad, circle.position.x), this.maxX - rad);
-                    circle.position.y = Math.min(Math.max(this.minY + rad, circle.position.y), this.maxY - rad);
                 }
+
+
+                circle.position.x = Math.min(Math.max(this.minX + rad, circle.position.x), this.maxX - rad);
+                circle.position.y = Math.min(Math.max(this.minY + rad, circle.position.y), this.maxY - rad);
 
             }
         }
 
 
-
-
     }
 
-    draw(ctx){
+    draw(ctx) {
 
-
-
-        for(var ii in this.balls){
-            this.balls[ii].draw(ctx, this.imageDataArr[this.imageNum], this.minX, this.minY, wid, hig );
+        for (var ii in this.balls) {
+            this.balls[ii].draw(ctx, this.imageDataArr[this.imageNum], this.minX, this.minY, wid, hig);
         }
 
-        ctx.drawImage( this.frameImg, this.frameLeft, this.frameTop, frameWid, frameHig);
+        ctx.drawImage(this.frameImg, this.frameLeft, this.frameTop, frameWid, frameHig);
 
 
-
-        if(this.isTransit){
+        if (this.isTransit) {
             ctx.save();
 
-            ctx.drawImage( AppStore.getImages()[artImgArr[this.imageNum]], this.miniFrameLeft + halfLeft, this.miniFrameTop + halfTop);
+            ctx.drawImage(AppStore.getImages()[artImgArr[this.imageNum]], this.miniFrameLeft + halfLeft, this.miniFrameTop + halfTop);
 
 
             ctx.globalAlpha = this.alpha;
-            ctx.drawImage( AppStore.getImages()[artImgArr[this.prevImageNum]], this.miniFrameLeft + halfLeft, this.miniFrameTop + halfTop);
+            ctx.drawImage(AppStore.getImages()[artImgArr[this.prevImageNum]], this.miniFrameLeft + halfLeft, this.miniFrameTop + halfTop);
 
             ctx.restore();
-        }else{
-            ctx.drawImage( AppStore.getImages()[artImgArr[this.imageNum]], this.miniFrameLeft + halfLeft, this.miniFrameTop + halfTop);
+        } else {
+            ctx.drawImage(AppStore.getImages()[artImgArr[this.imageNum]], this.miniFrameLeft + halfLeft, this.miniFrameTop + halfTop);
         }
 
-        ctx.drawImage( this.frameImg, this.miniFrameLeft, this.miniFrameTop, frameWid/2, frameHig/2);
+        ctx.drawImage(this.frameImg, this.miniFrameLeft, this.miniFrameTop, frameWid / 2, frameHig / 2);
     }
 
-    transitDrawing(ctx){
+    transitDrawing(ctx) {
 
     }
 
-    changePainting(){
-        if(this.isTransit) return;
+    changePainting() {
+        if (this.isTransit) return;
         this.isTransit = true;
 
         this.prevImageNum = this.imageNum;
@@ -250,18 +239,35 @@ class ParticleManager{
         TweenLite.to(this, .6, {alpha: 0, onComplete: this.onAlphaTweenComplete.bind(this)});
     }
 
-    onAlphaTweenComplete(){
+    onAlphaTweenComplete() {
         this.isTransit = false;
     }
 
-    onWindowResize(){
-        this.frameLeft = (AppStore.getWindowWidth() - frameWid)/2;
-        this.frameTop  = (AppStore.getWindowHeight() - frameHig)/2 - 120;
+    onWindowResize() {
+        this.setLayout();
+    }
 
-        this.miniFrameLeft = (AppStore.getWindowWidth() - frameWid/2)/2;
-        this.miniFrameTop  = this.frameTop + frameHig + 50;
+    setLayout() {
 
-        this.leftPos = left + this.frameLeft-1.0
+        if (window.orientation == 90 || window.orientation == -90) {
+            this.frameLeft = (AppStore.getWindowWidth() - (frameWid + 20 + frameWid/2))/2;
+            this.frameTop = (AppStore.getWindowHeight() - frameHig) / 2;
+
+            this.miniFrameLeft = this.frameLeft + frameWid + 20;
+            this.miniFrameTop = (AppStore.getWindowHeight() - frameHig/2)/2;
+
+
+        } else {
+
+            this.frameLeft = (AppStore.getWindowWidth() - frameWid) / 2;
+            this.frameTop = (AppStore.getWindowHeight() - (frameHig + 20 + frameHig / 2) ) / 2;
+
+            this.miniFrameLeft = (AppStore.getWindowWidth() - frameWid / 2) / 2;
+            this.miniFrameTop = this.frameTop + frameHig + 20;
+
+        }
+
+        this.leftPos = left + this.frameLeft - 1.0
         this.topPos = top + this.frameTop;
 
         this.minX = this.leftPos;

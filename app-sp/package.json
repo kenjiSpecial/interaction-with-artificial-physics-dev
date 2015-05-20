@@ -19,6 +19,7 @@
     "gsap": "^1.16.1",
     "img": "^1.0.0",
     "keymirror": "^0.1.1",
+    "ks-vector": "^0.1.4",
     "lodash": "^3.8.0",
     "object-assign": "^2.0.0",
     "raf": "^2.0.4",

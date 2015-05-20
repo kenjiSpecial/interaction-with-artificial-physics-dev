@@ -16,14 +16,12 @@ Background.prototype = Object.create(EventEmitter.prototype); // See note below
 Background.prototype.constructor = Background;
 
 Background.prototype.start = function(){
-    this.isAnimation = true;
+       this.isAnimation = true;
 
         var windowWid = window.innerWidth;
-        if (windowWid < CONSTANT_DATA.MIN_WIDTH) windowWid = CONSTANT_DATA.MIN_WIDTH;
         this.width = windowWid;
 
         var windowHig = window.innerHeight;
-        if (windowHig < CONSTANT_DATA.MIN_HEIGHT) windowHig = CONSTANT_DATA.MIN_HEIGHT;
         this.height = windowHig;
 
         TweenLite.to(this, .8, {height: -3, ease: Power3.easeInOut, onComplete: this.onCompleteHandler })
@@ -38,12 +36,11 @@ Background.prototype.update = function(ctx) {
     ctx.fillRect( 0, 0, this.width, this.height );
 
 
-    ctx.beginPath();
-    ctx.strokeStyle = "#000";
-    ctx.lineWidth = 2;
-    ctx.moveTo( 0, this.height);
-    ctx.lineTo(window.innerWidth, this.height);
-    ctx.stroke();
+}
+
+Background.prototype.reset = function () {
+    this.isAnimation = false;
+    this.width = -3;
 }
 
 Background.prototype.onCompleteHandler = function() {
@@ -61,6 +58,10 @@ Background.prototype.stop = function() {
 Background.prototype.onCompleteStopAnimationHandler = function(){
     this.emit("ON_COMPLETE_STOP_ANIMATION");
     this.isAnimation = false;
+}
+
+Background.prototype.onWindowResize = function() {
+
 }
 
 

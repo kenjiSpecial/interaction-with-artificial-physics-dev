@@ -193,10 +193,10 @@ class ParticleManager{
                         circle.position.x += mDiffX
                         circle.position.y += mDiffY;
                     }
-
-                    circle.position.x = Math.min(Math.max(this.minX + rad, circle.position.x), this.maxX - rad);
-                    circle.position.y = Math.min(Math.max(this.minY + rad, circle.position.y), this.maxY - rad);
                 }
+
+                circle.position.x = Math.min(Math.max(this.minX + rad, circle.position.x), this.maxX - rad);
+                circle.position.y = Math.min(Math.max(this.minY + rad, circle.position.y), this.maxY - rad);
 
             }
         }

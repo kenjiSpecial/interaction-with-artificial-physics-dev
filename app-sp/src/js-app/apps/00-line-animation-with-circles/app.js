@@ -13,7 +13,6 @@ var TweenLite = require('gsap');
 var CONSTANT_DATA = require('../../../js/utils/constants_app');
 var CONSTANTS = require('../../../js/utils/constants');
 var AppStore = require('../../../js/stores/app-store');
-var canvasApp = require('../../../js/components/js/canvas-app');
 
 var interactive = "interactive";
 

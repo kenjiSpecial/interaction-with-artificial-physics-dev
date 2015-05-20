@@ -37,9 +37,13 @@ var dpr;
 var canvas, ctx;
 
 var prevX, prevY, curX, curY, dx, dy;
+var startTime;
+var touchStartPosX, touchStartPosY;
 var TOUCH_START = "touchstart";
 var TOUCH_END   = "touchend"
 var TOUCH_MOVE  = "touchmove";
+var DEVICE_MOTION = "devicemotion";
+var DEVICE_ORIENTATION = "deviceorientation";
 var isStart;
 
 function initialize(){
@@ -92,22 +96,42 @@ function start(){
     var data = WorkStore.getWorkData();
     selectedNumber = data.workNum
     app = appCollection[selectedNumber];
-    backgroundWhite.start();
+
+    if(app.isBackgroundAnimation) backgroundWhite.start();
+    else                          backgroundWhite.reset();
+
+    if(app.start) app.start();
 
 
     window.addEventListener(TOUCH_START, onTouchStartHandler);
     window.addEventListener(TOUCH_MOVE, onTouchMoveHandler);
     window.addEventListener(TOUCH_END, onTouchEndHandler);
 
+    if (window.DeviceMotionEvent) {
+        window.addEventListener( DEVICE_MOTION, deviceMotionHandler);
+    }
+
+    window.addEventListener(DEVICE_ORIENTATION, onDeviceOrientationChangeHandler);
     ticker.addListener(CONSTANTS.TICK, update);
 }
 
 function stop(){
     backgroundWhite.stop();
 
+
+    if(app && app.stop) {
+        app.stop();
+    }
+
     window.removeEventListener(TOUCH_START, onTouchStartHandler);
     window.removeEventListener(TOUCH_MOVE, onTouchMoveHandler);
     window.removeEventListener(TOUCH_END, onTouchEndHandler);
+
+    if (window.DeviceMotionEvent) {
+        window.removeEventListener( DEVICE_MOTION, deviceMotionHandler);
+    }
+
+    window.removeEventListener(DEVICE_ORIENTATION, onDeviceOrientationChangeHandler);
 
 }
 
@@ -117,6 +141,7 @@ function update(){
     app.update(ctx);
 
     backgroundWhite.update(ctx);
+
 }
 
 function onCompleteStopAnimationHandler(){
@@ -125,15 +150,31 @@ function onCompleteStopAnimationHandler(){
 }
 
 function onWindowResize(){
-    //windowWid = window.innerWidth;
-    //windowHig = window.innerHeight;
-    onOrientationChangeHandler();
+    windowWid = window.innerWidth;
+    windowHig = window.innerHeight;
+
+    dpr = window.devicePixelRatio || 1;
+
+    canvas.style.width = windowWid + "px";
+    canvas.style.height = windowHig + "px";
+
+    canvas.width = windowWid * dpr;
+    canvas.height = windowHig * dpr;
+
+    ctx.scale( dpr, dpr );
+
+
 }
 
 function onTouchStartHandler(ev){
+    startTime = +new Date();
     var touch = ev.changedTouches[0];
     prevX = curX = touch.clientX;
     prevY = curY = touch.clientY;
+
+    touchStartPosX = curX, touchStartPosY = curY;
+
+    AppAction.onTouchStartCanvasApp( curX, curY );
 
     ev.preventDefault();
 }
@@ -149,6 +190,8 @@ function onTouchMoveHandler(ev){
     prevX = curX;
     prevY = curY;
 
+    AppAction.onTouchMoveCanvasApp(curX, curY);
+
     ev.preventDefault();
 }
 
@@ -157,12 +200,26 @@ function onTouchEndHandler(ev) {
     prevX = curX = touch.clientX;
     prevY = curY = touch.clientY;
 
+    var ddx = curX - touchStartPosX;
+    var ddy = curY - touchStartPosY;
+
+
+    var duration = +new Date() - startTime;
+    var dis = Math.sqrt( ddx * ddx + ddy * ddy );
+;
+
+    if(dis < 3 && duration < 3000 ){
+        AppAction.onTapCanvasApp();
+    }else{
+        AppAction.onTouchEndCanvasApp();
+    }
+
     ev.preventDefault();
 }
 
 function resume(){
     if(!AppStore.get("isWorkSelected")) return;
-    console.log('resume');
+
     if(AppStore.isMenuOpen()){
         if(AppStore.get("selectedClassName") == "app"){
             ticker.removeListener(CONSTANTS.TICK, update);
@@ -194,6 +251,27 @@ function onOrientationChangeHandler(){
     canvas.height = windowHig * dpr;
 
     ctx.scale( dpr, dpr );
+
+    backgroundWhite.onWindowResize();
+    if(app && app.onWindowResize) app.onWindowResize();
+
+    backgroundWhite
+}
+
+function deviceMotionHandler(ev){
+    var aclX = ev.acceleration.x || 0;
+    var aclY = ev.acceleration.y || 0;
+
+    AppAction.onDeviceMotionHandler(aclX, aclY);
+}
+
+function onDeviceOrientationChangeHandler(ev){
+    var theta = (ev.alpha - window.orientation + 90) / 180 * Math.PI;
+    AppAction.onDeviceChangeHandler(theta)
+
+
+    ev.preventDefault();
+
 }
 
 

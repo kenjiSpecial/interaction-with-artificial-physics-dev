@@ -1,8 +1,8 @@
 var BaseObject = require('./base-object');
 var colArr = ["#E91E63", "#3F51B5"];
 
-var imgWid = 213;
-var imgHig = 148;
+var imgWid = 107;
+var imgHig = 74;
 
 class Ball extends BaseObject{
     constructor(x, y, rad){
@@ -31,7 +31,6 @@ class Ball extends BaseObject{
         var yPos = parseInt( (this.position.y - minY) / hig * imgHig );
         xPos = Math.min( Math.max(0, xPos), imgWid - 1);
         yPos = Math.min( Math.max(0, yPos), imgHig - 1);
-
 
         var imagePos = 4 * (yPos * imageData.width + xPos);
 

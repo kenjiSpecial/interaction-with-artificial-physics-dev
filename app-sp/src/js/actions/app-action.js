@@ -291,9 +291,54 @@ var AppAction = {
         AppDispatcher.dispatch({
             actionType : AppConstants.RENDER_INDEX_DONE
         })
-    }
+    },
 
     /** ----------------------- */
+
+    onTouchStartCanvasApp : function( xPos, yPos ) {
+        AppDispatcher.dispatch({
+            xPos : xPos,
+            yPos : yPos,
+            actionType : AppConstants.TOUCH_START_CANVAS_APP
+        })
+    },
+
+    onTouchMoveCanvasApp : function( xPos, yPos ) {
+        AppDispatcher.dispatch({
+            xPos : xPos,
+            yPos : yPos,
+            actionType : AppConstants.TOUCH_MOVE_CANVAS_APP
+        })
+    },
+
+    onTouchEndCanvasApp : function( ) {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.TOUCH_END_CANVAS_APP
+        });
+    },
+
+    onTapCanvasApp : function( xPos, yPos ) {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.TAP_CANVAS_APP
+        })
+    },
+
+    /** ----------------------- */
+
+    onDeviceMotionHandler: function( aclX, aclY ) {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.ON_DEVICE_MOTION,
+            aclX  : aclX,
+            aclY  : aclY
+        })
+    },
+
+    onDeviceChangeHandler : function(theta) {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.ON_DEVICE_CHANGE,
+            theta : theta
+        })
+    }
 
 
 };

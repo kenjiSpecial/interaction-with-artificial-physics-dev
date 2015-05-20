@@ -14,8 +14,17 @@ var _apps = {
 
     selectedClassName : "app",
     works : [],
-    images : {}
+    images : {},
 
+    isTouchOnCanvasApp : false,
+    touchX : 0,
+    touchY : 0,
+    aclX : 0,
+    aclY : 0,
+    gravTheta : 1/2*Math.PI,
+
+    windowWid : window.innerWidth,
+    windowHig : window.innerHeight
 }
 
 var AppStore = assign({}, EventEmitter.prototype, {
@@ -59,6 +68,26 @@ var AppStore = assign({}, EventEmitter.prototype, {
             return false;
         }
 
+    },
+
+    getWindowWidth : function() {
+        return window.innerWidth
+    },
+
+    getWindowHeight : function() {
+        return window.innerHeight
+    },
+
+    getImages : function() {
+        return _apps.images
+    },
+
+    getAclX : function() {
+        return _apps.aclX
+    },
+
+    getAclY : function() {
+        return _apps.aclY
     },
 
     // ================================
@@ -166,6 +195,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
         _apps.isTransition = false;
         _apps.isAnimationWork = false;
         _apps.isWorkSelected = true;
+        _apps.isTouchOnCanvasApp = false;
 
         this.emit(CONSTANTS.START_WORK_ANIMATION);
     },
@@ -189,6 +219,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
         _apps.isTransition = true;
         _apps.isAnimationWork = true;
         _apps.isWorkSelected = false;
+        _apps.isTouchOnCanvasApp = false;
 
         this.emit(CONSTANTS.START_RENDERING_INDEX);
     },
@@ -204,6 +235,55 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
         this.emit(CONSTANTS.RENDER_INDEX_DONE);
     },
+
+    onWindowResize : function() {
+        _apps.windowWid = window.innerWidth;
+        _apps.windowHig = window.innerHeight;
+
+        this.emit(CONSTANTS.ON_WINDOW_RESIZE);
+    },
+
+    onTouchStartCanvasApp : function(xPos, yPos) {
+        _apps.isTouchOnCanvasApp = true;
+        _apps.touchX = xPos;
+        _apps.touchY = yPos;
+
+        this.emit(CONSTANTS.TOUCH_START_CANVAS_APP);
+    },
+
+    onTouchEndCanvasApp : function() {
+        _apps.isTouchOnCanvasApp = false;
+
+        this.emit(CONSTANTS.TOUCH_END_CANVAS_APP);
+    },
+
+    onTouchMoveCanvasApp : function(xPos, yPos) {
+        _apps.touchX = xPos;
+        _apps.touchY = yPos;
+
+
+        this.emit(CONSTANTS.TOUCH_MOVE_CANVAS_APP);
+    },
+
+    onTapCanvasApp : function() {
+        _apps.isTouchOnCanvasApp = false;
+
+        this.emit(CONSTANTS.TAP_CANVAS_APP);
+    },
+
+    onDeviceMotion : function( aclX, aclY ) {
+        _apps.aclX = aclX;
+        _apps.aclY = aclY;
+
+        this.emit(CONSTANTS.ON_DEVICE_MOTION);
+    },
+
+    onDeviceChange : function( theta ) {
+        console.log(theta);
+        _apps.gravTheta = theta;
+
+        this.emit(CONSTANTS.ON_DEVICE_MOTION);
+    }
 
 });
 
@@ -262,6 +342,27 @@ AppStore.dispatchToken = AppDispatcher.register(function (action) {
             break;
         case CONSTANTS.RENDER_WORK:
             AppStore.renderWork(action.workID);
+            break;
+        case CONSTANTS.ON_WINDOW_RESIZE:
+            AppStore.onWindowResize();
+            break;
+        case CONSTANTS.TOUCH_START_CANVAS_APP:
+            AppStore.onTouchStartCanvasApp( action.xPos, action.yPos );
+            break;
+        case CONSTANTS.TOUCH_END_CANVAS_APP:
+            AppStore.onTouchEndCanvasApp();
+            break;
+        case CONSTANTS.TOUCH_MOVE_CANVAS_APP:
+            AppStore.onTouchMoveCanvasApp( action.xPos, action.yPos );
+            break;
+        case CONSTANTS.TAP_CANVAS_APP:
+            AppStore.onTapCanvasApp();
+            break;
+        case CONSTANTS.ON_DEVICE_MOTION:
+            AppStore.onDeviceMotion( action.aclX, action.aclY );
+            break;
+        case CONSTANTS.ON_DEVICE_CHANGE:
+            AppStore.onDeviceChange(action.theta);
             break;
     }
 

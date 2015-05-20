@@ -37,21 +37,21 @@ App.prototype.start = function() {
 
     this.particles.start();
 
-    AppStore.addListener(CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP, this.onMouseDownInCanvasApp);
+    AppStore.addListener(CONSTANTS.TAP_CANVAS_APP, this.onMouseDownInCanvasApp);
 }
 
 App.prototype.stop = function() {
     removeClass(this.canvas, interactive);
     this.particles.stop();
 
-    AppStore.removeListener(CONSTANTS.MOUSE_DOWN_IN_CANVAS_APP, this.onMouseDownInCanvasApp);
+    AppStore.removeListener(CONSTANTS.TAP_CANVAS_APP, this.onMouseDownInCanvasApp);
 }
 
 App.prototype.update = function (ctx) {
     var winWidth  = AppStore.getWindowWidth();
     var winHeight = AppStore.getWindowHeight();
 
-    ctx.fillStyle = "#FFE0B2";
+    ctx.fillStyle = "#FFF3E0";
     ctx.fillRect( 0, 0, winWidth, winHeight );
 
     this.particles.update(dt);
