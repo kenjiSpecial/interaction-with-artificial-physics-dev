@@ -93,6 +93,22 @@ function onLoadStartHandler(){
 function start(){
     isStart = true;
     canvas.style.display = "block";
+
+    if(windowWid != window.innerWidth || windowHig != window.innerHeight) {
+        windowWid = window.innerWidth;
+        windowHig = window.innerHeight;
+
+        dpr = window.devicePixelRatio || 1;
+
+        canvas.style.width = windowWid + "px";
+        canvas.style.height = windowHig + "px";
+
+        canvas.width = windowWid * dpr;
+        canvas.height = windowHig * dpr;
+
+        ctx.scale(dpr, dpr);
+    }
+
     var data = WorkStore.getWorkData();
     selectedNumber = data.workNum
     app = appCollection[selectedNumber];
@@ -112,6 +128,9 @@ function start(){
     }
 
     window.addEventListener(DEVICE_ORIENTATION, onDeviceOrientationChangeHandler);
+
+
+
     ticker.addListener(CONSTANTS.TICK, update);
 }
 

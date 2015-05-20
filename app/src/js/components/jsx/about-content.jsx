@@ -83,11 +83,12 @@ class AboutContent extends React.Component {
                             <li>- <LinkText name="Verlet.js" link="https://github.com/subprotocol/verlet-js" /></li>
                             <li>- <LinkText name="Speculative Contacts – a continuous collision engine approach" link="http://www.wildbunny.co.uk/blog/2011/03/25/speculative-contacts-an-continuous-collision-engine-approach-part-1/" /></li>
                         </ul>
-                        <p>I used React, Flux, GreenSock, Babel, and didn't use any 2D canvas libary and jQuery to build this site.</p>
+                        <p>I used React, Flux, GreenSock, Babel, Browserify and didn't use any 2D canvas library and jQuery to build this site.</p>
+                        <p>All codes for building this site and experiments are available from <LinkText name="here" link="https://github.com/kenjiSpecial/two-d-physics" />.</p>
                     </div>
                     <div className={this.state.contents[4]}>
                         <p>Kenji SAITO has designed ande developed this site.</p>
-                        <p>If you're interested in him, please chect out the below:</p>
+                        <p>If you're interested in him, please check out the below:</p>
                         <p className="contact-list">
                             <LinkText name="WebSite" link="http://kenji-special.info" />
                             <LinkText name="Twitter" link="https://twitter.com/kenji_special" />

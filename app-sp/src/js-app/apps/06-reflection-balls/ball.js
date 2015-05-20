@@ -13,8 +13,8 @@ class Ball extends BaseObject{
         this.col = colArr[this.colNum];
     }
 
-    update(dt){
-        super.update(dt);
+    update(dt, grav){
+        super.update(dt, grav);
     }
 
     draw(ctx){

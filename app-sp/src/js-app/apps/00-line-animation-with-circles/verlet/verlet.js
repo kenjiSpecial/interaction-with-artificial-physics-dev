@@ -5,6 +5,7 @@ var colArr = ["244, 67, 54", "63, 81, 181", "76, 175, 80",  "0, 0, 0"];
 
 var Ball = require('./ball');
 var AppStore = require('../../../../js/stores/app-store');
+var AppConstants = require('../../../../js/utils/constants_app');
 
 class Verlet {
     /**
@@ -81,6 +82,7 @@ class Verlet {
             }
         }
 
+        
 
         for (var cc in this.composites) {
             if (this.composites[cc]) {
@@ -96,12 +98,6 @@ class Verlet {
                     // save last good state
                     particles[ii].lastPos = particles[ii].pos.copy();
 
-                    // gravity
-                    var gravity = 200;
-                    var theta = AppStore.get("gravTheta");
-                    var gravX = Math.cos(theta) * gravity;
-                    var gravY = Math.sin(theta) * gravity;
-                    this.gravity.set(gravX, gravY);
 
                     particles[ii].pos.addMultipledVector(TIME_STEP * TIME_STEP, this.gravity);
 

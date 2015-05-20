@@ -47,8 +47,6 @@ Background.prototype.onCompleteHandler = function() {
 }
 
 Background.prototype.stop = function() {
-    console.log('bg stop');
-
     this.isAnimation = true;
     this.width = window.innerWidth;
     this.height = -3;

@@ -9,19 +9,14 @@ class BaseObject {
         this.gravity = new Vector2(0, .3);
     }
 
-    update(dt){
-        this.verlet();
+    update(dt, grav){
+        this.verlet(grav);
     }
 
 
-    verlet(){
-        var theta = AppStore.get("gravTheta");
-        var gravX = Math.cos(theta) * .3;
-        var gravY = Math.sin(theta) * .3;
-        this.gravity.set( gravX, gravY );
-
+    verlet(grav){
         var oldPosition = this.position.copy();
-        var velPos = this.position.copy().subtract(this.prevPosition).add(this.gravity)
+        var velPos = this.position.copy().subtract(this.prevPosition).add(grav)
         velPos.x += AppStore.getAclX() /2;
         velPos.y += AppStore.getAclY() /2;
 

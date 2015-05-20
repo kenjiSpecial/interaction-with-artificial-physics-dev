@@ -1,6 +1,7 @@
 
 var Vector2 = require('ks-vector').Vector2;
 var AppStore = require('../../../js/stores/app-store');
+var AppConstants = require('../../../js/utils/constants_app');
 
 class BaseObject {
     constructor( x, y ){
@@ -15,9 +16,12 @@ class BaseObject {
 
 
     verlet(){
+        var sub = 1;
+        if(AppConstants.isAndroid) sub = -1;
+
         var theta = AppStore.get("gravTheta");
         var gravX = Math.cos(theta) * .3;
-        var gravY = Math.sin(theta) * .3;
+        var gravY = Math.sin(theta) * .3 * sub;
         this.gravity.set( gravX, gravY );
 
         var oldPosition = this.position.copy();

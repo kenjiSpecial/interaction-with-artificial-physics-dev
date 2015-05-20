@@ -113,10 +113,12 @@ class AboutContent extends React.Component {
                                 <li>- <a href="https://github.com/subprotocol/verlet-js" target="_blank">Verlet.js</a></li>
                                 <li>- <a href="http://www.wildbunny.co.uk/blog/2011/03/25/speculative-contacts-an-continuous-collision-engine-approach-part-1/" target="_blank">Speculative Contacts</a></li>
                             </ul>
-                            <p>I used React, Flux, GreenSock, and didn't use any 2D canvas libary and jQuery to build this site.</p>
+                            <p>I used React, Flux, GreenSock, Babel, Browserify  and didn't use any 2D canvas library and jQuery to build this site.</p>
+                            <p>All codes for building this site and experiments are available from <a href="https://github.com/kenjiSpecial/two-d-physics" target="_blank">here</a>.</p>
                         </div>
                         <div className="content">
-                            <p>If you're interested in me, please chect out the below:</p>
+                            <p>Kenji SAITO has designed ande developed this site.</p>
+                            <p>If you're interested in me, please check out the below:</p>
                             <p className="contact-list">
                                 <a href="http://kenji-special.info" target="_blank" >WebSite</a>
                                 <a href="https://twitter.com/kenji_special" target="_blank" >Twitter</a>
@@ -125,9 +127,6 @@ class AboutContent extends React.Component {
                             </p>
                         </div>
 
-                        <div className="content">
-                            <p>Thank you for experience my experiments. Designed and Developed By <a href="http://kenji-special.info" target="_blank" >Kenji SAITO</a>.</p>
-                        </div>
                     </div>
 
                     <div className="content-title">

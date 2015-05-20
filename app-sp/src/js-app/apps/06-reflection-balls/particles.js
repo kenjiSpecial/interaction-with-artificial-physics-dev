@@ -3,6 +3,7 @@ var Ball = require('./ball');
 
 var AppStore = require('../../../js/stores/app-store');
 var gsap = require('gsap');
+var Vector2 = require('ks-vector').Vector2;
 
 var colArr = ["#3F51B5", "#E91E63"];
 
@@ -22,17 +23,18 @@ class Particles {
             this.circles.push(circle);
         }
 
-
+        this.gravity = new Vector2();
     }
 
     changeReflection() {
         this.reflectNumber *= -1;
+        this.setGravity();
     }
 
     update(dt) {
 
         for (var ii = 0; ii < this.num; ii++) {
-            this.circles[ii].update(dt)
+            this.circles[ii].update(dt, this.gravity)
         }
 
         this.satisfyConstraints();
@@ -42,10 +44,27 @@ class Particles {
         this.colNum = 0;
         this.col = colArr[this.colNum];
         this.reflectNumber = -1;
+
+        this.setGravity();
+    }
+
+    setGravity(){
+        var random = Math.random();
+
+        if(random < .25){
+            this.gravity.set(0, .3);
+        }else if(random < .5){
+            this.gravity.set( .3, 0);
+        }else if(random < .75){
+            this.gravity.set(0, -0.3);
+        }else{
+            this.gravity.set( -0.3, 0);
+        }
     }
 
     changeNumber() {
         this.reflectNumber *= -1;
+        this.setGravity();
     }
 
     stop() {

@@ -51,7 +51,7 @@ App.prototype.update = function (ctx) {
     var winWidth  = AppStore.getWindowWidth();
     var winHeight = AppStore.getWindowHeight();
 
-    ctx.fillStyle = "#FFF3E0";
+    ctx.fillStyle = "#FFE0B2";
     ctx.fillRect( 0, 0, winWidth, winHeight );
 
     this.particles.update(dt);
