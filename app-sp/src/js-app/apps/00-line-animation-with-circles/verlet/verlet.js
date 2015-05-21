@@ -82,7 +82,7 @@ class Verlet {
             }
         }
 
-        
+
 
         for (var cc in this.composites) {
             if (this.composites[cc]) {
@@ -91,8 +91,8 @@ class Verlet {
                     var particles = this.composites[cc].particles;
 
                     var velocity = particles[ii].pos.copy().subtract(particles[ii].lastPos).multiply(this.friction);
-                    velocity.x += AppStore.getAclX()/2;
-                    velocity.y += AppStore.getAclY()/2;
+                    velocity.x += AppStore.getAclX()/4;
+                    velocity.y += AppStore.getAclY()/4;
 
 
                     // save last good state

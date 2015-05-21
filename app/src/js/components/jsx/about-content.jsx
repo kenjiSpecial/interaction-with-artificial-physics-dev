@@ -72,7 +72,7 @@ class AboutContent extends React.Component {
                 <div className="about-content-wrapper">
                     <div className={this.state.contents[0]}>About</div>
                     <div className={this.state.contents[1]}>
-                        <p>"Interaction with Artificial Physics" is the collction of interactinve experiments with Artificial Physics. The Artificial Physics is the system which controls the motion and coollisiton of objects by several parameters such as gravity and friction with JavaScript. Each experiment has ist own unique physics system with its unique parameter and system to add the taste artificially.</p>
+                        <p>"Interaction with Artificial Physics" is the collection of interactive experiments with Artificial Physics. The Artificial Physics is the system which controls the motion and collision of objects by several parameters such as gravity and friction with JavaScript. Each experiment has ist own unique physics system with its unique parameter and system to add the taste artificially.</p>
                     </div>
                     <div className={this.state.contents[2]}>Thechnology behind</div>
                     <div className={this.state.contents[3]}>
@@ -87,7 +87,7 @@ class AboutContent extends React.Component {
                         <p>All codes for building this site and experiments are available from <LinkText name="here" link="https://github.com/kenjiSpecial/two-d-physics" />.</p>
                     </div>
                     <div className={this.state.contents[4]}>
-                        <p>Kenji SAITO has designed ande developed this site.</p>
+                        <p>Kenji SAITO has designed and developed this site.</p>
                         <p>If you're interested in him, please check out the below:</p>
                         <p className="contact-list">
                             <LinkText name="WebSite" link="http://kenji-special.info" />

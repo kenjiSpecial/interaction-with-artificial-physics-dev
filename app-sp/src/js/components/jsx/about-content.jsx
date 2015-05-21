@@ -102,9 +102,9 @@ class AboutContent extends React.Component {
                     <div id="app-about-dom-wrapper">
                         <p className="title">About</p>
                         <div className="content">
-                            <p>"Interaction with Artificial Physics" is the collction of interactinve experiments with Artificial Physics. The Artificial Physics is the system which controls the motion and coollisiton of objects by several parameters such as gravity and friction with JavaScript. Each experiment has ist own unique physics with its unique parameter and system to add the taste artificially.</p>
+                            <p>"Interaction with Artificial Physics" is the collection of interactive experiments with Artificial Physics. The Artificial Physics is the system which controls the motion and collision of objects by several parameters such as gravity and friction with JavaScript. Each experiment has ist own unique physics with its unique parameter and system to add the taste artificially.</p>
                         </div>
-                        <p className="title">Thechnology behind</p>
+                        <p className="title">Technology behind</p>
                         <div className="content">
                             <p>All experiments are 2D canvas made with JavaScript.</p>
                             <p>I made the physics engine for them from scratch. I read the blog, and the article, and codes about the physics engine below to make it.</p>
@@ -117,7 +117,7 @@ class AboutContent extends React.Component {
                             <p>All codes for building this site and experiments are available from <a href="https://github.com/kenjiSpecial/two-d-physics" target="_blank">here</a>.</p>
                         </div>
                         <div className="content">
-                            <p>Kenji SAITO has designed ande developed this site.</p>
+                            <p>Kenji SAITO has designed and developed this site.</p>
                             <p>If you're interested in me, please check out the below:</p>
                             <p className="contact-list">
                                 <a href="http://kenji-special.info" target="_blank" >WebSite</a>

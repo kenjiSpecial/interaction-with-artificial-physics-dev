@@ -21,7 +21,7 @@ class App{
         var winHig = AppStore.getWindowHeight();
 
 
-        this.rotatingFloor = new Floor( winWid/2 - 20, 100, 40, 10 );
+        this.rotatingFloor = new Floor( winWid/2 - 20, 100, 40, 20 );
         this.mObjects.push(this.rotatingFloor);
 
         this.floor = new Floor( winWid/2 - 100, winHig - 100, 200, 50 );

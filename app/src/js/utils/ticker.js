@@ -11,9 +11,6 @@ var ticker = assign({}, EventEmitter.prototype, {
     init : function(){
         this.render = this.render.bind(this);
         this.onKeyboardDownHandler = this.onKeyboardDownHandler.bind(this);
-
-
-        keyboard.on(CONSTANTS.KEYBOARD_DOWN, this.onKeyboardDownHandler);
     },
 
     start : function() {

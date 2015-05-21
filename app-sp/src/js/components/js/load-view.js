@@ -14,16 +14,16 @@ var LoadView = function(){
 LoadView.prototype.fadeOut = function() {
     //return new Promise( )
     Array.prototype.forEach.call(this.ballArr, function(el, i){
-        TweenLite.to(el, .5, {opacity: 0});
+        TweenLite.to(el, .5, {opacity: 0, delay: .3});
     });
 
     var loadTextLength = this.loadText.length - 2;
     Array.prototype.forEach.call(this.loadText, function(el, i){
-        TweenLite.to(el, .4, {opacity: 0, delay: (loadTextLength - i) * .03, x: +15, ease: Power3.easeOut});
+        TweenLite.to(el, .4, {opacity: 0, delay: (loadTextLength - i) * .08, x: +15, ease: Power3.easeOut});
     });
 
 
-    TweenLite.to(this.loaderContent, .8, {y : -window.innerHeight, delay: .6, ease: Expo.easeInOut, onComplete: this.removeLoadView.bind(this)});
+    TweenLite.to(this.loaderContent, .8, {y : -window.innerHeight, delay: 1.0, ease: Expo.easeInOut, onComplete: this.removeLoadView.bind(this)});
 
     return Promise.delay(600);
 };

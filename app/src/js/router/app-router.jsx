@@ -52,6 +52,8 @@ var AppRouter = Router.extend({
 
         this.prevRoute = "";
 
+        if(ga) ga('send', 'pageview', '/');
+
         if (appStore.get(isLoad)) this.renderIndex();
         else                      appAction.loadStart();
 
@@ -66,6 +68,8 @@ var AppRouter = Router.extend({
         }
 
         this.prevRoute = "/work/" + query;
+
+        if(ga) ga('send', 'pageview', '/work/' + query );
 
         if (appStore.get(isLoad)) this.renderWork(query);
         else                      appAction.loadStart();
@@ -189,6 +193,7 @@ var AppRouter = Router.extend({
 
     onWorkBallAnimationDoneHandler: function () {
         var workdata = appStore.getSelectedWorkData();
+        if(ga) ga('send', 'pageview', '/work/' + workdata.id );
         this.navigate("/work/" + workdata.id);
 
         setTimeout(function () {
