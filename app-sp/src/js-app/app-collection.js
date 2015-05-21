@@ -69,6 +69,7 @@ function initialize(){
     AppStore.on(CONSTANTS.OPEN_MENU, resume);
     AppStore.on(CONSTANTS.CLOSE_MENU_ANIMATION_DONE, resume);
 
+
     backgroundWhite.on("ON_COMPLETE_STOP_ANIMATION", onCompleteStopAnimationHandler)
     window.addEventListener('orientationchange', onOrientationChangeHandler);
 }
@@ -128,7 +129,7 @@ function start(){
     }
 
     window.addEventListener(DEVICE_ORIENTATION, onDeviceOrientationChangeHandler);
-
+    AppStore.addListener( CONSTANTS.OPEN_MENU, onOpenMenuHandler );
 
 
     ticker.addListener(CONSTANTS.TICK, update);
@@ -151,6 +152,7 @@ function stop(){
     }
 
     window.removeEventListener(DEVICE_ORIENTATION, onDeviceOrientationChangeHandler);
+    AppStore.removeListener( CONSTANTS.OPEN_MENU, onOpenMenuHandler );
 
 }
 
@@ -294,6 +296,14 @@ function onDeviceOrientationChangeHandler(ev){
 
 }
 
+function onOpenMenuHandler(){
+    // TODO canvas is not visible clear when you scroll the menu
+    //alert("onOpenMenuHandler")
+    //if(app) app.update(ctx, backgroundWhite);
+
+
+    //window.scrollTo(0, 0);
+}
 
 initialize();
 

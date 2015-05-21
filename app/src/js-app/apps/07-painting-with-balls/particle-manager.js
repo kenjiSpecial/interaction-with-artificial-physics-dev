@@ -48,19 +48,7 @@ class ParticleManager{
     start(){
         this.imageNum = 0;
 
-        this.frameLeft = (AppStore.getWindowWidth() - frameWid)/2;
-        this.frameTop  = (AppStore.getWindowHeight() - frameHig)/2 - 120;
-
-        this.miniFrameLeft = (AppStore.getWindowWidth() - frameWid/2)/2;
-        this.miniFrameTop  = this.frameTop + frameHig + 50;
-
-        this.leftPos = left + this.frameLeft-1.0
-        this.topPos = top + this.frameTop;
-
-        this.minX = this.leftPos;
-        this.maxX = this.leftPos + wid;
-        this.minY = this.topPos;
-        this.maxY = this.topPos + hig;
+        this.onWindowResize();
 
         var isCollided;
         for(var ii = 0; ii < this.balls.length; ii++) {
@@ -255,19 +243,30 @@ class ParticleManager{
     }
 
     onWindowResize(){
-        this.frameLeft = (AppStore.getWindowWidth() - frameWid)/2;
-        this.frameTop  = (AppStore.getWindowHeight() - frameHig)/2 - 120;
+        this.frameLeft = (AppStore.getWindowWidth() - frameWid) / 2;
+        this.frameTop = (AppStore.getWindowHeight() - (frameHig + 30 + frameHig / 2) ) / 2;
 
-        this.miniFrameLeft = (AppStore.getWindowWidth() - frameWid/2)/2;
-        this.miniFrameTop  = this.frameTop + frameHig + 50;
+        if(this.frameTop > 10){
+            this.miniFrameLeft = (AppStore.getWindowWidth() - frameWid/2)/2;
+            this.miniFrameTop  = this.frameTop + frameHig + 30;
+        }else{
+            this.frameLeft = (AppStore.getWindowWidth() - (frameWid + 20 + frameWid/2))/2;
+            this.frameTop = (AppStore.getWindowHeight() - frameHig) / 2;
 
-        this.leftPos = left + this.frameLeft-1.0
+            this.miniFrameLeft = this.frameLeft + frameWid + 30;
+            this.miniFrameTop = (AppStore.getWindowHeight() - frameHig/2)/2;
+        }
+
+
+        this.leftPos = left + this.frameLeft-1.0;
         this.topPos = top + this.frameTop;
 
         this.minX = this.leftPos;
         this.maxX = this.leftPos + wid;
         this.minY = this.topPos;
         this.maxY = this.topPos + hig;
+
+
     }
 
 }
