@@ -4,7 +4,8 @@ var _ = require('lodash');
 var AppStore = require('../../stores/app-store');
 
 var LoadView = function(){
-    _.bindAll(this, 'removeLoadView')
+    _.bindAll(this, 'removeLoadView');
+
     this.loader = document.getElementById("loader");
     this.ballArr = this.loader.querySelectorAll(".ball");
     this.loadText = this.loader.querySelectorAll(".letter");
@@ -30,7 +31,7 @@ LoadView.prototype.fadeOut = function() {
 
 LoadView.prototype.removeLoadView = function() {
     this.loader.style.display = "none";
-}
+};
 
 
 var loadView = new LoadView();

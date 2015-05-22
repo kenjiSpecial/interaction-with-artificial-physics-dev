@@ -14,7 +14,7 @@ var AppAction = require('../../../actions/app-action');
 // ========================
 
 var WorkRope = function( num, xPos, workTitle, ctx) {
-    _.bindAll(this, 'onDragBallHandler', 'onCompleteCameraXAnimationHandler')
+    _.bindAll( this, 'onDragBallHandler', 'onCompleteCameraXAnimationHandler', 'onAppLoadDoneHandler' );
     this.workNumber = num;
     var ii;
 
@@ -56,7 +56,10 @@ var WorkRope = function( num, xPos, workTitle, ctx) {
     //AppStore.on(AppConstants.MOUSE_MOVE, this.updateMousePosition);
     AppStore.on(APP_CONSTANTS.ON_DRAG_BALL, this.onDragBallHandler);
     AppStore.on(APP_CONSTANTS.ON_COMPLETE_CAMERA_X_ANIMATION, this.onCompleteCameraXAnimationHandler);
+    //AppStore.on( APP_CONSTANTS.APP_LOAD_DONE, this.onAppLoadDoneHandler );
 
+    //console.log("AppStore");
+    //this.onAppLoadDoneHandler();
 };
 
 WorkRope.prototype = {
@@ -112,8 +115,13 @@ WorkRope.prototype = {
         }
 
         ctx.stroke();
+    },
 
+    onAppLoadDoneHandler : function() {
+        //var lastNum = this.line.particles.length-1;
+        //this.line.particles[lastNum].pos.x -= 5;
+        //this.line.particles[lastNum].pos.y -= 30 * Math.random() + 20;
     }
-}
+};
 
 module.exports = WorkRope;

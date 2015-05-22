@@ -154,8 +154,9 @@ var AppRouter = Router.extend({
     },
 
     onLoadDoneHandler: function () {
+        //console.log('onLoadDoneHandler');
 
-        var pr = loadView.fadeOut()
+        var pr = loadView.fadeOut();
         var self = this;
 
         pr.then(function () {
@@ -165,6 +166,7 @@ var AppRouter = Router.extend({
     },
 
     onRenderApp: function () {
+
         canvasApp.initialize();
         var str = history.getFragment();
         var url, param;
