@@ -97,7 +97,8 @@ class WorkText extends React.Component {
         var cmaeraMovement = - (APP_CONSTANT_DATAS.selectedWorkCameraXPos - AppStore.get("cameraPosX")) + this.selectedWorkPosX;
         this.cameraPosX = AppStore.get("cameraPosX");
 
-        var delay = Math.abs(  cmaeraMovement / 150 ) /10;
+        var delay = Math.abs(  cmaeraMovement / 150 ) /10 + .1;
+
         if(delay > .6) delay = .6
 
         TweenLite.to(this, delay, {cameraPosX: cmaeraMovement,  ease: Power2.easeOut,  onUpdate: this.onCameraPositionXUpdate.bind(this), onComplete: this.onCameraPositionXComplete.bind(this) });

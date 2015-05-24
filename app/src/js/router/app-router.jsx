@@ -1,3 +1,5 @@
+require('gsap');
+
 var Router = require('./router');
 
 var history = require('./history');
@@ -24,13 +26,14 @@ var canvasApp = require('../components/js/canvas-app');
 
 var AppRouter = Router.extend({
     initialize: function () {
-        _.bindAll(this, 'onLoadStartHandler', 'onLoadDoneHandler', 'onWorkBallAnimationDoneHandler', 'onCloseWork');
+        _.bindAll(this, 'onLoadStartHandler', 'onLoadDoneHandler', 'onWorkBallAnimationDoneHandler', 'onCloseWork', 'onRenderInitIndexHandler');
 
         appStore.on(AppConstants.LOAD_START, this.onLoadStartHandler);
         appStore.on(AppConstants.APP_LOAD_DONE, this.onLoadDoneHandler);
 
         appStore.on(AppConstants.ON_WORK_BALL_ANIMATION_DONE, this.onWorkBallAnimationDoneHandler);
         appStore.on(AppConstants.CLOSE_WORK, this.onCloseWork);
+        appStore.on(AppConstants.RENDER_INIT_INDEX, this.onRenderInitIndexHandler.bind(this));
     },
 
     prevRoute: "",
@@ -87,7 +90,8 @@ var AppRouter = Router.extend({
 
     renderInitIndex: function () {
         canvasApp.renderIndex();
-        appAction.onMouseMoveSet();
+        //appAction.onMouseMoveSet();
+        appAction.onRenderInitIndex();
     },
 
     renderWork: function (workID) {
@@ -191,6 +195,19 @@ var AppRouter = Router.extend({
         }
 
 
+    },
+
+    onRenderInitIndexHandler : function() {
+        this.rate = 1;
+        TweenLite.to(this, 1.2, {rate: 0, onUpdate: this.onTweenUpdateHandler.bind(this), onComplete: this.onTweenCompleteHandler.bind(this), ease: Power4.easeOut} )
+    },
+
+    onTweenUpdateHandler : function() {
+        appAction.onInitRenderTweenUpdateHnadler(this.rate);
+    },
+
+    onTweenCompleteHandler : function() {
+        appAction.onMouseMoveSet();
     },
 
     onWorkBallAnimationDoneHandler: function () {

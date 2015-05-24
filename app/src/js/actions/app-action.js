@@ -253,6 +253,20 @@ var AppAction = {
         AppDispatcher.dispatch({
            actionType : AppConstants.MOUSE_LEAVE
         });
+    },
+
+    onRenderInitIndex : function() {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.RENDER_INIT_INDEX
+        })
+    },
+
+    onInitRenderTweenUpdateHnadler : function(rate) {
+        AppDispatcher.dispatch({
+            actionType : AppConstants.RENDER_INIT_INDEX_TWEEN_UPDATE,
+            rate : rate
+
+        })
     }
 
 };

@@ -163,6 +163,9 @@ var AppStore = assign({}, EventEmitter.prototype, {
     },
 
     onMouseMoveEventHandler : function() {
+        //_apps.cameraPosX = 0;
+        //_apps.scrollX = 0;
+
         this.emit(APP_CONSTANTS.ON_MOUSE_MOVE_EVENT);
     },
 
@@ -387,6 +390,18 @@ var AppStore = assign({}, EventEmitter.prototype, {
     onMouseLeave : function() {
         _apps.isMouseenter = false;
         this.emit(APP_CONSTANTS.MOUSE_LEAVE);
+    },
+
+    onRenderInitIndex : function() {
+        _apps.cameraPosX = CONSTANT_DATA.INIT_CAMERA_X;
+        _apps.scrollX = CONSTANT_DATA.INIT_SCROLL_X
+
+        this.emit(APP_CONSTANTS.RENDER_INIT_INDEX);
+    },
+
+    onUpdateInitIndexTween : function(rate) {
+        _apps.cameraPosX = CONSTANT_DATA.INIT_CAMERA_X * rate;
+        _apps.scrollX = CONSTANT_DATA.INIT_SCROLL_X * rate;
     }
 
 });
@@ -522,6 +537,12 @@ AppStore.dispatchToken = AppDispatcher.register(function(action){
             break;
         case APP_CONSTANTS.MOUSE_LEAVE:
             AppStore.onMouseLeave();
+            break;
+        case APP_CONSTANTS.RENDER_INIT_INDEX:
+            AppStore.onRenderInitIndex();
+            break;
+        case APP_CONSTANTS.RENDER_INIT_INDEX_TWEEN_UPDATE:
+            AppStore.onUpdateInitIndexTween(action.rate);
             break;
 
     }

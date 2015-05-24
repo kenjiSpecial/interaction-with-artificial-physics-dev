@@ -29,5 +29,5 @@ module.exports = {
     "MIN_WIDTH" : 850,
     "MIN_HEIGHT": 540,
     "isAndroid" : isAndroid
-}
+};
 

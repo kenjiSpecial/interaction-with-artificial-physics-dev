@@ -58,4 +58,8 @@ module.exports = keyMirror({
     "KEYBOARD_DOWN" : null,
     "TICK"          : null,
     "WORK_UPDATE"   : null,
+
+    "RENDER_INIT_INDEX" : null,
+    RENDER_INIT_INDEX_TWEEN_UPDATE : null,
+    RENDER_INIT_INDEX_TWEEN_COMPLETE : null
 });
