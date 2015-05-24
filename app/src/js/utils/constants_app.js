@@ -8,6 +8,6 @@ module.exports = {
     "MIN_HEIGHT": 540,
 
     "INIT_SCROLL_X" : 200,
-    "INIT_CAMERA_X" : -400
+    "INIT_CAMERA_X" : -1000
 }
 
