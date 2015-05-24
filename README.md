@@ -1,6 +1,6 @@
 # interaction-with-artificial-physics-dev
 
-development repository for [2d-phy.kenji-special.info](2d-phy.kenji-special.info)
+dev repository for [2d-phy.kenji-special.info](http://2d-phy.kenji-special.info)
 
 
 "app folder" is for the codes of desktop pc site.
